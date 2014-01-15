@@ -5,11 +5,17 @@ import static icys.java.Utilities.*;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 
 public class Mode implements Screen {
 	
 	LabelButton back, help, addEgg, addPenguin, addBear;
+	Block blocks [][] = new Block [30][30];
+	ArrayList <Fish> fish = new ArrayList <Fish> (1);
+	ArrayList <Egg> eggs = new ArrayList <Egg> (1);
+	ArrayList <Penguin> penguins = new ArrayList <Penguin> (1);
+	ArrayList <PolarBear> bears = new ArrayList <PolarBear> (1);
 	
 	public Mode () {
 		
@@ -28,6 +34,9 @@ public class Mode implements Screen {
 //		addEgg = new LabelButton ("egg", font, Color.WHITE, blue, blue, aqua);
 //		addPenguin = new LabelButton ("pen", font, Color.WHITE, blue, blue, aqua);
 //		addBear = new LabelButton ("bear", font, Color.WHITE, blue, blue, aqua);
+		
+		
+		
 		main.add (addEgg);
 		main.add (addPenguin);
 		main.add (addBear);
@@ -37,13 +46,34 @@ public class Mode implements Screen {
 		main.add (background);
 		applyGraphics (main.getGraphics ());
 		
-		hide ();
-		
+	}
+	
+	public void animate () {
+		main.repaint ();
+		Thread.sleep (500);
+		for (int i = 0 ; i < penguins.size () ; i++) {
+			penguins.get(i).update (penguins, fish, eggs, blocks);
+		}
+		for (int i = 0 ; i < bears.size () ; i++) {
+			bears.get(i).update (bears, penguins, blocks);
+		}
+		for (int i = 0 ; i < eggs.size () ; i++) {
+			eggs.get(i).update ();
+		}
 	}
 
 	@Override
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
+		for (int i = 0 ; i < penguins.size () ; i++) {
+			penguins.get(i).show (blocks, g);
+		}
+		for (int i = 0 ; i < bears.size () ; i++) {
+			bears.get(i).show (blocks, g);
+		}
+		for (int i = 0 ; i < eggs.size () ; i++) {
+			eggs.get(i).show (blocks, g);
+		}
 		g.setColor (blue);
 		g.fillRect (0, offset + border, width, border);
 		g.setColor(aqua);
