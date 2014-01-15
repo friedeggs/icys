@@ -4,7 +4,7 @@ public abstract class NaturalDisaster extends Mode
 
 public class MeltingGlacier extends NaturalDisaster
 {
-    public MeltingGlacier (ArrayList < PolarBear > list)
+    public MeltingGlacier (ArrayList < PolarBear > list, int [][] block)
     {
         lostBear (list);
         meltArea ();
@@ -28,18 +28,35 @@ public class MeltingGlacier extends NaturalDisaster
     } //End of remove polar bear list
 
 
-    public void meltArea (Block[] [])
+    public void meltArea ( int [][] block)
     {
         //Cover certain blocks around the edge with "water" blocks?
         //Make sure that it covers bears grids?
         //How many percent?
+        // -1 not used
+        // 0 water
+        // 1 land
+        // what are the coordinates to multiply/add for GUI
+        
+        //175, 217, 255
     }
+    
 } //End of Class
 
 public class WaterPollution extends NaturalDisaster
 {
-    public WaterPollution (ArrayList < Fish > list)
+    boolean [][] cover;
+    public WaterPollution (ArrayList < Fish > list, int [][] block)
     {
+        cover = new boolean [block.length ()][block[0].length ()];
+        for (int i = 0; i < cover.length; i ++)
+            for (int j = 0; j < cover[i].length; j ++)
+                    cover[i][j] = false;
+        for (int i = 0; i < block.length; i ++)
+            for (int j = 0; j < block[i].length; j ++)
+                if (block[i][j]== -1 || block [i][j] == 0)
+                    cover[i][j] = true;
+
         stopFish (list);
         blackenWater (  /*Other Crap*/);
     }
@@ -52,11 +69,20 @@ public class WaterPollution extends NaturalDisaster
     }
 
 
-    public void blackenWater (Block[] [])
+    public void blackenWater (Graphics g) //(this is going to be the draw method)
     {
         //Cover all water block with darker shade
-        //Black or dark blue?
         //(11,23,59)
+        
+		for (int i = 0; i < block.length; i ++)
+            for (int j = 0; j < block[i].length; j ++)
+                if (cover[i][j] = true;)
+                    
+                            
+        Color dark = new Color (11,23,59);
+
+        
+        
     }
 } //End of Class
 
