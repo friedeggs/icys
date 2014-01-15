@@ -1,4 +1,6 @@
 package icys.java;
+import icys.java.Main.Background;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -18,11 +20,13 @@ public class Utilities {
 	
 	public static Screen currentScreen;
 	
+	public static Background background;
+	
 	public static Dimension screenSize = new Dimension (768, 576);
 	
 	public static int width = screenSize.width, height = screenSize.height;
 	
-	public static int border = 15, offset = 45;
+	public static int border = 10, offset = 50;
 	
 	public static Color lightblue = new Color (175, 217, 255),
 			blue = new Color (124, 175, 222),

@@ -1,6 +1,4 @@
 package icys.java;
-import icys.java.*;
-
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
@@ -20,7 +18,6 @@ import static icys.java.Utilities.*;
 public class Main extends JFrame implements MouseListener, MouseMotionListener {
 	//Mode selection;
 	BufferedImage fish;
-	Background background;
 	Font font = new Font ("Calibri", Font.BOLD, 32);
 	FontMetrics metrics;
 	

@@ -13,11 +13,13 @@ import javax.imageio.ImageIO;
 import static icys.java.Utilities.*;
 
 public class SelectionScreen implements Screen {
-	LabelButton selectLabel [], back, help;
+	LabelButton selectLabel [], back, help, title;
 	BoxButton box [];
 	
 	public SelectionScreen () {
 		
+		title = new LabelButton ("SELECT A MODE", new Font ("Calibri Light", Font.PLAIN, 48), 
+				Color.WHITE, lightblue);
 		back = new LabelButton ("back", font, Color.WHITE, lightblue, blue, aqua);
 		help = new LabelButton ("help", font, Color.WHITE, lightblue, blue, aqua);
 		
@@ -39,6 +41,7 @@ public class SelectionScreen implements Screen {
 		
 		main.add (back);
 		main.add (help);
+		main.add (title);
 		for (int i = 0 ; i < 4 ; i++){
 			main.add(selectLabel [i]);
 		}
@@ -54,6 +57,7 @@ public class SelectionScreen implements Screen {
 
 	@Override
 	public void show() {
+		title.setVisible(true);
 		back.setVisible (true);
 		help.setVisible (true);
 		for (int i = 0 ; i < 4; i ++)
@@ -62,6 +66,7 @@ public class SelectionScreen implements Screen {
 
 	@Override
 	public void hide() {
+		title.setVisible(false);
 		back.setVisible (false);
 		help.setVisible (false);
 		for (int i = 0 ; i < 4; i ++)
@@ -71,11 +76,15 @@ public class SelectionScreen implements Screen {
 	@Override
 	public void applyGraphics (Graphics g) {
 		// TODO Auto-generated method stub
+		title.applyGraphics(g);
 		back.applyGraphics(g);
 		help.applyGraphics(g);
-		
-		back.setLocation(back.getWidth(), (offset + border) / 2);
-		help.setLocation(width - help.getWidth(), (offset + border) / 2);
+
+		title.setLocation (width / 2, (offset + border) / 2);
+		back.setLocation(border + back.getWidth() / 2, 
+				border + back.getHeight() / 2);
+		help.setLocation(width - border - help.getWidth() / 2, 
+				border + help.getHeight() / 2);
 		
 		for (int i = 0 ; i < 4 ; i++)
 			selectLabel [i].applyGraphics(g);
@@ -161,7 +170,14 @@ public class SelectionScreen implements Screen {
 			help.setState (0);
 			main.setScreen (HelpScreen);
 		}
-			
+		for (int i = 0 ; i < 4 ; i++) {
+			if (box [i].getState () == 1) {
+				box [i].setState (0);
+				selectLabel [i].setState (0);
+				Mode mode = new Mode ();
+				main.setScreen(mode);
+			}
+		}
 	}
 
 	@Override

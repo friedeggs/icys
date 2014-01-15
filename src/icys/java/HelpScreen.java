@@ -40,7 +40,8 @@ public class HelpScreen implements Screen {
 	public void applyGraphics(Graphics g) {
 		back.applyGraphics(g);
 		
-		back.setLocation(back.getWidth(), height - back.getHeight());
+		back.setLocation(border + back.getWidth() / 2, 
+				height - border - back.getHeight() / 2);
 	}
 
 	@Override
