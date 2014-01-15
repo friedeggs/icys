@@ -13,6 +13,10 @@ public int x, y;
   
   public draw()
   {
+    HIII CHRISTINAAAA
+  }
+  
+  public hey () {
     
   }
   
