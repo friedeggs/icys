@@ -11,4 +11,9 @@ public int x, y;
     this.value = value; 
   }
   
+  public draw()
+  {
+    
+  }
+  
 }
