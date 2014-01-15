@@ -1,3 +1,5 @@
+package icys.java;
+
 import java.awt.image.BufferedImage;
 
 public class LifeForm {

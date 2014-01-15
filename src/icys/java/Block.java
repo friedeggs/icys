@@ -1,3 +1,5 @@
+package icys.java;
+
 public class Block
 {
 
@@ -11,7 +13,7 @@ public int x, y;
     this.value = value; 
   }
   
-  public draw()
+  //public draw()
   {
     //i know what you mean
   }
