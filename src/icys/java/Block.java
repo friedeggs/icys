@@ -13,11 +13,13 @@ public int x, y;
   
   public draw()
   {
-    HIII CHRISTINAAAA
+    //i know what you mean
   }
   
-  public hey () {
-    
-  }
   
+  
+  public thisisagreatmethod()
+  {
+    boolean ahahahahahaa;
+  }
 }
