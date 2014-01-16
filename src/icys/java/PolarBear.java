@@ -1,3 +1,5 @@
+package icys.java;
+
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -174,7 +176,7 @@ public class PolarBear extends LifeForm {
 		else if (this.direction == 4)
 			this.x = this.x + 1;
 		
-		if (thegreatbigworld[x][y].isOccupied && thegreatbigworld[x][y].value == 1)
+		if (thegreatbigworld[x][y].isOccupied == false && thegreatbigworld[x][y].value == 1)
 			return true;
 		else
 			return false;
