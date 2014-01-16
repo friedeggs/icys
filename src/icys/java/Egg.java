@@ -43,9 +43,9 @@ public class Egg extends LifeForm{
 			return false;
 	}
 	
-	public void show(Block[][] environment, Graphics g)
+	public void show(Block[][] enviro, Graphics g)
 	{
-		g.drawimage (minipencil, block[x][y].x, block[x][y].y, null); 
+		g.drawimage (minipencil, enviro[x][y].x, enviro[x][y].y, null); 
 	}
 	
 }
