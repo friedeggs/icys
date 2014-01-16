@@ -18,10 +18,10 @@ public class Penguin extends LifeForm {
 	int sinceEaten;
 	int fishesEaten; 
 	
-	public Penguin () 
+	public Penguin (int x, int y) 
 	{
-		x= 2;
-		y = 3;
+		this.x = x;
+		this.y = y;
 		alive = true; 
 		fishesEaten = 0;
 		sinceEaten = 0;
