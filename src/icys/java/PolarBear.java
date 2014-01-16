@@ -191,9 +191,9 @@ public class PolarBear extends LifeForm {
 		while (this.valid(thegreatbigworld) == false);
 	}
 	
-	public void show(Block[][] environment, Graphics g)
+	public void show(Block[][] enviro, Graphics g)
 	{
-		g.drawimage (image, block[x][y].x, block[x][y].y, null); 
+		g.drawimage (image, enviro[x][y].x, enviro[x][y].y, null); 
 	}
 
 }
