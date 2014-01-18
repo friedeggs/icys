@@ -21,7 +21,7 @@ public class Fish extends LifeForm{
 		x = chooseX();
 		y = chooseY();
 		canAppear = true;
-		timeAppeared = (Integer) null;
+		timeAppeared = 5;
 		try {
             fish = ImageIO.read(new File ("fish.png"));
 		} catch (IOException e) {

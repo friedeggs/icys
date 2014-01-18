@@ -13,6 +13,11 @@ public int x, y;
     this.value = value; 
   }
   
+  public void set (int x, int y) {
+	  this.x = x;
+	  this.y = y;
+  }
+  
   //public draw()
   {
     //i know what you mean

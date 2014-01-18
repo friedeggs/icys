@@ -35,7 +35,33 @@ public class Mode implements Screen {
 //		addPenguin = new LabelButton ("pen", font, Color.WHITE, blue, blue, aqua);
 //		addBear = new LabelButton ("bear", font, Color.WHITE, blue, blue, aqua);
 		
+		for (int i = 0 ; i < blocks.length ; i++) {
+			for (int j = 0 ; j < blocks.length ; j++) {
+				blocks [i][j] = new Block (1);
+				blocks [i][j].set (i * 16, j * 16);
+			}
+		}
 		
+		for (int i = 0 ; i < 1 ; i++) {
+			fish.add(new Fish (15));
+		}
+		
+		for (int i = 0 ; i < 1 ; i++) {
+			eggs.add(new Egg (8, 12));
+		}
+		
+		for (int i = 0 ; i < 1 ; i++) {
+			penguins.add(new Penguin (10, 10));
+		}
+		
+		for (int i = 0 ; i < 1 ; i++) {
+			bears.add(new PolarBear (5, 15, penguins));
+		}
+		
+		fish.get(0).show(5, blocks, main.getGraphics());
+		eggs.get(0).show(blocks, main.getGraphics());
+		penguins.get(0).show(blocks, main.getGraphics());
+		bears.get(0).show(blocks, main.getGraphics());
 		
 		main.add (addEgg);
 		main.add (addPenguin);
@@ -50,12 +76,15 @@ public class Mode implements Screen {
 	}
 	
 	public void animate () {
+		int s = 0;
+		while (s < 3) {
 		main.repaint ();
 		try {
-			Thread.sleep (500);
+			Thread.sleep (1000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+		// fish
 		for (int i = 0 ; i < penguins.size () ; i++) {
 			penguins.get(i).update (penguins, fish, eggs, 
 					blocks, main.getGraphics ());
@@ -66,11 +95,21 @@ public class Mode implements Screen {
 		for (int i = 0 ; i < eggs.size () ; i++) {
 			eggs.get(i).update (penguins, blocks, main.getGraphics ());
 		}
+		s++;
+		}
 	}
 
 	@Override
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
+		g.setColor (blue);
+		g.fillRect (0, offset + border, width, border);
+		g.setColor(aqua);
+		g.fillRect(0, offset+2*border, width, height-offset-2*border);
+		
+		for (int i = 0 ; i < fish.size () ; i++) {
+			fish.get(i).show (10, blocks, g);
+		}
 		for (int i = 0 ; i < penguins.size () ; i++) {
 			penguins.get(i).show (blocks, g);
 		}
@@ -80,10 +119,6 @@ public class Mode implements Screen {
 		for (int i = 0 ; i < eggs.size () ; i++) {
 			eggs.get(i).show (blocks, g);
 		}
-		g.setColor (blue);
-		g.fillRect (0, offset + border, width, border);
-		g.setColor(aqua);
-		g.fillRect(0, offset+2*border, width, height-offset-2*border);
 	}
 
 	@Override

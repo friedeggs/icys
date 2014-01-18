@@ -27,7 +27,7 @@ public class Penguin extends LifeForm {
 		sinceEaten = 0;
 		//choose target
 		try {
-			cup = ImageIO.read(new File ("quotes.png"));
+			cup = ImageIO.read(new File ("penguin.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
