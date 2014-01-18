@@ -69,16 +69,16 @@ public class Main extends JFrame implements MouseListener, MouseMotionListener {
 		}
 		
 		public void paintComponent (Graphics g) {
-//			int density = 180, j;
-//			for (int i = 5 ; i < width ; i += density) {
-//				if (i / density % 2 == 0)
-//					j = 0;
-//				else
-//					j = density / 2;
-//				for ( ; j < height ; j += density) {
-//					g.drawImage(fish, i, j, null);
-//				}
-//			}
+			int density = 180, j;
+			for (int i = 5 ; i < width ; i += density) {
+				if (i / density % 2 == 0)
+					j = 0;
+				else
+					j = density / 2;
+				for ( ; j < height ; j += density) {
+					g.drawImage(fish, i, j, null);
+				}
+			}
 			
 			currentScreen.draw (g);
 			
