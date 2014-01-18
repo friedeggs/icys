@@ -12,7 +12,7 @@ public class Mode implements Screen {
 	
 	LabelButton back, help, addEgg, addPenguin, addBear;
 	Block blocks [][] = new Block [30][30];
-	ArrayList <Fish> fish = new ArrayList <Fish> (1);
+	static ArrayList <Fish> fish = new ArrayList <Fish> (1);
 	ArrayList <Egg> eggs = new ArrayList <Egg> (1);
 	ArrayList <Penguin> penguins = new ArrayList <Penguin> (1);
 	ArrayList <PolarBear> bears = new ArrayList <PolarBear> (1);
@@ -58,11 +58,6 @@ public class Mode implements Screen {
 			bears.add(new PolarBear (5, 15, penguins));
 		}
 		
-		fish.get(0).show(5, blocks, main.getGraphics());
-		eggs.get(0).show(blocks, main.getGraphics());
-		penguins.get(0).show(blocks, main.getGraphics());
-		bears.get(0).show(blocks, main.getGraphics());
-		
 		main.add (addEgg);
 		main.add (addPenguin);
 		main.add (addBear);
@@ -71,16 +66,18 @@ public class Mode implements Screen {
 		main.add (help);
 		main.add (background);
 		applyGraphics (main.getGraphics ());
+		main.repaint ();
+		System.out.println ("constructor");
 		
-		animate ();
+		//animate ();
 	}
 	
 	public void animate () {
 		int s = 0;
-		while (s < 3) {
+		while (s < 30) {
 		main.repaint ();
 		try {
-			Thread.sleep (1000);
+			Thread.sleep (500);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -102,6 +99,7 @@ public class Mode implements Screen {
 	@Override
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
+		System.out.println ("draw");
 		g.setColor (blue);
 		g.fillRect (0, offset + border, width, border);
 		g.setColor(aqua);

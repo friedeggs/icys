@@ -116,6 +116,7 @@ public class PolarBear extends LifeForm {
 		}
 		
 		min = distances[0]; 
+		this.target = pens.get (0);
 		for (int j = 0; j< distances.length; j++)
 		{
 			
@@ -152,7 +153,7 @@ public class PolarBear extends LifeForm {
 		else
 			possibilities[1] = 2;
 		
-		int random = (int)(Math.random() * 2 + 1); //Chooses random direction within two possible directions
+		int random = (int)(Math.random() * 2); //Chooses random direction within two possible directions
 		direction = possibilities [random];
 		
 		if (direction == 0) //If direction chosen is not valid, choose other direction
@@ -161,7 +162,7 @@ public class PolarBear extends LifeForm {
 				random = 2;
 			else
 				random = 1;
-			direction = possibilities[random];
+			direction = possibilities[random-1];
 		}
 		this.direction = direction;
 	}
