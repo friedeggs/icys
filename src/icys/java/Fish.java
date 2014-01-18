@@ -31,11 +31,13 @@ public class Fish extends LifeForm{
 	
 	public int chooseX ()
 	{
+		return 15;
 		//How to choose X coordinate?
 	}
 	
 	public int chooseY ()
 	{
+		return 15;
 		//How to choose Y coordinate? 
 	}
 	

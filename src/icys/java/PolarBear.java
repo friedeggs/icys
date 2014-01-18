@@ -49,14 +49,15 @@ public class PolarBear extends LifeForm {
 		}
 	}
 	
-	public void update(ArrayList <PolarBear> rawr, ArrayList<Penguin> pencils, Block[][] iii)
+	public void update(ArrayList <PolarBear> rawr, ArrayList<Penguin> pencils,
+			Block[][] iii, Graphics g)
 	{
 		eatPenguin();
 		checkAlive();
 		reproduces (rawr, pencils);
 		updateTarget(pencils);
 		move(iii);
-		show(iii);
+		show(iii, g);
 	}
 	
 	public void eatPenguin ()
@@ -193,7 +194,7 @@ public class PolarBear extends LifeForm {
 	
 	public void show(Block[][] enviro, Graphics g)
 	{
-		g.drawimage (image, enviro[x][y].x, enviro[x][y].y, null); 
+		g.drawImage (image, enviro[x][y].x, enviro[x][y].y, null); 
 	}
 
 }

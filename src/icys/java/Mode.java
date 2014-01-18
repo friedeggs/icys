@@ -46,6 +46,7 @@ public class Mode implements Screen {
 		main.add (background);
 		applyGraphics (main.getGraphics ());
 		
+		animate ();
 	}
 	
 	public void animate () {
@@ -56,10 +57,11 @@ public class Mode implements Screen {
 			e.printStackTrace();
 		}
 		for (int i = 0 ; i < penguins.size () ; i++) {
-			penguins.get(i).update (penguins, fish, eggs, blocks);
+			penguins.get(i).update (penguins, fish, eggs, 
+					blocks, main.getGraphics ());
 		}
 		for (int i = 0 ; i < bears.size () ; i++) {
-			bears.get(i).update (bears, penguins, blocks);
+			bears.get(i).update (bears, penguins, blocks, main.getGraphics ());
 		}
 		for (int i = 0 ; i < eggs.size () ; i++) {
 			eggs.get(i).update (penguins, blocks, main.getGraphics ());

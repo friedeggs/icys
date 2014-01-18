@@ -22,7 +22,7 @@ public class Egg extends LifeForm{
 		alive = true;
 		timeAlive = 0;
 		try {
-            minipencil = ImageIO.read(new File ("eggggggggg.png"));
+            minipencil = ImageIO.read(new File ("egg.png"));
 		} catch (IOException e) {
             e.printStackTrace();
 		}

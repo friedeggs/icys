@@ -34,14 +34,15 @@ public class Penguin extends LifeForm {
 		
 	}
 	
-	public void update(ArrayList<Penguin> pencils, ArrayList <Fish> blub, ArrayList<Egg> frieda, Block[][] iii)
+	public void update(ArrayList<Penguin> pencils, ArrayList <Fish> blub, 
+			ArrayList<Egg> frieda, Block[][] iii, Graphics g)
 	{
 		this.eatFish();
 		this.checkAlive();
 		this.reproduces (frieda);
 		this.updateTarget(blub);
 		this.move(iii);
-		this.show();
+		this.show(iii, g);
 	}
 
 	public void eatFish ()
@@ -177,6 +178,6 @@ public class Penguin extends LifeForm {
 
 	public void show(Block[][] enviro, Graphics g)
 	{
-		g.drawimage (cup, enviro[x][y].x, enviro[x][y].y, null); 
+		g.drawImage (cup, enviro[x][y].x, enviro[x][y].y, null); 
 	}
 }

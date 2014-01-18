@@ -19,7 +19,7 @@ public class WaterPollution extends NaturalDisaster
                     cover[i][j] = true;
 
         stopFish (list);
-        blackenWater (  /*Other Crap*/);
+        blackenWater (g, blocks  /*Other Crap*/);
     }
 
 
