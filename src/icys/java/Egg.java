@@ -1,8 +1,12 @@
+package icys.java;
+
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
 
 public class Egg extends LifeForm{
 
@@ -24,7 +28,7 @@ public class Egg extends LifeForm{
 		}
 	}
 	
-	public void update(ArrayList<Penguin> penGUI, Block[][] iii)
+	public void update(ArrayList<Penguin> penGUI, Block[][] iii, Graphics g)
 	{
 		timeAlive ++;
 		if (grownUp())
@@ -33,7 +37,7 @@ public class Egg extends LifeForm{
 			Penguin penS = new Penguin (this.x, this.y);
 			penGUI.add(penS);
 		}
-		show(iii);
+		show(iii, g);
 	}
 	
 	public boolean grownUp()
@@ -46,7 +50,7 @@ public class Egg extends LifeForm{
 	
 	public void show(Block[][] enviro, Graphics g)
 	{
-		g.drawimage (minipencil, enviro[x][y].x, enviro[x][y].y, null); 
+		g.drawImage (minipencil, enviro[x][y].x, enviro[x][y].y, null); 
 	}
 	
 }

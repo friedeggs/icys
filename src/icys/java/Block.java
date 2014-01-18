@@ -17,11 +17,4 @@ public int x, y;
   {
     //i know what you mean
   }
-  
-  
-  
-  public thisisagreatmethod()
-  {
-    boolean ahahahahahaa;
-  }
 }

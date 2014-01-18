@@ -50,7 +50,11 @@ public class Mode implements Screen {
 	
 	public void animate () {
 		main.repaint ();
-		Thread.sleep (500);
+		try {
+			Thread.sleep (500);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		for (int i = 0 ; i < penguins.size () ; i++) {
 			penguins.get(i).update (penguins, fish, eggs, blocks);
 		}
@@ -58,7 +62,7 @@ public class Mode implements Screen {
 			bears.get(i).update (bears, penguins, blocks);
 		}
 		for (int i = 0 ; i < eggs.size () ; i++) {
-			eggs.get(i).update ();
+			eggs.get(i).update (penguins, blocks, main.getGraphics ());
 		}
 	}
 

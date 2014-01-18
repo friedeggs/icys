@@ -1,8 +1,12 @@
+package icys.java;
+
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
 
 public class Fish extends LifeForm{
  
@@ -17,9 +21,9 @@ public class Fish extends LifeForm{
 		x = chooseX();
 		y = chooseY();
 		canAppear = true;
-		timeAppeared = null;
+		timeAppeared = (Integer) null;
 		try {
-            fish = ImageIO.read(new File ("fysh.png"));
+            fish = ImageIO.read(new File ("fish.png"));
 		} catch (IOException e) {
             e.printStackTrace();
 		}
@@ -35,9 +39,9 @@ public class Fish extends LifeForm{
 		//How to choose Y coordinate? 
 	}
 	
-	public void show(int time, Block[][] environment, Graphics g)
+	public void show(int time, Block[][] block, Graphics g)
 	{
-		g.drawimage (fish, block[x][y].x, block[x][y].y, null); 
+		g.drawImage (fish, block[x][y].x, block[x][y].y, null); 
 		timeAppeared = time;
 	}
 
