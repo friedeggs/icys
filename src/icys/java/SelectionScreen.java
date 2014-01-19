@@ -51,6 +51,8 @@ public class SelectionScreen implements Screen {
 
 	@Override
 	public void draw(Graphics g) {
+		g.setColor (aqua);
+		g.fillRect(0, 100, main.i*15, 300);
 		for (int i = 0 ; i < 4 ; i++)
 			box [i].draw(g);
 	}
@@ -174,7 +176,7 @@ public class SelectionScreen implements Screen {
 			if (box [i].getState () == 1) {
 				box [i].setState (0);
 				selectLabel [i].setState (0);
-				Mode mode = new Mode ();
+				//mode = new Mode ();
 				main.setScreen(mode);
 			}
 		}

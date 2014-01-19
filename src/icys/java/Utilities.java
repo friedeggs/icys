@@ -20,7 +20,9 @@ public class Utilities {
 	
 	public static Screen currentScreen;
 	
-	public static Background background;
+	public static Screen mode;
+	
+	//public static Background background;
 	
 	public static Dimension screenSize = new Dimension (768, 576);
 	

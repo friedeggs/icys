@@ -1,4 +1,5 @@
 package icys.java;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
@@ -20,6 +21,9 @@ public class Main extends JFrame implements MouseListener, MouseMotionListener {
 	BufferedImage fish;
 	Font font = new Font ("Calibri", Font.BOLD, 32);
 	FontMetrics metrics;
+	Background background;
+	boolean running = false;
+	int i = 0;
 	
 	public Main () {
 		super ("ICY-S"); 
@@ -43,6 +47,7 @@ public class Main extends JFrame implements MouseListener, MouseMotionListener {
 		SelectionScreen = new SelectionScreen ();
 		AboutScreen = new AboutScreen ();
 		HelpScreen = new HelpScreen ();
+		mode = new Mode ();
 		currentScreen = StartScreen;
 
 		//currentScreen.add();
@@ -55,11 +60,14 @@ public class Main extends JFrame implements MouseListener, MouseMotionListener {
 		SelectionScreen.applyGraphics (getGraphics ());
 		AboutScreen.applyGraphics (getGraphics ());
 		HelpScreen.applyGraphics (getGraphics ());
+		mode.applyGraphics (getGraphics ());
 		
 		setBackground (lightblue);
 		setLocationRelativeTo (null);
 		setDefaultCloseOperation (EXIT_ON_CLOSE);
 		setVisible (true);
+		
+		animate ();
 	}
 	
 	public class Background extends JPanel {
@@ -69,17 +77,20 @@ public class Main extends JFrame implements MouseListener, MouseMotionListener {
 		}
 		
 		public void paintComponent (Graphics g) {
-			int density = 180, j;
-			for (int i = 5 ; i < width ; i += density) {
-				if (i / density % 2 == 0)
-					j = 0;
-				else
-					j = density / 2;
-				for ( ; j < height ; j += density) {
-					g.drawImage(fish, i, j, null);
-				}
-			}
-			
+//			int density = 180, j;
+//			for (int i = 5 ; i < width ; i += density) {
+//				if (i / density % 2 == 0)
+//					j = 0;
+//				else
+//					j = density / 2;
+//				for ( ; j < height ; j += density) {
+//					g.drawImage(fish, i, j, null);
+//				}
+//			}
+			g.setColor (lightblue);
+			g.fillRect(0, 0, width, height);
+			g.setColor(blue);
+			g.fillRect (0, 0, i*15, height);
 			currentScreen.draw (g);
 			
 //				g.drawLine(0, border+offset, getWidth(), border+offset);
@@ -109,6 +120,21 @@ public class Main extends JFrame implements MouseListener, MouseMotionListener {
 		}
 	}
 	
+	public void animate () {
+		while (true) {
+			if (running) {
+				i++;
+				repaint ();
+			}
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	public static void main (String args []) {
 		main = new Main ();
 		main.create ();
@@ -118,6 +144,14 @@ public class Main extends JFrame implements MouseListener, MouseMotionListener {
 		currentScreen.hide ();
 		currentScreen = screen;
 		currentScreen.show ();
+		if (currentScreen == mode) {
+			i = 0;
+			running = true;
+		}
+		else {
+			i = 0;
+			running = false;
+		}
 		repaint ();
 	}
 	

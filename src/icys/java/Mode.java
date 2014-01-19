@@ -64,18 +64,23 @@ public class Mode implements Screen {
 		
 		main.add (back);
 		main.add (help);
-		main.add (background);
-		applyGraphics (main.getGraphics ());
-		main.repaint ();
-		System.out.println ("constructor");
 		
-		//animate ();
+		addEgg.setVisible(false);		
+		addPenguin.setVisible(false);		
+		addBear.setVisible(false);		
+		back.setVisible(false);		
+		help.setVisible(false);
+		//main.add (main.background);
+		//applyGraphics (main.getGraphics ());
+		System.out.println ("constructor");
 	}
 	
-	public void animate () {
+	public void animate1 () {
 		int s = 0;
 		while (s < 30) {
 		main.repaint ();
+		main.invalidate();
+		back.setForeground (back.getForeground());
 		try {
 			Thread.sleep (500);
 		} catch (InterruptedException e) {
@@ -99,24 +104,36 @@ public class Mode implements Screen {
 	@Override
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
-		System.out.println ("draw");
 		g.setColor (blue);
 		g.fillRect (0, offset + border, width, border);
 		g.setColor(aqua);
 		g.fillRect(0, offset+2*border, width, height-offset-2*border);
 		
-		for (int i = 0 ; i < fish.size () ; i++) {
-			fish.get(i).show (10, blocks, g);
-		}
-		for (int i = 0 ; i < penguins.size () ; i++) {
-			penguins.get(i).show (blocks, g);
-		}
-		for (int i = 0 ; i < bears.size () ; i++) {
-			bears.get(i).show (blocks, g);
-		}
-		for (int i = 0 ; i < eggs.size () ; i++) {
-			eggs.get(i).show (blocks, g);
-		}
+//		for (int i = 0 ; i < fish.size () ; i++) {
+//			fish.get(i).show (10, blocks, g);
+//		}
+//		for (int i = 0 ; i < penguins.size () ; i++) {
+//			penguins.get(i).show (blocks, g);
+//		}
+//		for (int i = 0 ; i < bears.size () ; i++) {
+//			bears.get(i).show (blocks, g);
+//		}
+//		for (int i = 0 ; i < eggs.size () ; i++) {
+//			eggs.get(i).show (blocks, g);
+//		}
+
+//		for (int i = 0 ; i < penguins.size () ; i++) {
+//			penguins.get(i).update (penguins, fish, eggs, 
+//					blocks, g);
+//		}
+//		for (int i = 0 ; i < bears.size () ; i++) {
+//			bears.get(i).update (bears, penguins, blocks, g);
+//		}
+//		for (int i = 0 ; i < eggs.size () ; i++) {
+//			eggs.get(i).update (penguins, blocks, g);
+//		}
+		g.setColor(Color.BLUE);
+		g.fillRect(0, 100, main.i*15, 300);
 	}
 
 	@Override

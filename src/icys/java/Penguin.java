@@ -153,13 +153,13 @@ public class Penguin extends LifeForm {
 
 	public boolean valid(Block[][] thegreatbigworld)
 	{
-		if (this.direction == 8)		
+		if (this.direction == 8 && this.y > 0)		
 			this.y = this.y - 1 ;
-		else if (this.direction == 2)
+		else if (this.direction == 2 && this.y < thegreatbigworld[0].length)
 			this.y = this.y + 1; 
-		else if (this.direction == 6)
+		else if (this.direction == 6 && this.x > 0)
 			this.x = this.x -1 ;
-		else if (this.direction == 4)
+		else if (this.direction == 4 && this.x < thegreatbigworld.length)
 			this.x = this.x + 1; 
 		
 		if (thegreatbigworld[x][y].isOccupied == false && thegreatbigworld[x][y].value == 1)
