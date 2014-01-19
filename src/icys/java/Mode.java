@@ -27,14 +27,6 @@ public class Mode implements Screen {
 		addPenguin = new LabelButton ("pen", font, Color.WHITE, lightblue, blue, aqua);
 		addBear = new LabelButton ("bear", font, Color.WHITE, lightblue, blue, aqua);
 		
-//		back = new LabelButton ("back", font, Color.WHITE, blue, blue, aqua);
-//		help = new LabelButton ("help", font, Color.WHITE, blue, blue, aqua);
-//
-//		// make icons later
-//		addEgg = new LabelButton ("egg", font, Color.WHITE, blue, blue, aqua);
-//		addPenguin = new LabelButton ("pen", font, Color.WHITE, blue, blue, aqua);
-//		addBear = new LabelButton ("bear", font, Color.WHITE, blue, blue, aqua);
-		
 		for (int i = 0 ; i < blocks.length ; i++) {
 			for (int j = 0 ; j < blocks.length ; j++) {
 				blocks [i][j] = new Block (1);
@@ -46,7 +38,7 @@ public class Mode implements Screen {
 			fish.add(new Fish (15));
 		}
 		
-		for (int i = 0 ; i < 1 ; i++) {
+		for (int i = 0 ; i < 10 ; i++) {
 			eggs.add(new Egg (8, 12));
 		}
 		
@@ -72,7 +64,6 @@ public class Mode implements Screen {
 		help.setVisible(false);
 		//main.add (main.background);
 		//applyGraphics (main.getGraphics ());
-		System.out.println ("constructor");
 	}
 	
 	public void animate1 () {
@@ -122,18 +113,16 @@ public class Mode implements Screen {
 //			eggs.get(i).show (blocks, g);
 //		}
 
-//		for (int i = 0 ; i < penguins.size () ; i++) {
-//			penguins.get(i).update (penguins, fish, eggs, 
-//					blocks, g);
-//		}
-//		for (int i = 0 ; i < bears.size () ; i++) {
-//			bears.get(i).update (bears, penguins, blocks, g);
-//		}
-//		for (int i = 0 ; i < eggs.size () ; i++) {
-//			eggs.get(i).update (penguins, blocks, g);
-//		}
-		g.setColor(Color.BLUE);
-		g.fillRect(0, 100, main.i*15, 300);
+		for (int i = 0 ; i < penguins.size () ; i++) {
+			penguins.get(i).update (penguins, fish, eggs, 
+					blocks, g);
+		}
+		for (int i = 0 ; i < bears.size () ; i++) {
+			bears.get(i).update (bears, penguins, blocks, g);
+		}
+		for (int i = 0 ; i < eggs.size () ; i++) {
+			eggs.get(i).update (penguins, blocks, g);
+		}
 	}
 
 	@Override

@@ -89,8 +89,6 @@ public class Main extends JFrame implements MouseListener, MouseMotionListener {
 //			}
 			g.setColor (lightblue);
 			g.fillRect(0, 0, width, height);
-			g.setColor(blue);
-			g.fillRect (0, 0, i*15, height);
 			currentScreen.draw (g);
 			
 //				g.drawLine(0, border+offset, getWidth(), border+offset);
