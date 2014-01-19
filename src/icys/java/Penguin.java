@@ -18,6 +18,10 @@ public class Penguin extends LifeForm {
 	int sinceEaten;
 	int fishesEaten; 
 	
+	public Penguin () {
+		
+	}
+	
 	public Penguin (int x, int y) 
 	{
 		this.x = x;
@@ -151,6 +155,8 @@ public class Penguin extends LifeForm {
 		this.direction = direction;
 	}
 
+	/** YO. THIS CHANGES THE POSITION BEFORE CHECKING IF THE NEW BLOCK
+	   IS OCCUPIED OR NOT LAND ? */
 	public boolean valid(Block[][] thegreatbigworld)
 	{
 		if (this.direction == 8 && this.y > 0)		
@@ -158,7 +164,7 @@ public class Penguin extends LifeForm {
 		else if (this.direction == 2 && this.y < thegreatbigworld[0].length)
 			this.y = this.y + 1; 
 		else if (this.direction == 6 && this.x > 0)
-			this.x = this.x -1 ;
+			this.x = this.x - 1 ;
 		else if (this.direction == 4 && this.x < thegreatbigworld.length)
 			this.x = this.x + 1; 
 		
@@ -170,11 +176,13 @@ public class Penguin extends LifeForm {
 	
 	public void move (Block [][] thegreatbigworld)
 	{
+		/** shouldn't you cross off invalid directions
+		 and also what if there is no valid direction? */
 		do 
 		{
 			this.chooseDirection();
 		}
-		while (this.valid(thegreatbigworld) == false);
+		while (!this.valid(thegreatbigworld));
 	}
 
 	public void show(Block[][] enviro, Graphics g)

@@ -36,4 +36,6 @@ public class Utilities {
 	
 	public static Font font = new Font ("Calibri", Font.BOLD, 32),
 	font_large = new Font ("Calibri", Font.BOLD, 144);
+	
+	public static Block blocks [][];
 }

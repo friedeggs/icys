@@ -11,7 +11,6 @@ import java.util.ArrayList;
 public class Mode implements Screen {
 	
 	LabelButton back, help, addEgg, addPenguin, addBear;
-	Block blocks [][] = new Block [30][30];
 	static ArrayList <Fish> fish = new ArrayList <Fish> (1);
 	ArrayList <Egg> eggs = new ArrayList <Egg> (1);
 	ArrayList <Penguin> penguins = new ArrayList <Penguin> (1);
@@ -27,6 +26,7 @@ public class Mode implements Screen {
 		addPenguin = new LabelButton ("pen", font, Color.WHITE, lightblue, blue, aqua);
 		addBear = new LabelButton ("bear", font, Color.WHITE, lightblue, blue, aqua);
 		
+		blocks = new Block [30][30];
 		for (int i = 0 ; i < blocks.length ; i++) {
 			for (int j = 0 ; j < blocks.length ; j++) {
 				blocks [i][j] = new Block (1);
