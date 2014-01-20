@@ -12,7 +12,6 @@ import javax.imageio.ImageIO;
 
 public class PolarBear extends LifeForm {
 
-	boolean alive;
 	Penguin target;
 	//Block subtarget;
 	int x, y;
@@ -26,7 +25,6 @@ public class PolarBear extends LifeForm {
 		super (index);
 		//x int
 		//y int
-		alive = true;
 		sinceEaten = 0;
 		penguinsEaten = 0;
 		chooseTarget();
@@ -37,9 +35,9 @@ public class PolarBear extends LifeForm {
 		}
 	}
 	
-	public PolarBear (int x, int y)
+	public PolarBear (int index, int x, int y)
 	{
-		alive = true;
+		super (index);
 		sinceEaten = 0;
 		penguinsEaten = 0;
 		this.x = x;

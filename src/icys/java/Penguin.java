@@ -11,8 +11,7 @@ import static icys.java.Utilities.*;
 
 public class Penguin extends LifeForm {
 	
-	Fish target;
-	Block aim; // Block version of target
+	Entity target; // Block or fish
 	int x, y;
 	int direction;
 	int sinceEaten;
@@ -51,16 +50,14 @@ public class Penguin extends LifeForm {
 
 	public void eatFish ()
 	{
-		if (target == null && x == aim.x && y == aim.y) 
-			// the penguin was heading for a random block
+		if (x == target.x && y == target.y)
 		{
-			aim = null;
-		}
-		else if (target != null && x == target.x && y == target.y)
-		{
-			target.remove();
-			fishesEaten ++;
-			sinceEaten = 0;
+			if (target instanceof Fish) {
+				((Fish) target).remove();
+				fishesEaten ++;
+				sinceEaten = 0;
+			}
+			target = null;
 		}
 		else
 			sinceEaten ++ ;
@@ -171,7 +168,7 @@ public class Penguin extends LifeForm {
 		else if (this.direction == 4 && this.x < blocks.length-1)
 			this.x = this.x + 1; 
 		
-		if (blocks[x][y].isOccupied == false && blocks[x][y].value == 1)
+		if (blocks[x][y].lifeform == null && blocks[x][y].value == 1)
 			return true;
 		else
 			return false;
