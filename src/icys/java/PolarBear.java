@@ -1,5 +1,6 @@
 package icys.java;
 
+import static icys.java.Utilities.blocks;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -13,8 +14,10 @@ public class PolarBear extends LifeForm {
 
 	boolean alive;
 	Penguin target;
+	//Block subtarget;
 	int x, y;
 	int direction;
+	BufferedImage image;
 	int sinceEaten;
 	int penguinsEaten; 
 
@@ -56,7 +59,7 @@ public class PolarBear extends LifeForm {
 		reproduces (rawr, pencils);
 		updateTarget(pencils);
 		move(iii);
-		show(g);
+		show(iii, g);
 	}
 	
 	public void eatPenguin ()
@@ -107,7 +110,9 @@ public class PolarBear extends LifeForm {
 	public void chooseTarget(ArrayList<Penguin> pens) //Chooses closest fish for new target
 	{		
 		if (pens.size() == 0) {
-			// WHAT NOW D:
+			target = null;
+			//int[] coordinates = this.chooseRandomLand();
+			//subtarget = blocks[coordinates[0]][coordinates[1]];
 		}
 		else {
 		
@@ -145,47 +150,60 @@ public class PolarBear extends LifeForm {
 		int[] possibilities = new int [2];
 		int direction; //8- up, 6-right, 2- down, 4- left
 		
-		if (this.x == target.x) //Compares x-coordinate of penguin vs. target
-			possibilities[0]= 0; 
-		else if(this.x - target.x > 0)
-			possibilities[0] = 4;
-		else
-			possibilities[0] = 6;
-		
-		if (this.y == target.y) //Compares y-coordinate of penguin vs. target
-			possibilities[0] = 0;
-		else if (this.y - target.y > 0)
-			possibilities[1] = 8;
-		else
-			possibilities[1] = 2;
-		
-		int random = (int)(Math.random() * 2); //Chooses random direction within two possible directions
-		direction = possibilities [random];
-		
-		if (direction == 0) //If direction chosen is not valid, choose other direction
+		if (target == null)
 		{
-			if (random == 1)
-				random = 2;
+			direction = (int)((Math.random()* 4)+1); //Chooses random direction if there is no target
+		}	
+		else
+		{
+			if (this.x == target.x) //Compares x-coordinate of penguin vs. target
+				possibilities[0]= 0; 
+			else if(this.x - target.x > 0)
+				possibilities[0] = 4;
 			else
-				random = 1;
-			direction = possibilities[random-1];
+				possibilities[0] = 6;
+			
+			if (this.y == target.y) //Compares y-coordinate of penguin vs. target
+				possibilities[0] = 0;
+			else if (this.y - target.y > 0)
+				possibilities[1] = 8;
+			else
+				possibilities[1] = 2;
+			
+			int random = (int)(Math.random() * 2); //Chooses random direction within two possible directions
+			direction = possibilities [random];
+			
+			if (direction == 0) //If direction chosen is not valid, choose other direction
+			{
+				if (random == 1)
+					random = 2;
+				else
+					random = 1;
+				direction = possibilities[random-1];
+			}
+			this.direction = direction;
 		}
-		this.direction = direction;
 	}
 
 	public boolean valid(Block[][] thegreatbigworld)
 	{
-		if (this.direction == 8 && this.y > 0)
-			this.y = this.y - 1 ;
-		else if (this.direction == 2 && this.y < thegreatbigworld[0].length)
-			this.y = this.y + 1; 
-		else if (this.direction == 6 && this.x > 0)
-			this.x = this.x -1 ;
-		else if (this.direction == 4 && this.x < thegreatbigworld.length)
-			this.x = this.x + 1;
+		int newX = x, newY = y;
 		
-		if (thegreatbigworld[x][y].isOccupied == false && thegreatbigworld[x][y].value == 1)
+		if (this.direction == 8 && this.y > 0)
+			newY = this.y - 1 ;
+		else if (this.direction == 2 && this.y < thegreatbigworld[0].length)
+			newY = this.y + 1; 
+		else if (this.direction == 6 && this.x > 0)
+			newX = this.x -1 ;
+		else if (this.direction == 4 && this.x < thegreatbigworld.length)
+			newX = this.x + 1;
+		
+		if (thegreatbigworld[newX][newY].isOccupied == false && thegreatbigworld[newX][newY].value == 1)
+		{
+			x = newX;
+			y = newY;
 			return true;
+		}
 		else
 			return false;
 	}
@@ -196,6 +214,13 @@ public class PolarBear extends LifeForm {
 		{
 			this.chooseDirection();
 		}
-		while (this.valid(thegreatbigworld) == false);
+		while (this.valid(thegreatbigworld) == false); 
 	}
+	
+	public void show(Block[][] enviro, Graphics g)
+	{
+		g.drawImage (image, enviro[x][y].x, enviro[x][y].y, null); 
+	}
+
 }
+
