@@ -21,5 +21,6 @@ public int x, y;
   //public draw()
   {
     //i know what you mean
+    // EDITTT
   }
 }
