@@ -21,14 +21,15 @@ public class PolarBear extends LifeForm {
 	int sinceEaten;
 	int penguinsEaten; 
 
-	public PolarBear(ArrayList <Penguin> pencils)
+	public PolarBear(int index)
 	{
+		super (index);
 		//x int
 		//y int
 		alive = true;
 		sinceEaten = 0;
 		penguinsEaten = 0;
-		chooseTarget(pencils);
+		chooseTarget();
 		try {
 			image = ImageIO.read(new File ("polarbear.png"));
 		} catch (IOException e) {
@@ -36,14 +37,14 @@ public class PolarBear extends LifeForm {
 		}
 	}
 	
-	public PolarBear (int x, int y, ArrayList <Penguin> pens)
+	public PolarBear (int x, int y)
 	{
 		alive = true;
 		sinceEaten = 0;
 		penguinsEaten = 0;
 		this.x = x;
 		this.y = y;
-		chooseTarget(pens);
+		chooseTarget();
 		try {
 			image = ImageIO.read(new File ("polarbear.png"));
 		} catch (IOException e) {
@@ -88,7 +89,7 @@ public class PolarBear extends LifeForm {
 		
 		if (penguinsEaten == 5)
 		{
-			PolarBear baby = new PolarBear(x, y, pens);
+			PolarBear baby = new PolarBear(x, y);
 			penguinsEaten = 0;
 			bears.add(baby);
 		}
@@ -217,9 +218,15 @@ public class PolarBear extends LifeForm {
 		while (this.valid(thegreatbigworld) == false); 
 	}
 	
-	public void show(Block[][] enviro, Graphics g)
+	public void show(Graphics g)
 	{
-		g.drawImage (image, enviro[x][y].x, enviro[x][y].y, null); 
+		g.drawImage (image, blocks[x][y].x, blocks[x][y].y, null); 
+	}
+
+	@Override
+	public void remove() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

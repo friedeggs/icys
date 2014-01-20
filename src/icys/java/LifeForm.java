@@ -2,13 +2,14 @@ package icys.java;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+
 import static icys.java.Utilities.*;
 
 public abstract class LifeForm {
 
 	int x, y, index;
 	BufferedImage image;
-	LifeForm arraylist;
 	Block pos;
 	
 	public LifeForm (int index) {

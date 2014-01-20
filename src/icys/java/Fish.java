@@ -39,9 +39,8 @@ public class Fish extends LifeForm {
 	@Override
 	public void remove() {
 		fish.remove(index);
-		for (int i = index ; i < fish.size() ; i++) {
+		for (int i = index ; i < fish.size() ; i++)
 			fish.get(i).index--;
-		}
 	}
 	
 }

@@ -19,7 +19,7 @@ public class Penguin extends LifeForm {
 	int sinceEaten;
 	int fishesEaten; 
 	
-	public Penguin () {
+	public Penguin (int index) {
 		
 	}
 	
@@ -190,5 +190,12 @@ public class Penguin extends LifeForm {
 			this.chooseDirection();
 		}
 		while (!this.valid(thegreatbigworld));
+	}
+
+	@Override
+	public void remove() {
+		penguins.remove(index);
+		for (int i = index ; i < penguins.size() ; i++)
+			penguins.get(i).index--;
 	}
 }
