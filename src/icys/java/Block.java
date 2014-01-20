@@ -10,10 +10,10 @@ public boolean isOccupied;
 public int value; 
 public int row, column,increaseX, increaseY, x /*=768, 567*/, y;
 
-  public Block (int value, int i, int j)
+  public Block (int value1, int i, int j)
   {
-    boolean isOccupied = false; 
-    this.value = value; 
+    isOccupied = false; 
+    value = value1; 
     row = i;
     column = j;
   }
@@ -31,7 +31,7 @@ public int row, column,increaseX, increaseY, x /*=768, 567*/, y;
   	use;
   	
   	if (value != 1){
-  		if (a.equals'x')
+  		if (a =='x')
   			use = dark;
   		else
   			use = water;
@@ -40,8 +40,9 @@ public int row, column,increaseX, increaseY, x /*=768, 567*/, y;
   		use = land;
   	
   	int [] xPoint = {row*x, row*x+increaseX, row*x - increaseX, row + increaseX};
-  	int [] yPoint = {column*y, colume*y+increaseY, column*y-increaseY, column - increaseY};
-  	System.setColor (use);
-  	poly = new Polygon (xPoint, yPoint, xPoint.length ());
+  	int [] yPoint = {column*y, column*y+increaseY, column*y-increaseY, column - increaseY};
+  	g.setColor (use);
+  	Polygon poly = new Polygon (xPoint, yPoint, xPoint.length);
   	g.drawPolygon (poly);
   }
+}

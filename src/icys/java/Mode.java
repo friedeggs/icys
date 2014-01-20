@@ -29,8 +29,8 @@ public class Mode implements Screen {
 		blocks = new Block [30][30];
 		for (int i = 0 ; i < blocks.length ; i++) {
 			for (int j = 0 ; j < blocks.length ; j++) {
-				blocks [i][j] = new Block (1);
-				blocks [i][j].set (i * 16, j * 16);
+				blocks [i][j] = new Block (1, i, j);
+			//	blocks [i][j].set (i * 16, j * 16); //TODO
 			}
 		}
 		
