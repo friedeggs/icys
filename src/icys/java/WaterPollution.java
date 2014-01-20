@@ -1,4 +1,5 @@
 package icys.java;
+import static icys.java.Utilities.*;
 
 import java.awt.Color;
 import java.awt.Graphics;
