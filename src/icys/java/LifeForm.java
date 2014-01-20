@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import static icys.java.Utilities.*;
 
-public abstract class LifeForm {
+public abstract class LifeForm extends Entity {
 
 	int x, y, index;
 	BufferedImage image;

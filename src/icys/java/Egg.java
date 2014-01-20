@@ -29,14 +29,14 @@ public class Egg extends LifeForm{
 		}
 	}
 	
-	public void update(ArrayList<Penguin> penGUI, Block[][] iii, Graphics g)
+	public void update(Graphics g)
 	{
 		timeAlive ++;
 		if (grownUp())
 		{
 			remove ();
 			Penguin penS = new Penguin (penguins.size(), x, y);
-			penGUI.add(penS);
+			penguins.add(penS);
 		}
 		show(g);
 	}

@@ -10,8 +10,7 @@ import javax.imageio.ImageIO;
 import static icys.java.Utilities.*;
 
 public class Penguin extends LifeForm {
-
-	boolean alive;
+	
 	Fish target;
 	Block aim; // Block version of target
 	int x, y;
@@ -28,7 +27,6 @@ public class Penguin extends LifeForm {
 		super (index);
 		this.x = x;
 		this.y = y;
-		alive = true; 
 		fishesEaten = 0;
 		sinceEaten = 0;
 		//choose target
@@ -53,7 +51,12 @@ public class Penguin extends LifeForm {
 
 	public void eatFish ()
 	{
-		if (target != null && x == target.x && y == target.y)
+		if (target == null && x == aim.x && y == aim.y) 
+			// the penguin was heading for a random block
+		{
+			aim = null;
+		}
+		else if (target != null && x == target.x && y == target.y)
 		{
 			target.remove();
 			fishesEaten ++;
@@ -81,14 +84,15 @@ public class Penguin extends LifeForm {
 	
 	public void updateTarget() //updateTarget: This method checks if target is alive, and calls method to choose new target if current target is dead
 	{
-		boolean targetAlive = false; 
-		for (int i = 0; i < fish.size(); i ++) 
-		{
-			if (this.target == fish.get(i)) //Checks if target fish is still in fish ArrayList
-				targetAlive = true; 
-		}
-		if (targetAlive == false) //Chooses new target if target is dead
-			this.chooseTarget();
+//		boolean targetAlive = false; 
+//		for (int i = 0; i < fish.size(); i ++) 
+//		{
+//			if (this.target == fish.get(i)) //Checks if target fish is still in fish ArrayList
+//				targetAlive = true; 
+//		}
+//		if (targetAlive == false) //Chooses new target if target is dead
+		if (target == null && (fish.size() > 0 || aim == null))
+			chooseTarget();
 	}
 	
 	public void chooseTarget() //Chooses closest fish for new target
@@ -121,19 +125,13 @@ public class Penguin extends LifeForm {
 		}
 	}
 	
-	public int distanceTo (Fish fish) //distanceTo: This method finds the distance between the penguin and fish parameter
-	{
-		int distanceTo = (Math.abs(this.x - fish.x)) + (Math.abs(this.y - fish.y));
-		return distanceTo;
-	}
-	
 	public void chooseDirection() //chooseDirection: This method chooses a direction for the penguin to go, towards the fish
 	{
 		int[] possibilities = new int [2];
 		int direction; //8- up, 6-right, 2- down, 4- left
 		
 		if (this.x == target.x) //Compares x-coordinate of penguin vs. target
-			possibilities[0]= 0; 
+			possibilities[0] = 0; 
 		else if(this.x - target.x > 0)
 			possibilities[0] = 4;
 		else
@@ -162,32 +160,51 @@ public class Penguin extends LifeForm {
 
 	/** YO. THIS CHANGES THE POSITION BEFORE CHECKING IF THE NEW BLOCK
 	   IS OCCUPIED OR NOT LAND ? */
-	public boolean valid(Block[][] thegreatbigworld)
+	public boolean valid()
 	{
 		if (this.direction == 8 && this.y > 0)		
 			this.y = this.y - 1 ;
-		else if (this.direction == 2 && this.y < thegreatbigworld[0].length-1)
+		else if (this.direction == 2 && this.y < blocks[0].length-1)
 			this.y = this.y + 1; 
 		else if (this.direction == 6 && this.x > 0)
 			this.x = this.x - 1 ;
-		else if (this.direction == 4 && this.x < thegreatbigworld.length-1)
+		else if (this.direction == 4 && this.x < blocks.length-1)
 			this.x = this.x + 1; 
 		
-		if (thegreatbigworld[x][y].isOccupied == false && thegreatbigworld[x][y].value == 1)
+		if (blocks[x][y].isOccupied == false && blocks[x][y].value == 1)
 			return true;
 		else
 			return false;
 	}
 	
-	public void move (Block [][] thegreatbigworld)
+	public void move ()
 	{
+		boolean direction [][] = new boolean [3][3]; 
+		int temp, counter = 0;
+		for (int i = -1 ; i <= 1 ; i++)
+			for (int j = -1 ; j <= 1 ; j++)
+				if (Math.abs (i+j) == 1) {
+					if (target != null)
+						temp = distanceTo (target);
+					else
+						temp = distanceTo (aim);
+					x += i;
+					y += j;
+					if ((target != null && distanceTo (target) < temp)
+							|| (aim != null && distanceTo (aim) < temp)) {
+						direction [i+1][j+1] = true;
+						counter++;
+					}
+					x -= i;
+					y -= j;
+				}
 		/** shouldn't you cross off invalid directions
 		 and also what if there is no valid direction? */
 		do 
 		{
 			this.chooseDirection();
 		}
-		while (!this.valid(thegreatbigworld));
+		while (!this.valid());
 	}
 
 	@Override
