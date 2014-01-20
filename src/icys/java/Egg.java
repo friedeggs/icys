@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
+import static icys.java.Utilities.*;
 
 public class Egg extends LifeForm{
 
@@ -14,8 +15,9 @@ public class Egg extends LifeForm{
 	int x, y;
 	int timeAlive;
 	
-	public Egg(int x, int y)
+	public Egg(int index, int x, int y)
 	{
+		super (index);
 		this.x = x;
 		this.y = y;
 		alive = true;
@@ -32,8 +34,8 @@ public class Egg extends LifeForm{
 		timeAlive ++;
 		if (grownUp())
 		{
-			alive = false;
-			Penguin penS = new Penguin (this.x, this.y);
+			remove ();
+			Penguin penS = new Penguin (penguins.size(), x, y);
 			penGUI.add(penS);
 		}
 		show(g);
@@ -42,6 +44,13 @@ public class Egg extends LifeForm{
 	public boolean grownUp()
 	{
 		return (timeAlive == 20);
+	}
+
+	@Override
+	public void remove() {
+		fish.remove(index);
+		for (int i = index ; i < fish.size() ; i++)
+			fish.get(i).index--;
 	}
 	
 }

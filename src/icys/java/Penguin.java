@@ -20,11 +20,12 @@ public class Penguin extends LifeForm {
 	int fishesEaten; 
 	
 	public Penguin (int index) {
-		
+		super (index);
 	}
 	
-	public Penguin (int x, int y) 
+	public Penguin (int index, int x, int y) 
 	{
+		super (index);
 		this.x = x;
 		this.y = y;
 		alive = true; 
@@ -64,19 +65,16 @@ public class Penguin extends LifeForm {
 	
 	public void checkAlive() 
 	{
-		if (alive)
-		{
-			if (sinceEaten > 20)
-				alive = false;
-		}
+		if (sinceEaten > 20)
+			remove();
 	}
 	
 	public void reproduces()
 	{
 		if (fishesEaten == 5)
 		{
-			Egg baby = new Egg(x, y);
 			fishesEaten = 0;
+			Egg baby = new Egg(eggs.size(), x, y);
 			eggs.add(baby);
 		}	
 	}
