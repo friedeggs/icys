@@ -1,6 +1,7 @@
 package icys.java;
 import java.awt.Color; 
 import java.awt.Graphics;
+import java.awt.Polygon;
 
 public class Block
 {
@@ -29,11 +30,18 @@ public int row, column,increaseX, increaseY, x /*=768, 567*/, y;
   	dark = new Color (11,23,59),
   	use;
   	
-  	if (a.equals'x')
-  		use = dark;
+  	if (value != 1){
+  		if (a.equals'x')
+  			use = dark;
+  		else
+  			use = water;
+  	}
   	else
-  		use = water;
+  		use = land;
   	
-  	int [] xPoint = {row*x; row*x+increaseX};
-  	int [] yPoint = {column*y, colume*y+increaseY};
+  	int [] xPoint = {row*x, row*x+increaseX, row*x - increaseX, row + increaseX};
+  	int [] yPoint = {column*y, colume*y+increaseY, column*y-increaseY, column - increaseY};
+  	System.setColor (use);
+  	poly = new Polygon (xPoint, yPoint, xPoint.length ());
+  	g.drawPolygon (poly);
   }
