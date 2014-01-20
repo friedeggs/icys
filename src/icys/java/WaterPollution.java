@@ -26,8 +26,8 @@ public class WaterPollution extends NaturalDisaster
 
     public void stopFish (ArrayList < Fish > list)
     {
-        for (int i = 0 ; i < list.size () ; i++)
-            list.get ( i ) .canAppear = false;
+        //for (int i = 0 ; i < list.size () ; i++)
+          //  list.get ( i ) .canAppear = false;
     }
 
     public void blackenWater (Graphics g, Block[][] block) //(this is going to be the draw method)

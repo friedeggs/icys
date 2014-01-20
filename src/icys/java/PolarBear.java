@@ -15,7 +15,6 @@ public class PolarBear extends LifeForm {
 	Penguin target;
 	int x, y;
 	int direction;
-	BufferedImage image;
 	int sinceEaten;
 	int penguinsEaten; 
 
@@ -57,7 +56,7 @@ public class PolarBear extends LifeForm {
 		reproduces (rawr, pencils);
 		updateTarget(pencils);
 		move(iii);
-		show(iii, g);
+		show(g);
 	}
 	
 	public void eatPenguin ()
@@ -199,10 +198,4 @@ public class PolarBear extends LifeForm {
 		}
 		while (this.valid(thegreatbigworld) == false);
 	}
-	
-	public void show(Block[][] enviro, Graphics g)
-	{
-		g.drawImage (image, enviro[x][y].x, enviro[x][y].y, null); 
-	}
-
 }

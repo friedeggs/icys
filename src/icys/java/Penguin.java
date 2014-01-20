@@ -14,7 +14,6 @@ public class Penguin extends LifeForm {
 	Fish target;
 	int x, y;
 	int direction;
-	BufferedImage cup;
 	int sinceEaten;
 	int fishesEaten; 
 	
@@ -32,7 +31,7 @@ public class Penguin extends LifeForm {
 		//choose target
 		target = Mode.fish.get(0); // TEMPORARY
 		try {
-			cup = ImageIO.read(new File ("penguin.png"));
+			image = ImageIO.read(new File ("penguin.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -47,7 +46,7 @@ public class Penguin extends LifeForm {
 		this.reproduces (frieda);
 		this.updateTarget(blub);
 		this.move(iii);
-		this.show(iii, g);
+		this.show(g);
 	}
 
 	public void eatFish ()
@@ -161,11 +160,11 @@ public class Penguin extends LifeForm {
 	{
 		if (this.direction == 8 && this.y > 0)		
 			this.y = this.y - 1 ;
-		else if (this.direction == 2 && this.y < thegreatbigworld[0].length)
+		else if (this.direction == 2 && this.y < thegreatbigworld[0].length-1)
 			this.y = this.y + 1; 
 		else if (this.direction == 6 && this.x > 0)
 			this.x = this.x - 1 ;
-		else if (this.direction == 4 && this.x < thegreatbigworld.length)
+		else if (this.direction == 4 && this.x < thegreatbigworld.length-1)
 			this.x = this.x + 1; 
 		
 		if (thegreatbigworld[x][y].isOccupied == false && thegreatbigworld[x][y].value == 1)
@@ -183,10 +182,5 @@ public class Penguin extends LifeForm {
 			this.chooseDirection();
 		}
 		while (!this.valid(thegreatbigworld));
-	}
-
-	public void show(Block[][] enviro, Graphics g)
-	{
-		g.drawImage (cup, enviro[x][y].x, enviro[x][y].y, null); 
 	}
 }

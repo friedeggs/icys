@@ -31,11 +31,12 @@ public class Mode implements Screen {
 			for (int j = 0 ; j < blocks.length ; j++) {
 				blocks [i][j] = new Block (1);
 				blocks [i][j].set (i * 16, j * 16);
+				blocks [i][j].setIndices (i, j);
 			}
 		}
 		
 		for (int i = 0 ; i < 1 ; i++) {
-			fish.add(new Fish (15));
+			fish.add(new Fish ());
 		}
 		
 		for (int i = 0 ; i < 10 ; i++) {
@@ -112,7 +113,9 @@ public class Mode implements Screen {
 //		for (int i = 0 ; i < eggs.size () ; i++) {
 //			eggs.get(i).show (blocks, g);
 //		}
-
+		for (int i = 0 ; i < fish.size () ; i++) {
+			fish.get(i).show (g);
+		}
 		for (int i = 0 ; i < penguins.size () ; i++) {
 			penguins.get(i).update (penguins, fish, eggs, 
 					blocks, g);

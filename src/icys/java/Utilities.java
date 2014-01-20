@@ -38,4 +38,6 @@ public class Utilities {
 	font_large = new Font ("Calibri", Font.BOLD, 144);
 	
 	public static Block blocks [][];
+	
+	public static final int WATER = 0, LAND = 1, UNUSED = 2;
 }

@@ -13,7 +13,6 @@ public class Egg extends LifeForm{
 	boolean alive;
 	int x, y;
 	int timeAlive;
-	BufferedImage minipencil;
 	
 	public Egg(int x, int y)
 	{
@@ -22,7 +21,7 @@ public class Egg extends LifeForm{
 		alive = true;
 		timeAlive = 0;
 		try {
-            minipencil = ImageIO.read(new File ("egg.png"));
+            image = ImageIO.read(new File ("egg.png"));
 		} catch (IOException e) {
             e.printStackTrace();
 		}
@@ -37,7 +36,7 @@ public class Egg extends LifeForm{
 			Penguin penS = new Penguin (this.x, this.y);
 			penGUI.add(penS);
 		}
-		show(iii, g);
+		show(g);
 	}
 	
 	public boolean grownUp()
@@ -46,11 +45,6 @@ public class Egg extends LifeForm{
 			return true; 
 		else
 			return false;
-	}
-	
-	public void show(Block[][] enviro, Graphics g)
-	{
-		g.drawImage (minipencil, enviro[x][y].x, enviro[x][y].y, null); 
 	}
 	
 }

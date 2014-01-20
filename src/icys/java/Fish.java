@@ -7,21 +7,23 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
+import static icys.java.Utilities.*;
 
-public class Fish extends LifeForm{
+public class Fish extends LifeForm {
  
 	boolean alive;
 	int x, y;
-	boolean canAppear;
-	int timeAppeared;
 	BufferedImage fish;
+	Block pos;
 	
-	public Fish (int timer)
+	public Fish ()
 	{
-		x = chooseX();
-		y = chooseY();
-		canAppear = true;
-		timeAppeared = 5;
+		do
+			pos = randomBlock ();
+		while (!byWater (pos));
+		x = pos.x;
+		y = pos.y;
+		pos.set(this);
 		try {
             fish = ImageIO.read(new File ("fish.png"));
 		} catch (IOException e) {
@@ -29,22 +31,13 @@ public class Fish extends LifeForm{
 		}
 	}
 	
-	public int chooseX ()
-	{
-		return 15;
-		//How to choose X coordinate?
-	}
-	
-	public int chooseY ()
-	{
-		return 15;
-		//How to choose Y coordinate? 
-	}
-	
-	public void show(int time, Block[][] block, Graphics g)
-	{
-		g.drawImage (fish, block[x][y].x, block[x][y].y, null); 
-		timeAppeared = time;
+	public boolean byWater (Block block) {
+		return (block.getX() == 0 || block.getY() == 0 || 
+				block.getX() == blocks.length-1 || block.getY() == blocks.length-1||
+				blocks [block.getX()-1][block.getY()].value == WATER || 
+				blocks [block.getX()+1][block.getY()].value == WATER ||
+				blocks [block.getX()][block.getY()-1].value == WATER || 
+				blocks [block.getX()][block.getY()+1].value == WATER);
 	}
 
 }
