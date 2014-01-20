@@ -107,6 +107,11 @@ public class PolarBear extends LifeForm {
 	
 	public void chooseTarget(ArrayList<Penguin> pens) //Chooses closest fish for new target
 	{		
+		if (pens.size() == 0) {
+			// WHAT NOW D:
+		}
+		else {
+		
 		int[] distances = new int [pens.size()]; 
 		int min; 
 		
@@ -125,6 +130,8 @@ public class PolarBear extends LifeForm {
 				min = distances[j];	//...set as minimum.
 				this.target = pens.get(j); //And set the respective fish as new target
 			}
+		}
+		
 		}
 	}
 	
