@@ -41,10 +41,7 @@ public class Egg extends LifeForm{
 	
 	public boolean grownUp()
 	{
-		if (timeAlive == 20)
-			return true; 
-		else
-			return false;
+		return (timeAlive == 20);
 	}
 	
 }

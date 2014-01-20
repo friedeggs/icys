@@ -10,14 +10,10 @@ import javax.imageio.ImageIO;
 import static icys.java.Utilities.*;
 
 public class Fish extends LifeForm {
- 
-	boolean alive;
-	int x, y;
-	BufferedImage fish;
-	Block pos;
 	
-	public Fish ()
+	public Fish (int index)
 	{
+		super (index);
 		do
 			pos = randomBlock ();
 		while (!byWater (pos));
@@ -25,7 +21,7 @@ public class Fish extends LifeForm {
 		y = pos.y;
 		pos.set(this);
 		try {
-            fish = ImageIO.read(new File ("fish.png"));
+            image = ImageIO.read(new File ("fish.png"));
 		} catch (IOException e) {
             e.printStackTrace();
 		}
@@ -40,4 +36,12 @@ public class Fish extends LifeForm {
 				blocks [block.getX()][block.getY()+1].value == WATER);
 	}
 
+	@Override
+	public void remove() {
+		fish.remove(index);
+		for (int i = index ; i < fish.size() ; i++) {
+			fish.get(i).index--;
+		}
+	}
+	
 }

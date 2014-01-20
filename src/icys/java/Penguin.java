@@ -7,11 +7,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
+import static icys.java.Utilities.*;
 
 public class Penguin extends LifeForm {
 
 	boolean alive;
 	Fish target;
+	Block aim; // Block version of target
 	int x, y;
 	int direction;
 	int sinceEaten;
@@ -29,7 +31,7 @@ public class Penguin extends LifeForm {
 		fishesEaten = 0;
 		sinceEaten = 0;
 		//choose target
-		target = Mode.fish.get(0); // TEMPORARY
+		chooseTarget ();
 		try {
 			image = ImageIO.read(new File ("penguin.png"));
 		} catch (IOException e) {
@@ -38,22 +40,21 @@ public class Penguin extends LifeForm {
 		
 	}
 	
-	public void update(ArrayList<Penguin> pencils, ArrayList <Fish> blub, 
-			ArrayList<Egg> frieda, Block[][] iii, Graphics g)
+	public void update(Graphics g)
 	{
 		this.eatFish();
 		this.checkAlive();
-		this.reproduces (frieda);
-		this.updateTarget(blub);
-		this.move(iii);
+		this.reproduces ();
+		this.updateTarget();
+		this.move();
 		this.show(g);
 	}
 
 	public void eatFish ()
 	{
-		if ((this.x == target.x) && (this.y == target.y) && this.alive)
+		if (target != null && x == target.x && y == target.y)
 		{
-			target.alive = false;
+			target.remove();
 			fishesEaten ++;
 			sinceEaten = 0;
 		}
@@ -70,47 +71,54 @@ public class Penguin extends LifeForm {
 		}
 	}
 	
-	public ArrayList<Egg> reproduces(ArrayList<Egg> eggs)
+	public void reproduces()
 	{
 		if (fishesEaten == 5)
 		{
 			Egg baby = new Egg(x, y);
 			fishesEaten = 0;
 			eggs.add(baby);
-		}
-		return eggs; 	
+		}	
 	}
 	
-	public void updateTarget(ArrayList<Fish> fishes) //updateTarget: This method checks if target is alive, and calls method to choose new target if current target is dead
+	public void updateTarget() //updateTarget: This method checks if target is alive, and calls method to choose new target if current target is dead
 	{
 		boolean targetAlive = false; 
-		for (int i = 0; i < fishes.size(); i ++) 
+		for (int i = 0; i < fish.size(); i ++) 
 		{
-			if (this.target == fishes.get(i)) //Checks if target fish is still in fish ArrayList
+			if (this.target == fish.get(i)) //Checks if target fish is still in fish ArrayList
 				targetAlive = true; 
 		}
 		if (targetAlive == false) //Chooses new target if target is dead
-			this.chooseTarget(fishes);
+			this.chooseTarget();
 	}
 	
-	public void chooseTarget(ArrayList<Fish> fishes) //Chooses closest fish for new target
+	public void chooseTarget() //Chooses closest fish for new target
 	{		
-		int[] distances = new int [fishes.size()]; 
+		if (fish.size() == 0) {
+			// choose a random block of land
+			aim = randomBlock ();
+			return;
+		}
+		// else: 
+		int[] distances = new int [fish.size()]; 
 		int min; 
 		
-		for (int i = 0; i < fishes.size(); i ++) 
+		for (int i = 0; i < fish.size(); i ++) 
 		{
-			distances [i] = this.distanceTo(fishes.get(i)); //Creates an array for the distance of each fish from penguin
+			distances [i] = this.distanceTo(fish.get(i)); 
+			//Creates an array for the distance of each fish from penguin
 		}
 		
 		min = distances[0]; 
 		for (int j = 0; j< distances.length; j++)
 		{
 			
-			if (distances[j] < min ) //If current element is smaller than minimum... 
+			if (distances[j] < min ) //If current element is smaller than minimum 
 			{
 				min = distances[j];	//...set as minimum.
-				this.target = fishes.get(j); //And set the respective fish as new target
+				this.target = fish.get(j); 
+				//And set the respective fish as new target
 			}
 		}
 	}

@@ -4,6 +4,7 @@ import icys.java.Main.Background;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.util.ArrayList;
 
 
 public class Utilities {
@@ -40,4 +41,12 @@ public class Utilities {
 	public static Block blocks [][];
 	
 	public static final int WATER = 0, LAND = 1, UNUSED = 2;
+	
+	public static ArrayList <Fish> fish;
+	
+	public static ArrayList <Egg> eggs;
+	
+	public static ArrayList <Penguin> penguins;
+	
+	public static ArrayList <PolarBear> bears;
 }

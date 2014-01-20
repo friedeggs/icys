@@ -4,11 +4,22 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import static icys.java.Utilities.*;
 
-public class LifeForm {
+public abstract class LifeForm {
 
-	boolean alive;
-	int x, y;
+	int x, y, index;
 	BufferedImage image;
+	LifeForm arraylist;
+	Block pos;
+	
+	public LifeForm (int index) {
+		this.index = index;
+	}	
+	
+	public LifeForm (int index, int x, int y) {
+		this.index = index;
+		this.x = x;
+		this.y = y;
+	}
 	
 	public void checkAlive()
 	{
@@ -32,6 +43,8 @@ public class LifeForm {
 		} while (blocks[x][y].isOccupied || blocks[x][y].value != LAND);
 		return blocks [x][y];
 	}
+	
+	public abstract void remove ();
 	
 }
 

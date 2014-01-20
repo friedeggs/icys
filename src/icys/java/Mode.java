@@ -11,10 +11,6 @@ import java.util.ArrayList;
 public class Mode implements Screen {
 	
 	LabelButton back, help, addEgg, addPenguin, addBear;
-	static ArrayList <Fish> fish = new ArrayList <Fish> (1);
-	ArrayList <Egg> eggs = new ArrayList <Egg> (1);
-	ArrayList <Penguin> penguins = new ArrayList <Penguin> (1);
-	ArrayList <PolarBear> bears = new ArrayList <PolarBear> (1);
 	
 	public Mode () {
 		
@@ -25,17 +21,16 @@ public class Mode implements Screen {
 		addEgg = new LabelButton ("egg", font, Color.WHITE, lightblue, blue, aqua);
 		addPenguin = new LabelButton ("pen", font, Color.WHITE, lightblue, blue, aqua);
 		addBear = new LabelButton ("bear", font, Color.WHITE, lightblue, blue, aqua);
+
+		fish = new ArrayList <Fish> (1);
+		eggs = new ArrayList <Egg> (1);
+		penguins = new ArrayList <Penguin> (1);
+		bears = new ArrayList <PolarBear> (1);
 		
 		blocks = new Block [30][30];
-		for (int i = 0 ; i < blocks.length ; i++) {
-			for (int j = 0 ; j < blocks.length ; j++) {
-				blocks [i][j] = new Block (1);
-				blocks [i][j].set (i * 16, j * 16);
-				blocks [i][j].setIndices (i, j);
-				blocks [i][j] = new Block (1, i, j);
-			//	blocks [i][j].set (i * 16, j * 16); //TODO
-			}
-		}
+		for (int i = 0 ; i < blocks.length ; i++)
+			for (int j = 0 ; j < blocks.length ; j++)
+				blocks [i][j] = new Block (LAND, i, j);
 		
 		for (int i = 0 ; i < 1 ; i++) {
 			fish.add(new Fish ());
@@ -68,36 +63,12 @@ public class Mode implements Screen {
 		//main.add (main.background);
 		//applyGraphics (main.getGraphics ());
 	}
-	
-	public void animate1 () {
-		int s = 0;
-		while (s < 30) {
-		main.repaint ();
-		main.invalidate();
-		back.setForeground (back.getForeground());
-		try {
-			Thread.sleep (500);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		// fish
-		for (int i = 0 ; i < penguins.size () ; i++) {
-			penguins.get(i).update (penguins, fish, eggs, 
-					blocks, main.getGraphics ());
-		}
-		for (int i = 0 ; i < bears.size () ; i++) {
-			bears.get(i).update (bears, penguins, blocks, main.getGraphics ());
-		}
-		for (int i = 0 ; i < eggs.size () ; i++) {
-			eggs.get(i).update (penguins, blocks, main.getGraphics ());
-		}
-		s++;
-		}
-	}
 
 	@Override
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
+		
+		// Toolbars
 		g.setColor (blue);
 		g.fillRect (0, offset + border, width, border);
 		g.setColor(aqua);
