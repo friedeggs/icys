@@ -29,14 +29,11 @@ public class Mode implements Screen {
 		blocks = new Block [30][30];
 		for (int i = 0 ; i < blocks.length ; i++) {
 			for (int j = 0 ; j < blocks.length ; j++) {
-<<<<<<< HEAD
 				blocks [i][j] = new Block (1);
 				blocks [i][j].set (i * 16, j * 16);
 				blocks [i][j].setIndices (i, j);
-=======
 				blocks [i][j] = new Block (1, i, j);
 			//	blocks [i][j].set (i * 16, j * 16); //TODO
->>>>>>> 9c4d4764f8c2441a16d74326a0a9cdbcbc7956b9
 			}
 		}
 		
@@ -105,6 +102,9 @@ public class Mode implements Screen {
 		g.fillRect (0, offset + border, width, border);
 		g.setColor(aqua);
 		g.fillRect(0, offset+2*border, width, height-offset-2*border);
+		/**
+		 * HERE GWACIE
+		 */
 		
 //		for (int i = 0 ; i < fish.size () ; i++) {
 //			fish.get(i).show (10, blocks, g);

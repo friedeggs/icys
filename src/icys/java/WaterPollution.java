@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.util.ArrayList;
 
 public class WaterPollution extends NaturalDisaster {
@@ -12,20 +13,17 @@ public class WaterPollution extends NaturalDisaster {
 			list.get(i).canAppear = false;
 	}
 
-<<<<<<< HEAD
     public void stopFish (ArrayList < Fish > list)
     {
         //for (int i = 0 ; i < list.size () ; i++)
           //  list.get ( i ) .canAppear = false;
     }
-=======
 	public void blackenWater(int[][] block) {
 		// Cover all water block with darker shade
 		// Black or dark blue?
 		// (11,23,59)
->>>>>>> 9c4d4764f8c2441a16d74326a0a9cdbcbc7956b9
 
-		boolean[][] cover = new boolean[block.length()][block[0].length()];
+		boolean[][] cover = new boolean[blocks.length()][blocks[0].length()];
 		for (int i = 0; i < cover.length; i++)
 			for (int j = 0; j < cover[i].length; j++)
 				cover[i][j] = false;

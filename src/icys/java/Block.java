@@ -9,28 +9,16 @@ public class Block
 {
 
 public boolean isOccupied;
-public int value; 
-<<<<<<< HEAD
-public int x, y, indexX, indexY; // X, Y ARE COORDINATES OR INDICES?
+public int value, width; 
+public int x, y; // X AND Y ARE INDEXES OF THE 2D ARRAY CALLED BLOCKS
 public LifeForm lifeform;
-=======
-public int row, column,increaseX, increaseY, x /*=768, 567*/, y;
->>>>>>> 9c4d4764f8c2441a16d74326a0a9cdbcbc7956b9
 
   public Block (int value1, int i, int j)
   {
     isOccupied = false; 
-    value = value1; 
-    row = i;
-    column = j;
+    value = value1;
   }
   
-  /* public void set (int iC, int jC) {
-	  row = iC;
-	  column = jC;
-  }*/
-  
-<<<<<<< HEAD
   public void set (LifeForm l) {
 	  lifeform = l;
   }
@@ -75,6 +63,5 @@ public int row, column,increaseX, increaseY, x /*=768, 567*/, y;
   	g.setColor (use);
   	Polygon poly = new Polygon (xPoint, yPoint, xPoint.length);
   	g.drawPolygon (poly);
->>>>>>> 9c4d4764f8c2441a16d74326a0a9cdbcbc7956b9
   }
 }
