@@ -80,7 +80,7 @@ public class Mode implements Screen {
 		BufferedReader br = null;
 		String sCurrentLine = null;
 		try {
-			br = new BufferedReader(new FileReader("melt.txt"));
+			br = new BufferedReader(new FileReader("start.txt"));
 
 			while ((sCurrentLine = br.readLine()) != null) {
 				result = sCurrentLine;
