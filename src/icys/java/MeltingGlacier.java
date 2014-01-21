@@ -9,7 +9,11 @@ public class MeltingGlacier extends NaturalDisaster {
 	
 	char [][] myCrap = new char [15][21];
 	
-	public MeltingGlacier() {}	
+	public MeltingGlacier() {
+		lostBear();
+		meltArea();
+		revert();
+	}	
 	
 	public void lostBear() {
 		// 50%
