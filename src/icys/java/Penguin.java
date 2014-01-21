@@ -12,7 +12,6 @@ import static icys.java.Utilities.*;
 public class Penguin extends LifeForm {
 	
 	Entity target; // Block or fish
-	int x, y;
 	int direction;
 	int sinceEaten;
 	int fishesEaten; 

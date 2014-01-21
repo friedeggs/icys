@@ -71,6 +71,8 @@ public class Mode implements Screen {
 		g.fillRect (0, offset + border, width, border);
 		g.setColor(aqua);
 		g.fillRect(0, offset+2*border, width, height-offset-2*border);
+		g.setColor(blue);
+		g.fillRect(0, 200, main.i*15, 100);
 		/**
 		 * HERE GWACIE
 		 */

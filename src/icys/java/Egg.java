@@ -12,7 +12,6 @@ import static icys.java.Utilities.*;
 public class Egg extends LifeForm{
 
 	boolean alive;
-	int x, y;
 	int timeAlive;
 	
 	public Egg(int index, int x, int y)
@@ -48,9 +47,9 @@ public class Egg extends LifeForm{
 
 	@Override
 	public void remove() {
-		fish.remove(index);
-		for (int i = index ; i < fish.size() ; i++)
-			fish.get(i).index--;
+		eggs.remove(index);
+		for (int i = index ; i < eggs.size() ; i++)
+			eggs.get(i).index--;
 	}
 	
 }

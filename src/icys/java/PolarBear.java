@@ -14,7 +14,6 @@ import javax.imageio.ImageIO;
 public class PolarBear extends LifeForm {
 
 	Entity target;
-	int x, y;
 	int direction;
 	int sinceEaten;
 	int penguinsEaten; 
