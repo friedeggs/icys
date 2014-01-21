@@ -82,10 +82,6 @@ public abstract class LifeForm extends Entity {
 	 * @return
 	 */
 	protected int closer (int i, int j) {
-		if (target == null) {
-			System.out.println("null whyyy");
-			return 1;
-		}
 		if (blocks [x+i][y+j].distanceTo(target) < distanceTo (target))
 			return 3;
 		if (blocks [x+i][y+j].distanceTo(target) == distanceTo (target))

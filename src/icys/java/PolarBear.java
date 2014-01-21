@@ -54,9 +54,6 @@ public class PolarBear extends LifeForm {
 		checkAlive();
 		reproduces ();
 		updateTarget();
-		if (target == null) {
-			System.out.println("no excuse to be null sigh");
-		}
 		move();
 	}
 	
@@ -139,7 +136,7 @@ public class PolarBear extends LifeForm {
 		for (int i = -1 ; i <= 1 ; i++)
 			for (int j = -1 ; j <= 1 ; j++)
 				if (valid (i, j) && blocks [x+i][y+j].lifeform instanceof Fish)
-						direction [i][j] = -1;
+						direction [i+1][j+1] = -1;
 	}
 	
 	protected void move () {

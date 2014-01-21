@@ -40,9 +40,6 @@ public class Penguin extends LifeForm {
 		this.checkAlive();
 		this.reproduces ();
 		this.updateTarget();
-		if (target == null) {
-			System.out.println("no excuse to be null sigh");
-		}
 		this.move();
 	}
 
