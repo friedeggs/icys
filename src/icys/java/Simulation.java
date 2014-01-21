@@ -1,5 +1,8 @@
 package icys.java;
 
-public class Simulation {
+public class Simulation extends Mode{
 
+	public Simulation ()
+	{}
+	
 }

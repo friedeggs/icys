@@ -35,7 +35,8 @@ public class Mode implements Screen {
 		read ();
 		blocks = new Block [15][21];
 		for (int i = 0 ; i < blocks.length ; i++)
-			for (int j = 0 ; j < blocks[0].length ; j++) {
+			for (int j = 0 ; j < blocks[0].length ; j++) 
+			{
 				if (value[i][j]=='0')
 					blocks [i][j] = new Block (WATER, i, j);
 				else if (value[i][j] == '1')
@@ -118,7 +119,7 @@ public class Mode implements Screen {
 		g.fillRect (0, offset + border, width, border);
 		g.setColor(aqua);
 		g.fillRect(0, offset+2*border, width, height-offset-2*border);
-		g.setColor(blue);
+		g.setColor(blue); 
 		g.fillRect (0, 180, main.i*15, 90);	
 		
 		for (int i = 0 ; i < blocks.length ; i++) 
@@ -164,11 +165,11 @@ public class Mode implements Screen {
 		}
 		
 		int [] xPoint = {400, 400+30, 
-		400+30-15, 400-15};
+		400+30-15, 400-15}; 
 		int [] yPoint = {300, 300, 300+30, 300+30};
 		g.setColor(Color.ORANGE);
-		Polygon poly = new Polygon (xPoint, yPoint, xPoint.length);
-		g.fillPolygon (poly);	
+		Polygon poly = new Polygon (xPoint, yPoint, xPoint.length); //Wait, what is this??D: 
+		g.fillPolygon (poly); 	
 	}
 
 	@Override

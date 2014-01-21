@@ -33,8 +33,7 @@ public class Penguin extends LifeForm {
 			image = ImageIO.read(new File ("penguino.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-		
+		}	
 	}
 	
 	public void update(Graphics g)
@@ -164,7 +163,7 @@ public class Penguin extends LifeForm {
 
 	public void move (int dir)
 	{
-		
+		 
 	}
 	
 	@Override
