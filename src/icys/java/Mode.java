@@ -257,7 +257,20 @@ public class Mode implements Screen {
 			help.setState (1);
 			main.repaint ();
 		}
+		else if (earthquake.contains(x,y)) {
+			earthquake.setState(1);
+			Earthquake quake = new Earthquake(bears, penguins);
+		}
+		else if (melt.contains(x, y)) {
+			melt.setState(1);
+			MeltingGlacier melting = new MeltingGlacier();
+		}
+		else if (pollution.contains(x, y)) {
+			pollution.setState(1);
+			WaterPollution pollutedWater = new WaterPollution();
+		}
 	}
+
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
@@ -287,6 +300,21 @@ public class Mode implements Screen {
 			help.setState (1);
 		else
 			help.setState (0);
+		if (earthquake.contains(x, y))
+			earthquake.setState(1);
+		else
+			earthquake.setState(0);
+		if (melt.contains(x, y))
+			melt.setState(1);
+		else
+			melt.setState(0);
+		if (pollution.contains(x, y))
+			pollution.setState(1);
+		else
+			pollution.setState(0);
+		
+		//System.out.println("omNOMNOM");
 	}
+
 	
 }
