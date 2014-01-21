@@ -259,15 +259,18 @@ public class Mode implements Screen {
 		}
 		else if (earthquake.contains(x,y)) {
 			earthquake.setState(1);
-			Earthquake quake = new Earthquake(bears, penguins);
+			Earthquake quake = new Earthquake();
+			System.out.println("Oh no! An earthquake!");
 		}
 		else if (melt.contains(x, y)) {
 			melt.setState(1);
 			MeltingGlacier melt = new MeltingGlacier();
+			System.out.println("Gasp! The glacier is melting!");
 		}
 		else if (pollution.contains(x, y)) {
 			pollution.setState(1);
 			WaterPollution pollutedWater = new WaterPollution();
+			System.out.println("Ah! The water was polluted!");
 		}
 	}
 
@@ -313,7 +316,7 @@ public class Mode implements Screen {
 		else
 			pollution.setState(0);
 		
-		//System.out.println("omNOMNOM");
+		
 	}
 
 	
