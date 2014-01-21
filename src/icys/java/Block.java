@@ -24,6 +24,10 @@ public class Block extends Entity {
 	public void setTargeter(LifeForm l) {
 		targeter = l;
 	}
+	
+	public void changeValue (int x){
+		value = x;
+	}
 
 	public void show(Graphics g) // and char a??
 	{
