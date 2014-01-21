@@ -120,14 +120,6 @@ public class Mode implements Screen {
 		g.fillRect (0, offset + border, width, border);
 		g.setColor(water);
 		g.fillRect(0, offset+2*border, width, height-offset-2*border);
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 3a593047eaba73e7dc6694b6f8402531eff64171
-		g.setColor(blue); 
-		g.fillRect (0, 180, main.i*15, 90);	
->>>>>>> 3a593047eaba73e7dc6694b6f8402531eff64171
 		
 		for (int i = 0 ; i < blocks.length ; i++) 
 			for (int j = 0 ; j < blocks[0].length ; j++)
@@ -170,19 +162,6 @@ public class Mode implements Screen {
 		for (int i = 0 ; i < fish.size () ; i++) {
 			fish.get(i).show (g);
 		}
-<<<<<<< HEAD
-=======
-		
-		int [] xPoint = {400, 400+30, 
-		400+30-15, 400-15}; 
-		int [] yPoint = {300, 300, 300+30, 300+30};
-		g.setColor(Color.ORANGE);
-		Polygon poly = new Polygon (xPoint, yPoint, xPoint.length); //Wait, what is this??D: 
-		g.fillPolygon (poly); 	
-<<<<<<< HEAD
->>>>>>> 3a593047eaba73e7dc6694b6f8402531eff64171
-=======
->>>>>>> 3a593047eaba73e7dc6694b6f8402531eff64171
 	}
 
 	@Override
