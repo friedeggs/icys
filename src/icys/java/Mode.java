@@ -13,6 +13,7 @@ public class Mode implements Screen {
 
 	Random random = new Random ();
 	LabelButton back, help, addEgg, addPenguin, addBear;
+	char [][] value = new Char [15][21];
 	
 	public Mode () {
 		
@@ -29,13 +30,16 @@ public class Mode implements Screen {
 		penguins = new ArrayList <Penguin> ();
 		bears = new ArrayList <PolarBear> ();
 		
-		blocks = new Block [15][15];
+		read ();
+		blocks = new Block [15][21];
 		for (int i = 0 ; i < blocks.length ; i++)
 			for (int j = 0 ; j < blocks[0].length ; j++) {
-				if (i == 0 || j == 0)
+				if (value[i][j]=='0')
 					blocks [i][j] = new Block (WATER, i, j);
-				else
+				else if (value[i][j] == '1')
 					blocks [i][j] = new Block (LAND, i, j);
+				else //if (value[i][j]==2)
+					blocks [i][j] = new Block (UNUSED, i, j);
 			}
 		
 		for (int i = 0 ; i < 1 ; i++) {
@@ -66,6 +70,38 @@ public class Mode implements Screen {
 		addBear.setVisible(false);		
 		back.setVisible(false);		
 		help.setVisible(false);
+	}
+	
+	public void read ()
+	{
+		String[] splited = new String [315];
+		String result = "a";
+
+		BufferedReader br = null;
+		String sCurrentLine = null;
+		try {
+			br = new BufferedReader(new FileReader("start.txt"));
+
+			while ((sCurrentLine = br.readLine()) != null) {
+				result = sCurrentLine;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (br != null)
+					br.close();
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		}
+		splited = result.split("	");
+		int indexS = 0;
+		for (int i = 0; i < value.length; i++)
+			for (int j = 0; j < value[i].length; j++) {
+				value[i][j] = splited[indexS].charAt(0);
+				indexS++;
+			}
 	}
 
 	@Override

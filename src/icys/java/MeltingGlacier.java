@@ -1,11 +1,14 @@
+package icys.java;
+
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-//HELLO WORLD!!! :D
+
 public class MeltingGlacier extends NaturalDisaster {
+	
+	char [][] myCrap = new char [15][21];
+	
 	public MeltingGlacier(ArrayList<PolarBear> list, int[][] block) {
 		lostBear(list);
 		meltArea(block);
@@ -39,34 +42,37 @@ public class MeltingGlacier extends NaturalDisaster {
 
 	}
 
-	public void read(String name) {
+	public void read() {
 
-		String[][] rows = new String[16][21];
-		int index = 0;
+		String[] splited = new String [315];
+		String result = "a";
+
 		BufferedReader br = null;
+		String sCurrentLine = null;
 		try {
-			br = new BufferedReader(new FileReader(new File(
-					"C://Users/Lili/Desktop/nope.txt")));
-			String str = null;
+			br = new BufferedReader(new FileReader("melt.txt"));
 
-			while ((str = br.readLine()) != null) {
-				rows[index] = str.split("HEYHEYHEYHEYHEY");
-				index++;
+			while ((sCurrentLine = br.readLine()) != null) {
+				result = sCurrentLine;
 			}
-
-			for (String[] strings : rows) {
-				for (String string : strings) {
-					System.out.print(string);
-				}
-			}
-
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			try {
+				if (br != null)
+					br.close();
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
 		}
+		splited = result.split("	");
+		int indexS = 0;
+		for (int i = 0; i < myCrap.length; i++)
+			for (int j = 0; j < myCrap[i].length; j++) {
+				myCrap[i][j] = splited[indexS].charAt(0);
+				indexS++;
+			}
+
 	} // End of read method
 
 } // End of Class
