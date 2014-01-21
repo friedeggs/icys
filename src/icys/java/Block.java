@@ -25,8 +25,13 @@ public class Block extends Entity {
 		targeter = l;
 	}
 	
-	public void changeValue (int x){
-		value = x;
+	public void changeValue (char x){
+		if (x == '0')
+			value = Utilities.WATER;
+		else if (x =='1')
+			value = Utilities.LAND;
+		else //if (x =='2')
+			value = Utilities.UNUSED;
 	}
 
 	public void show(Graphics g) // and char a??
