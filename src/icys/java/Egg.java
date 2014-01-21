@@ -38,7 +38,7 @@ public class Egg extends LifeForm{
 			Penguin penS = new Penguin (penguins.size(), x, y);
 			penguins.add(penS);
 		}
-		show(g);
+		//blocks[x][y].setTargeter(this);
 	}
 	
 	public boolean grownUp()

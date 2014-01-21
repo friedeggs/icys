@@ -43,7 +43,6 @@ public class Penguin extends LifeForm {
 		this.reproduces ();
 		this.updateTarget();
 		this.move();
-		this.show(g);
 	}
 
 	public void eatFish ()
@@ -122,8 +121,7 @@ public class Penguin extends LifeForm {
 	{
 		return (Math.abs(i+j) == 1) && x+i >= 0 && x+i < blocks.length &&
 				y+j >= 0 && y+j < blocks[0].length && blocks [x+i][y+j].value 
-				== LAND && free (blocks[x+i][y+j]) &&
-				blocks [x+i][y+j].distanceTo(target) < distanceTo (target);
+				== LAND && free (blocks[x+i][y+j]);
 	}
 	
 	public boolean free (Block block) {
@@ -131,34 +129,42 @@ public class Penguin extends LifeForm {
 				block.lifeform instanceof Fish;
 	}
 	
+	public int closer (int i, int j) {
+		if (blocks [x+i][y+j].distanceTo(target) < distanceTo (target))
+			return 3;
+		if (blocks [x+i][y+j].distanceTo(target) == distanceTo (target))
+			return 2;
+		return 1;
+	}
+	
 	public void move ()
 	{
-		boolean direction [][] = new boolean [3][3]; // CHANGE IN X AND Y
-		int counter = 0;
+		int direction [][] = new int [3][3]; // CHANGE IN X AND Y
+		int counter [] = new int [3];
 		for (int i = -1 ; i <= 1 ; i++)
 			for (int j = -1 ; j <= 1 ; j++) {
 				if (valid (i, j)) {
-					direction [i+1][j+1] = true;
-					counter++;
+					direction [i+1][j+1] = closer (i, j);
+					counter [direction [i+1][j+1]-1 ]++;
 				}
 			}
-		
-		if (counter == 0) // There is nowhere to move - don't move
-			return;
 
-		blocks [x][y].targeter = null;
-		int random = (int)(Math.random() * counter);
-		
-		for (int i = -1 ; i <= 1 ; i++)
-			for (int j = -1 ; j <= 1 ; j++)
-				if (direction [i+1][j+1]) {
-					counter--;
-					if (random == counter) {
-						x += i;
-						y += j;
-					}
-				}
 		blocks [x][y].setTargeter(this);
+		for (int k = 2 ; k >= 0 ; k--) {
+			int random = (int)(Math.random() * counter [k]);
+			for (int i = -1 ; i <= 1 ; i++)
+				for (int j = -1 ; j <= 1 ; j++)
+					if (direction [i+1][j+1] == k+1) {
+						counter[k]--;
+						if (random == counter[k]) {
+							blocks [x][y].targeter = null;
+							x += i;
+							y += j;
+							blocks [x][y].setTargeter(this);
+							return;
+						}
+					}
+		}
 	}
 
 	public void move (int dir)
@@ -168,6 +174,7 @@ public class Penguin extends LifeForm {
 	
 	@Override
 	public void remove() {
+		blocks [x][y].set(null);
 		penguins.remove(index);
 		for (int i = index ; i < penguins.size() ; i++)
 			penguins.get(i).index--;

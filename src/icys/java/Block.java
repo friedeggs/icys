@@ -27,6 +27,13 @@ public class Block extends Entity {
 		targeter = l;
 	}
 	
+	public void update (Graphics g) {
+		if (targeter != null)
+			lifeform = targeter;
+		targeter = null;
+		show (g);
+	}
+	
 	public void changeValue (char x){
 		if (x == '0')
 			value = Utilities.WATER;
@@ -38,9 +45,6 @@ public class Block extends Entity {
 
 	public void show(Graphics g) // and char a??
 	{
-		if (lifeform != null) {
-			//lifeform.show(g);
-		}
 		Color //aqua, //new Color(175, 217, 255), 
 				land = new Color(255, 255, 255),
 				dark = new Color(11, 23, 59), use;
@@ -52,6 +56,9 @@ public class Block extends Entity {
 				use = water;
 		} else
 			use = land;
+		if (use == land) {
+			use = new Color (255-x*10,255-x*10, 255-y*10);
+		}
 
 		int [] xPoint = {coordX(x), coordX(x)+block_width, 
 				coordX(x)+block_width-shift, coordX(x)-shift};
@@ -84,12 +91,9 @@ public class Block extends Entity {
 			Polygon threed = new Polygon (threedX, threedY, threedX.length);
 			g.fillPolygon (threed);
 		}
-		//g.drawRect(coordX(x), coordY(y), coordX(1)/1, coordY(1)/1);
-//		int [] xPoint = {400, 400+30, 
-//				400-5, 400+30-5};
-//		int [] yPoint = {300, 300, 300+30, 300+30};
-//		g.setColor(Color.ORANGE);
-//		Polygon poly = new Polygon (xPoint, yPoint, xPoint.length);
-//		g.fillPolygon (poly);
+		
+		if (lifeform != null) {
+			lifeform.show(g);
+		}
 	}
 }

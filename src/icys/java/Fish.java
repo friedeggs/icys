@@ -27,6 +27,10 @@ public class Fish extends LifeForm {
 		}
 	}
 	
+	public void update () {
+		blocks[x][y].setTargeter(this);
+	}
+	
 	public boolean byWater (Block block) {
 		return (block.x == 0 || block.y == 0 || 
 				block.x == blocks.length-1 || block.y == blocks.length-1 ||
@@ -38,6 +42,7 @@ public class Fish extends LifeForm {
 
 	@Override
 	public void remove() {
+		blocks [x][y].set(null);
 		fish.remove(index); // SOMETHING'S WRONG I THINK FISH
 		// KEEP GETTING REMOVED WHEN THEY DON'T EXIST
 		// java.lang.IndexOutOfBoundsException: Index: 0, Size: 0

@@ -121,10 +121,6 @@ public class Mode implements Screen {
 		g.setColor(water);
 		g.fillRect(0, offset+2*border, width, height-offset-2*border);
 		
-		for (int i = 0 ; i < blocks.length ; i++) 
-			for (int j = 0 ; j < blocks[0].length ; j++)
-				blocks[i][j].show(g);
-		
 		int rand = (int)(Math.abs(random.nextGaussian()*2/3));
 		for (int i = 0 ; i < rand ; i++) {
 			fish.add(new Fish (fish.size()));
@@ -159,9 +155,9 @@ public class Mode implements Screen {
 		for (int i = 0 ; i < bears.size () ; i++) {
 			bears.get(i).update (g);
 		}
-		for (int i = 0 ; i < fish.size () ; i++) {
-			fish.get(i).show (g);
-		}
+		for (int i = 0 ; i < blocks.length ; i++) 
+			for (int j = 0 ; j < blocks[0].length ; j++)
+				blocks[i][j].update(g);
 	}
 
 	@Override
