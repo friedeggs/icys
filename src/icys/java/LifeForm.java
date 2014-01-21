@@ -32,8 +32,7 @@ public abstract class LifeForm extends Entity {
 	
 	public void show(Graphics g)
 	{
-		g.drawImage (image, blocks[x][y].x, blocks[x][y].y, null); 
-		System.out.println (image);
+		g.drawImage (image, coordX(x), coordY(y), null); 
 	}
 	
 	public Block randomBlock () {

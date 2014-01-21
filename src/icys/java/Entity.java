@@ -16,4 +16,18 @@ public abstract class Entity {
 	}
 	
 	public abstract void show (Graphics g);
+	
+	/**
+	 * Converts a block x index into coordinates
+	 */
+	public int coordX (int index) {
+		return index * 15; // TEMPORARY
+	}	
+	
+	/**
+	 * Converts a block y index into coordinates
+	 */
+	public int coordY (int index) {
+		return index * 15; // TEMPORARY
+	}
 }

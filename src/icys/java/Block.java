@@ -13,6 +13,8 @@ public class Block extends Entity {
 
 	public Block(int value1, int i, int j) {
 		value = value1;
+		x = i;
+		y = j;
 	}
 
 	public void set(LifeForm l) {

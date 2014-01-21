@@ -28,7 +28,6 @@ public class Penguin extends LifeForm {
 		this.y = y;
 		fishesEaten = 0;
 		sinceEaten = 0;
-		//choose target
 		chooseTarget ();
 		try {
 			image = ImageIO.read(new File ("penguin.png"));
@@ -81,22 +80,15 @@ public class Penguin extends LifeForm {
 	
 	public void updateTarget() //updateTarget: This method checks if target is alive, and calls method to choose new target if current target is dead
 	{
-//		boolean targetAlive = false; 
-//		for (int i = 0; i < fish.size(); i ++) 
-//		{
-//			if (this.target == fish.get(i)) //Checks if target fish is still in fish ArrayList
-//				targetAlive = true; 
-//		}
-//		if (targetAlive == false) //Chooses new target if target is dead
-		if (target == null && (fish.size() > 0 || aim == null))
+		if (target == null || (fish.size() > 0 && target instanceof Block))
 			chooseTarget();
 	}
 	
 	public void chooseTarget() //Chooses closest fish for new target
-	{		
+	{
 		if (fish.size() == 0) {
 			// choose a random block of land
-			aim = randomBlock ();
+			target = randomBlock ();
 			return;
 		}
 		// else: 
@@ -110,6 +102,7 @@ public class Penguin extends LifeForm {
 		}
 		
 		min = distances[0]; 
+		target = fish.get(0);
 		for (int j = 0; j< distances.length; j++)
 		{
 			
@@ -121,87 +114,38 @@ public class Penguin extends LifeForm {
 			}
 		}
 	}
-	
-	public void chooseDirection() //chooseDirection: This method chooses a direction for the penguin to go, towards the fish
-	{
-		int[] possibilities = new int [2];
-		int direction; //8- up, 6-right, 2- down, 4- left
-		
-		if (this.x == target.x) //Compares x-coordinate of penguin vs. target
-			possibilities[0] = 0; 
-		else if(this.x - target.x > 0)
-			possibilities[0] = 4;
-		else
-			possibilities[0] = 6;
-		
-		if (this.y == target.y) //Compares y-coordinate of penguin vs. target
-			possibilities[0] = 0;
-		else if (this.y - target.y > 0)
-			possibilities[1] = 8;
-		else
-			possibilities[1] = 2;
-		
-		int random = (int)(Math.random() * 2); //Chooses random direction within two possible directions
-		direction = possibilities [random];
-		
-		if (direction == 0) //If direction chosen is not valid, choose other direction
-		{
-			if (random == 1)
-				random = 2;
-			else
-				random = 1;
-			direction = possibilities[random - 1];
-		}
-		this.direction = direction;
-	}
 
-	/** YO. THIS CHANGES THE POSITION BEFORE CHECKING IF THE NEW BLOCK
-	   IS OCCUPIED OR NOT LAND ? */
-	public boolean valid()
+	public boolean valid (int i, int j)
 	{
-		if (this.direction == 8 && this.y > 0)		
-			this.y = this.y - 1 ;
-		else if (this.direction == 2 && this.y < blocks[0].length-1)
-			this.y = this.y + 1; 
-		else if (this.direction == 6 && this.x > 0)
-			this.x = this.x - 1 ;
-		else if (this.direction == 4 && this.x < blocks.length-1)
-			this.x = this.x + 1; 
-		
-		if (blocks[x][y].lifeform == null && blocks[x][y].value == 1)
-			return true;
-		else
-			return false;
+		return (Math.abs(i+j) <= 1) && x+i >= 0 && x+i <= blocks.length &&
+				y+j >= 0 && y+j <= blocks[0].length && 
+				blocks [x+i][y+j].distanceTo(target) < distanceTo (target);
 	}
 	
 	public void move ()
 	{
-		boolean direction [][] = new boolean [3][3]; 
-		int temp, counter = 0;
+		boolean direction [][] = new boolean [3][3]; // CHANGE IN X AND Y
+		int counter = 0;
 		for (int i = -1 ; i <= 1 ; i++)
 			for (int j = -1 ; j <= 1 ; j++)
-				if (Math.abs (i+j) == 1) {
-					if (target != null)
-						temp = distanceTo (target);
-					else
-						temp = distanceTo (aim);
-					x += i;
-					y += j;
-					if ((target != null && distanceTo (target) < temp)
-							|| (aim != null && distanceTo (aim) < temp)) {
-						direction [i+1][j+1] = true;
-						counter++;
-					}
-					x -= i;
-					y -= j;
+				if (valid (i, j)) {
+					direction [i+1][j+1] = true;
+					counter++;
 				}
-		/** shouldn't you cross off invalid directions
-		 and also what if there is no valid direction? */
-		do 
-		{
-			this.chooseDirection();
-		}
-		while (!this.valid());
+		
+		if (counter == 0) // There is nowhere to move - don't move
+			return;
+		
+		int random = (int)(Math.random() * counter);
+		for (int i = -1 ; i <= 1 ; i++)
+			for (int j = -1 ; j <= 1 ; j++)
+				if (direction [i+1][j+1]) {
+					counter--;
+					if (random == counter) {
+						x += i;
+						y += j;
+					}
+				}
 	}
 
 	@Override

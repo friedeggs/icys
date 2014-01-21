@@ -33,19 +33,19 @@ public class Mode implements Screen {
 				blocks [i][j] = new Block (LAND, i, j);
 		
 		for (int i = 0 ; i < 1 ; i++) {
-			fish.add(new Fish ());
-		}
-		
-		for (int i = 0 ; i < 10 ; i++) {
-			eggs.add(new Egg (8, 12));
+			fish.add(new Fish (i));
 		}
 		
 		for (int i = 0 ; i < 1 ; i++) {
-			penguins.add(new Penguin (10, 10));
+			eggs.add(new Egg (i, 8, 12));
 		}
 		
 		for (int i = 0 ; i < 1 ; i++) {
-			bears.add(new PolarBear (5, 15, penguins));
+			penguins.add(new Penguin (i, 10, 10));
+		}
+		
+		for (int i = 0 ; i < 1 ; i++) {
+			bears.add(new PolarBear (i, 5, 15));
 		}
 		
 		main.add (addEgg);
@@ -60,8 +60,6 @@ public class Mode implements Screen {
 		addBear.setVisible(false);		
 		back.setVisible(false);		
 		help.setVisible(false);
-		//main.add (main.background);
-		//applyGraphics (main.getGraphics ());
 	}
 
 	@Override
@@ -76,31 +74,17 @@ public class Mode implements Screen {
 		/**
 		 * HERE GWACIE
 		 */
-		
-//		for (int i = 0 ; i < fish.size () ; i++) {
-//			fish.get(i).show (10, blocks, g);
-//		}
-//		for (int i = 0 ; i < penguins.size () ; i++) {
-//			penguins.get(i).show (blocks, g);
-//		}
-//		for (int i = 0 ; i < bears.size () ; i++) {
-//			bears.get(i).show (blocks, g);
-//		}
-//		for (int i = 0 ; i < eggs.size () ; i++) {
-//			eggs.get(i).show (blocks, g);
-//		}
 		for (int i = 0 ; i < fish.size () ; i++) {
 			fish.get(i).show (g);
 		}
+		for (int i = 0 ; i < eggs.size () ; i++) {
+			eggs.get(i).update (g);
+		}
 		for (int i = 0 ; i < penguins.size () ; i++) {
-			penguins.get(i).update (penguins, fish, eggs, 
-					blocks, g);
+			penguins.get(i).update (g);
 		}
 		for (int i = 0 ; i < bears.size () ; i++) {
-			bears.get(i).update (bears, penguins, blocks, g);
-		}
-		for (int i = 0 ; i < eggs.size () ; i++) {
-			eggs.get(i).update (penguins, blocks, g);
+			bears.get(i).update (g);
 		}
 	}
 

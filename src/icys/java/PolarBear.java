@@ -1,6 +1,7 @@
 package icys.java;
 
-import static icys.java.Utilities.blocks;
+import static icys.java.Utilities.*;
+
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -12,11 +13,9 @@ import javax.imageio.ImageIO;
 
 public class PolarBear extends LifeForm {
 
-	Penguin target;
-	//Block subtarget;
+	Entity target;
 	int x, y;
 	int direction;
-	BufferedImage image;
 	int sinceEaten;
 	int penguinsEaten; 
 
@@ -50,170 +49,118 @@ public class PolarBear extends LifeForm {
 		}
 	}
 	
-	public void update(ArrayList <PolarBear> rawr, ArrayList<Penguin> pencils,
-			Block[][] iii, Graphics g)
+	public void update(Graphics g)
 	{
 		eatPenguin();
 		checkAlive();
-		reproduces (rawr, pencils);
-		updateTarget(pencils);
-		move(iii);
-		show(iii, g);
+		reproduces ();
+		updateTarget();
+		move();
+		show(g);
 	}
 	
 	public void eatPenguin ()
 	{
-		if ((this.x == target.x) && (this.y == target.y)&& this.alive)
+		if (x == target.x && y == target.y)
 		{
-			target.alive = false;
-			penguinsEaten ++;
-			sinceEaten = 0;
-		} else
-			sinceEaten ++;
+			if (target instanceof Penguin) {
+				((Penguin) target).remove();
+				penguinsEaten ++;
+				sinceEaten = 0;
+			}
+			target = null;
+		}
+		else
+			sinceEaten ++ ;
 	}
 	
 	public void checkAlive() 
 	{
-		if (alive)
-		{
-			if (sinceEaten > 20)
-				alive = false;
-		}
+		if (sinceEaten > 20)
+			remove ();
 	}
 	
 	
-	public ArrayList<PolarBear> reproduces(ArrayList<PolarBear> bears, ArrayList<Penguin> pens)
+	public ArrayList<PolarBear> reproduces()
 	{
 		
 		if (penguinsEaten == 5)
 		{
-			PolarBear baby = new PolarBear(x, y);
+			PolarBear baby = new PolarBear(bears.size(), x, y);
 			penguinsEaten = 0;
 			bears.add(baby);
 		}
 		return bears; 	
 	}
 	
-	public void updateTarget(ArrayList<Penguin> penGUIno) 
+	/**
+	 * updateTarget: This method checks if target is alive, and calls 
+	 * method to choose new target if current target is dead
+	 */
+	public void updateTarget() 
 	{
-		boolean targetAlive = false; 
-		for (int i = 0; i < penGUIno.size(); i ++) 
-		{
-			if (this.target == penGUIno.get(i)) //Checks if target penguin is still in penguin ArrayList
-				targetAlive = true; 
-		}
-		if (targetAlive == false) //Chooses new target if target is dead
-			this.chooseTarget(penGUIno);
+		if (target == null || (penguins.size() > 0 && target instanceof Block))
+			chooseTarget();
 	}
 	
-	public void chooseTarget(ArrayList<Penguin> pens) //Chooses closest fish for new target
+	public void chooseTarget() //Chooses closest fish for new target
 	{		
-		if (pens.size() == 0) {
-			target = null;
-			//int[] coordinates = this.chooseRandomLand();
-			//subtarget = blocks[coordinates[0]][coordinates[1]];
+		if (penguins.size() == 0) {
+			target = randomBlock ();
+			return;
 		}
-		else {
 		
-		int[] distances = new int [pens.size()]; 
+		int[] distances = new int [penguins.size()]; 
 		int min; 
 		
-		for (int i = 0; i < pens.size(); i ++) 
+		for (int i = 0; i < penguins.size(); i ++) 
 		{
-			distances [i] = this.distanceTo(pens.get(i)); //Creates an array for the distance of each fish from penguin
+			distances [i] = this.distanceTo(penguins.get(i)); //Creates an array for the distance of each fish from penguin
 		}
 		
 		min = distances[0]; 
-		this.target = pens.get (0);
+		target = penguins.get (0);
 		for (int j = 0; j< distances.length; j++)
 		{
-			
 			if (distances[j] < min ) //If current element is smaller than minimum... 
 			{
 				min = distances[j];	//...set as minimum.
-				this.target = pens.get(j); //And set the respective fish as new target
+				this.target = penguins.get(j); //And set the respective fish as new target
 			}
-		}
-		
-		}
-	}
-	
-	public int distanceTo (Penguin pen) //distanceTo: This method finds the distance between the penguin and fish parameter
-	{
-		int distanceTo = (Math.abs(this.x - pen.x)) + (Math.abs(this.y - pen.y));
-		return distanceTo;
-	}
-	
-	public void chooseDirection() //chooseDirection: This method chooses a direction for the penguin to go, towards the fish
-	{
-		int[] possibilities = new int [2];
-		int direction; //8- up, 6-right, 2- down, 4- left
-		
-		if (target == null)
-		{
-			direction = (int)((Math.random()* 4)+1); //Chooses random direction if there is no target
-		}	
-		else
-		{
-			if (this.x == target.x) //Compares x-coordinate of penguin vs. target
-				possibilities[0]= 0; 
-			else if(this.x - target.x > 0)
-				possibilities[0] = 4;
-			else
-				possibilities[0] = 6;
-			
-			if (this.y == target.y) //Compares y-coordinate of penguin vs. target
-				possibilities[0] = 0;
-			else if (this.y - target.y > 0)
-				possibilities[1] = 8;
-			else
-				possibilities[1] = 2;
-			
-			int random = (int)(Math.random() * 2); //Chooses random direction within two possible directions
-			direction = possibilities [random];
-			
-			if (direction == 0) //If direction chosen is not valid, choose other direction
-			{
-				if (random == 1)
-					random = 2;
-				else
-					random = 1;
-				direction = possibilities[random-1];
-			}
-			this.direction = direction;
 		}
 	}
 
-	public boolean valid(Block[][] thegreatbigworld)
+	public boolean valid (int i, int j)
 	{
-		int newX = x, newY = y;
-		
-		if (this.direction == 8 && this.y > 0)
-			newY = this.y - 1 ;
-		else if (this.direction == 2 && this.y < thegreatbigworld[0].length)
-			newY = this.y + 1; 
-		else if (this.direction == 6 && this.x > 0)
-			newX = this.x -1 ;
-		else if (this.direction == 4 && this.x < thegreatbigworld.length)
-			newX = this.x + 1;
-		
-		if (thegreatbigworld[newX][newY].isOccupied == false && thegreatbigworld[newX][newY].value == 1)
-		{
-			x = newX;
-			y = newY;
-			return true;
-		}
-		else
-			return false;
+		return (Math.abs(i+j) <= 1) && x+i >= 0 && x+i <= blocks.length &&
+				y+j >= 0 && y+j <= blocks[0].length && 
+				blocks [x+i][y+j].distanceTo(target) < distanceTo (target);
 	}
 	
-	public void move(Block[][] thegreatbigworld)
+	public void move ()
 	{
-		do 
-		{
-			this.chooseDirection();
-		}
-		while (this.valid(thegreatbigworld) == false); 
+		boolean direction [][] = new boolean [3][3]; // CHANGE IN X AND Y
+		int counter = 0;
+		for (int i = -1 ; i <= 1 ; i++)
+			for (int j = -1 ; j <= 1 ; j++)
+				if (valid (i, j)) {
+					direction [i+1][j+1] = true;
+					counter++;
+				}
+		
+		if (counter == 0) // There is nowhere to move - don't move
+			return;
+		
+		int random = (int)(Math.random() * counter);
+		for (int i = -1 ; i <= 1 ; i++)
+			for (int j = -1 ; j <= 1 ; j++)
+				if (direction [i+1][j+1]) {
+					counter--;
+					if (random == counter) {
+						x += i;
+						y += j;
+					}
+				}
 	}
 	
 	public void show(Graphics g)
