@@ -13,7 +13,6 @@ import javax.imageio.ImageIO;
 
 public class PolarBear extends LifeForm {
 
-	Entity target;
 	int sinceEaten;
 	int penguinsEaten; 
 
@@ -55,6 +54,9 @@ public class PolarBear extends LifeForm {
 		checkAlive();
 		reproduces ();
 		updateTarget();
+		if (target == null) {
+			System.out.println("no excuse to be null sigh");
+		}
 		move();
 	}
 	
