@@ -42,6 +42,7 @@ public class Fish extends LifeForm {
 
 	@Override
 	public void remove() {
+		System.out.println("REMOVE");
 		blocks [x][y].set(null);
 		fish.remove(index); // SOMETHING'S WRONG I THINK FISH
 		// KEEP GETTING REMOVED WHEN THEY DON'T EXIST

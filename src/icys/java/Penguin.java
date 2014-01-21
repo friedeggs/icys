@@ -133,7 +133,9 @@ public class Penguin extends LifeForm {
 	
 	@Override
 	public void remove() {
+		System.out.println("REMOVE");
 		blocks [x][y].set(null);
+		blocks [x][y].lifeform = null;
 		penguins.remove(index);
 		for (int i = index ; i < penguins.size() ; i++)
 			penguins.get(i).index--;

@@ -58,7 +58,7 @@ public class Block extends Entity {
 		} else
 			use = land;
 		if (use == land) {
-			use = new Color (255-x*10,255-x*10, 255-y*10);
+			use = new Color (255-x*5,255-x*5, 255-y*5);
 		}
 
 		int [] xPoint = {coordX(x), coordX(x)+block_width, 

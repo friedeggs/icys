@@ -142,6 +142,8 @@ public class PolarBear extends LifeForm {
 	
 	@Override
 	public void remove() {
+		System.out.println("REMOVE");
+		blocks [x][y].lifeform = null;
 		blocks [x][y].set(null);
 		if (blocks [x][y].lifeform instanceof PolarBear)
 			System.out.println ("YOU. YOU'RE DEAD");

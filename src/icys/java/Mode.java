@@ -15,17 +15,22 @@ import java.util.Random;
 public class Mode implements Screen {
 
 	Random random = new Random ();
-	LabelButton back, help, addEgg, addPenguin, addBear;
+	LabelButton back, help, earthquake, melting, pollution; 
+	LabelButton addEgg, addPenguin, addBear;
 	
 	public Mode () {
 		
 		back = new LabelButton ("back", font, Color.WHITE, lightblue, blue, aqua);
 		help = new LabelButton ("help", font, Color.WHITE, lightblue, blue, aqua);
-
+		earthquake = new LabelButton ("earthquake", font_small, Color.WHITE, lightblue, blue, aqua);
+		melting = new LabelButton ("melt glacier", font_small, Color.WHITE, lightblue, blue, aqua);
+		pollution = new LabelButton ("pollution", font_small, Color.WHITE, lightblue, blue, aqua);
+		
+		
 		// make icons later
-		addEgg = new LabelButton ("egg", font, Color.WHITE, lightblue, blue, aqua);
-		addPenguin = new LabelButton ("pen", font, Color.WHITE, lightblue, blue, aqua);
-		addBear = new LabelButton ("bear", font, Color.WHITE, lightblue, blue, aqua);
+		addEgg = new LabelButton ("egg", font_small, Color.WHITE, lightblue, blue, aqua);
+		addPenguin = new LabelButton ("penguin", font_small, Color.WHITE, lightblue, blue, aqua);
+		addBear = new LabelButton ("bear", font_small, Color.WHITE, lightblue, blue, aqua);
 
 		fish = new ArrayList <Fish> ();
 		eggs = new ArrayList <Egg> ();
@@ -70,13 +75,21 @@ public class Mode implements Screen {
 		main.add (addBear);
 		
 		main.add (back);
+		main.add (earthquake);
+		main.add (melting);
+		main.add (pollution);
 		main.add (help);
+		
 		
 		addEgg.setVisible(false);		
 		addPenguin.setVisible(false);		
 		addBear.setVisible(false);		
 		back.setVisible(false);		
+		earthquake.setVisible(false);
+		melting.setVisible(false);
+		pollution.setVisible(false);
 		help.setVisible(false);
+		
 	}
 	
 	public void read ()
@@ -121,6 +134,7 @@ public class Mode implements Screen {
 		g.setColor(water);
 		g.fillRect(0, offset+2*border, width, height-offset-2*border);
 		
+		// DON'T ADD MORE FISH THAN CAN BE ADDED
 		int rand = (int)(Math.abs(random.nextGaussian()*2/3));
 		for (int i = 0 ; i < rand ; i++) {
 			fish.add(new Fish (fish.size()));
@@ -146,14 +160,14 @@ public class Mode implements Screen {
 		/**
 		 * HERE GWACIE
 		 */
-		for (int i = 0 ; i < bears.size () ; i++) {
-			bears.get(i).update (g);
-		}
 		for (int i = 0 ; i < eggs.size () ; i++) {
 			eggs.get(i).update (g);
 		}
 		for (int i = 0 ; i < penguins.size () ; i++) {
 			penguins.get(i).update (g);
+		}
+		for (int i = 0 ; i < bears.size () ; i++) {
+			bears.get(i).update (g);
 		}
 		for (int i = 0 ; i < blocks.length ; i++) 
 			for (int j = 0 ; j < blocks[0].length ; j++)
@@ -163,6 +177,9 @@ public class Mode implements Screen {
 	@Override
 	public void show() {
 		back.setVisible (true);
+		earthquake.setVisible (true);
+		melting.setVisible (true);
+		pollution.setVisible (true);
 		help.setVisible (true);
 		addEgg.setVisible (true);
 		addPenguin.setVisible (true);
@@ -172,6 +189,9 @@ public class Mode implements Screen {
 	@Override
 	public void hide() {
 		back.setVisible (false);
+		earthquake.setVisible(false);
+		melting.setVisible(false);
+		pollution.setVisible(false);
 		help.setVisible (false);
 		addEgg.setVisible (false);
 		addPenguin.setVisible (false);
@@ -181,19 +201,27 @@ public class Mode implements Screen {
 	@Override
 	public void applyGraphics(Graphics g) {
 		back.applyGraphics(g);
+		earthquake.applyGraphics(g);
+		melting.applyGraphics(g);
+		pollution.applyGraphics(g);
 		help.applyGraphics(g);
 		
 		addEgg.applyGraphics(g);
 		addPenguin.applyGraphics(g);
 		addBear.applyGraphics(g);
 		
-		int numOfButtons = 4;
+		int numOfButtons = 7;
 		addEgg.setLocation(width * 1 / numOfButtons, border + back.getHeight() / 2);
-		addPenguin.setLocation(width * 2 / numOfButtons, border + back.getHeight() / 2);
-		addBear.setLocation(width * 3 / numOfButtons, border + back.getHeight() / 2);
+		addPenguin.setLocation(width * 2 / numOfButtons -35, border + back.getHeight() / 2);
+		addBear.setLocation(width * 3 / numOfButtons -60, border + back.getHeight() / 2);
 		
 		back.setLocation(border + back.getWidth() / 2, 
 				border + back.getHeight() / 2);
+		
+		earthquake.setLocation(width * 4 / numOfButtons -55, border + back.getHeight() / 2);
+		melting.setLocation(width * 5 / numOfButtons -35, border + back.getHeight() / 2);
+		pollution.setLocation(width * 6 / numOfButtons -25, border + back.getHeight() / 2);
+		
 		help.setLocation(width - border - help.getWidth() / 2, 
 				border + help.getHeight() / 2);
 	}
