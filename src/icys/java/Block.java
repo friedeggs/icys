@@ -8,7 +8,7 @@ import java.awt.Graphics;
 
 public class Block extends Entity {
 
-	public int value, width, height;
+	public int value, width = 30, height = 30, shift = 5;
 	public LifeForm lifeform, targeter;
 
 	public Block(int value1, int i, int j) {
@@ -36,25 +36,24 @@ public class Block extends Entity {
 
 	public void show(Graphics g) // and char a??
 	{
-		char a = Utilities.value [x][y];
 		if (lifeform != null) {
 			//lifeform.show(g);
 		}
-		Color water = new Color(175, 217, 255), land = new Color(0, 0, 0), dark = new Color(
-				11, 23, 59), use;
+		Color water = new Color(175, 217, 255), 
+				land = new Color(255, 255, 255),
+				dark = new Color(11, 23, 59), use;
 
 		if (value != 1) {
-			if (a == '2')
+			if (value == 2)
 				use = dark;
 			else
 				use = water;
 		} else
 			use = land;
 
-		int [] xPoint = {row*x, row*x+increaseX, row*x - increaseX, row +
-		increaseX};
-		int [] yPoint = {column*y, column*y+increaseY, column*y-increaseY,
-		column - increaseY};
+		int [] xPoint = {coordX(x), coordX(x)+width, 
+				coordX(x)-shift, coordX(x)+width-shift};
+		int [] yPoint = {coordY(y), coordY(y), coordY(y)+height, coordY(y)+height};
 		g.setColor(use);
 		Polygon poly = new Polygon (xPoint, yPoint, xPoint.length);
 		g.fillPolygon (poly);

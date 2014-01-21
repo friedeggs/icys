@@ -1,6 +1,7 @@
 package icys.java;
 
 import java.awt.Graphics;
+import static icys.java.Utilities.*;
 
 public abstract class Entity {
 	public int x, y; // X AND Y ARE INDEXES OF THE 2D ARRAY CALLED BLOCKS
@@ -28,6 +29,6 @@ public abstract class Entity {
 	 * Converts a block y index into coordinates
 	 */
 	public int coordY (int index) {
-		return index * 30; // TEMPORARY
+		return index * 30 + offset+2*border; // TEMPORARY
 	}
 }
