@@ -41,7 +41,9 @@ public class Utilities {
 			water = aqua;//new Color (103, 213, 235);
 	
 	public static Font font = new Font ("Calibri", Font.BOLD, 32),
-	font_large = new Font ("Calibri", Font.BOLD, 144);
+			font_large = new Font ("Calibri", Font.BOLD, 144),
+			font_small = new Font ("Calibri", Font.BOLD, 24);
+
 	
 	public static Block blocks [][] = new Block [21][15];
 	
