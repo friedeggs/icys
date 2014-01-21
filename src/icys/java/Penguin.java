@@ -66,7 +66,7 @@ public class Penguin extends LifeForm {
 	public void checkAlive() 
 	{
 		if (sinceEaten > 20) {
-			System.out.println ("Penguin: *dies*");
+			System.out.println ("Penguin: *dies of hunger*");
 			remove();
 		}
 	}
@@ -162,6 +162,11 @@ public class Penguin extends LifeForm {
 		blocks [x][y].setTargeter(this);
 	}
 
+	public void move (int dir)
+	{
+		
+	}
+	
 	@Override
 	public void remove() {
 		penguins.remove(index);
