@@ -121,7 +121,10 @@ public class Mode implements Screen {
 		g.setColor(water);
 		g.fillRect(0, offset+2*border, width, height-offset-2*border);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 3a593047eaba73e7dc6694b6f8402531eff64171
 		g.setColor(blue); 
 		g.fillRect (0, 180, main.i*15, 90);	
 >>>>>>> 3a593047eaba73e7dc6694b6f8402531eff64171
@@ -176,6 +179,9 @@ public class Mode implements Screen {
 		g.setColor(Color.ORANGE);
 		Polygon poly = new Polygon (xPoint, yPoint, xPoint.length); //Wait, what is this??D: 
 		g.fillPolygon (poly); 	
+<<<<<<< HEAD
+>>>>>>> 3a593047eaba73e7dc6694b6f8402531eff64171
+=======
 >>>>>>> 3a593047eaba73e7dc6694b6f8402531eff64171
 	}
 
