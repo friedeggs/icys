@@ -6,10 +6,12 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Random;
 
 //arbitary comment?
 public class Mode implements Screen {
-	
+
+	Random random = new Random ();
 	LabelButton back, help, addEgg, addPenguin, addBear;
 	
 	public Mode () {
@@ -22,15 +24,19 @@ public class Mode implements Screen {
 		addPenguin = new LabelButton ("pen", font, Color.WHITE, lightblue, blue, aqua);
 		addBear = new LabelButton ("bear", font, Color.WHITE, lightblue, blue, aqua);
 
-		fish = new ArrayList <Fish> (1);
-		eggs = new ArrayList <Egg> (1);
-		penguins = new ArrayList <Penguin> (1);
-		bears = new ArrayList <PolarBear> (1);
+		fish = new ArrayList <Fish> ();
+		eggs = new ArrayList <Egg> ();
+		penguins = new ArrayList <Penguin> ();
+		bears = new ArrayList <PolarBear> ();
 		
-		blocks = new Block [30][30];
+		blocks = new Block [15][15];
 		for (int i = 0 ; i < blocks.length ; i++)
-			for (int j = 0 ; j < blocks.length ; j++)
-				blocks [i][j] = new Block (LAND, i, j);
+			for (int j = 0 ; j < blocks[0].length ; j++) {
+				if (i == 0 || j == 0)
+					blocks [i][j] = new Block (WATER, i, j);
+				else
+					blocks [i][j] = new Block (LAND, i, j);
+			}
 		
 		for (int i = 0 ; i < 1 ; i++) {
 			fish.add(new Fish (i));
@@ -45,7 +51,7 @@ public class Mode implements Screen {
 		}
 		
 		for (int i = 0 ; i < 1 ; i++) {
-			bears.add(new PolarBear (i, 5, 15));
+			bears.add(new PolarBear (i, 5, 12));
 		}
 		
 		main.add (addEgg);
@@ -72,7 +78,33 @@ public class Mode implements Screen {
 		g.setColor(aqua);
 		g.fillRect(0, offset+2*border, width, height-offset-2*border);
 		g.setColor(blue);
-		g.fillRect(0, 200, main.i*15, 100);
+		g.fillRect (0, 180, main.i*15, 90);;
+		for (int i = 0 ; i < blocks.length ; i++) 
+			for (int j = 0 ; j < blocks[0].length ; j++)
+				blocks[i][j].show(g);
+		
+		int rand = (int)(Math.abs(random.nextGaussian()*2/3));
+		for (int i = 0 ; i < rand ; i++) {
+			fish.add(new Fish (fish.size()));
+		}		
+//		rand = (int)(Math.abs(random.nextGaussian()/2));
+//		for (int i = 0 ; i < rand ; i++) {
+//			eggs.add(new Egg (eggs.size(),
+//					(int)(Math.random()*blocks.length),
+//					(int)(Math.random()*blocks[0].length)));
+//		}		
+//		rand = (int)(Math.abs(random.nextGaussian()/2));
+//		for (int i = 0 ; i < rand ; i++) {
+//			penguins.add(new Penguin (penguins.size(),
+//					(int)(Math.random()*blocks.length),
+//					(int)(Math.random()*blocks[0].length)));
+//		}	
+//		rand = (int)(Math.abs(random.nextGaussian()/2));
+//		for (int i = 0 ; i < rand ; i++) {
+//			bears.add(new PolarBear (bears.size(),
+//					(int)(Math.random()*blocks.length),
+//					(int)(Math.random()*blocks[0].length)));
+//		}
 		/**
 		 * HERE GWACIE
 		 */

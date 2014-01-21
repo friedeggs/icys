@@ -121,8 +121,9 @@ public class Main extends JFrame implements MouseListener, MouseMotionListener {
 	public void animate () {
 		while (true) {
 			if (running) {
-				System.out.println(i);
 				i++;
+				if (i == 40)
+					i = 0;
 				repaint ();
 			}
 			try {

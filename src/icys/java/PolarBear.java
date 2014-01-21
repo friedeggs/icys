@@ -23,6 +23,7 @@ public class PolarBear extends LifeForm {
 		super (index);
 		//x int
 		//y int
+		blocks [x][y].set(this);
 		sinceEaten = 0;
 		penguinsEaten = 0;
 		chooseTarget();
@@ -36,13 +37,14 @@ public class PolarBear extends LifeForm {
 	public PolarBear (int index, int x, int y)
 	{
 		super (index);
+		blocks [x][y].set(this);
 		sinceEaten = 0;
 		penguinsEaten = 0;
 		this.x = x;
 		this.y = y;
 		chooseTarget();
 		try {
-			image = ImageIO.read(new File ("polarbear.png"));
+			image = ImageIO.read(new File ("polar.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -66,6 +68,7 @@ public class PolarBear extends LifeForm {
 				((Penguin) target).remove();
 				penguinsEaten ++;
 				sinceEaten = 0;
+				System.out.println("nom. RAWR");
 			}
 			target = null;
 		}
@@ -75,8 +78,10 @@ public class PolarBear extends LifeForm {
 	
 	public void checkAlive() 
 	{
-		if (sinceEaten > 20)
-			remove ();
+		if (sinceEaten > 20) {
+			System.out.println ("Polar bear: *dies*");
+			remove();
+		}
 	}
 	
 	
@@ -131,9 +136,15 @@ public class PolarBear extends LifeForm {
 
 	public boolean valid (int i, int j)
 	{
-		return (Math.abs(i+j) <= 1) && x+i >= 0 && x+i <= blocks.length &&
-				y+j >= 0 && y+j <= blocks[0].length && 
+		return (Math.abs(i+j) == 1) && x+i >= 0 && x+i < blocks.length &&
+				y+j >= 0 && y+j < blocks[0].length && blocks [x+i][y+j].value 
+				== LAND && free (blocks[x+i][y+j]) &&
 				blocks [x+i][y+j].distanceTo(target) < distanceTo (target);
+	}
+	
+	public boolean free (Block block) {
+		return block.lifeform == null || block.targeter == null ||
+				block.lifeform instanceof Penguin;
 	}
 	
 	public void move ()
@@ -149,7 +160,8 @@ public class PolarBear extends LifeForm {
 		
 		if (counter == 0) // There is nowhere to move - don't move
 			return;
-		
+
+		blocks [x][y].targeter = null;
 		int random = (int)(Math.random() * counter);
 		for (int i = -1 ; i <= 1 ; i++)
 			for (int j = -1 ; j <= 1 ; j++)
@@ -160,17 +172,15 @@ public class PolarBear extends LifeForm {
 						y += j;
 					}
 				}
-	}
-	
-	public void show(Graphics g)
-	{
-		g.drawImage (image, blocks[x][y].x, blocks[x][y].y, null); 
+		blocks [x][y].setTargeter(this);
 	}
 
 	@Override
 	public void remove() {
 		// TODO Auto-generated method stub
-		
+		bears.remove(index);
+		for (int i = index ; i < bears.size() ; i++)
+			bears.get(i).index--;
 	}
 
 }

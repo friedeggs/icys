@@ -19,10 +19,11 @@ public class Egg extends LifeForm{
 		super (index);
 		this.x = x;
 		this.y = y;
+		blocks [x][y].set(this);
 		alive = true;
 		timeAlive = 0;
 		try {
-            image = ImageIO.read(new File ("egg.png"));
+            image = ImageIO.read(new File ("egggg.png"));
 		} catch (IOException e) {
             e.printStackTrace();
 		}

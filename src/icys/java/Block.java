@@ -9,7 +9,7 @@ import java.awt.Graphics;
 public class Block extends Entity {
 
 	public int value, width;
-	public LifeForm lifeform;
+	public LifeForm lifeform, targeter;
 
 	public Block(int value1, int i, int j) {
 		value = value1;
@@ -19,13 +19,17 @@ public class Block extends Entity {
 
 	public void set(LifeForm l) {
 		lifeform = l;
+	}	
+	
+	public void setTargeter(LifeForm l) {
+		targeter = l;
 	}
 
 	public void show(Graphics g) // and char a??
 	{
 		char a = 'a'; // TEMPORARY
 		if (lifeform != null) {
-			lifeform.show(g);
+			//lifeform.show(g);
 		}
 		Color water = new Color(175, 217, 255), land = new Color(0, 0, 0), dark = new Color(
 				11, 23, 59), use;
@@ -45,5 +49,6 @@ public class Block extends Entity {
 		g.setColor(use);
 		// Polygon poly = new Polygon (xPoint, yPoint, xPoint.length);
 		// g.drawPolygon (poly);
+		g.drawRect(coordX(x), coordY(y), coordX(1)/1, coordY(1)/1);
 	}
 }

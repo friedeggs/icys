@@ -25,11 +25,12 @@ public class Penguin extends LifeForm {
 		super (index);
 		this.x = x;
 		this.y = y;
+		blocks [x][y].set(this);
 		fishesEaten = 0;
 		sinceEaten = 0;
 		chooseTarget ();
 		try {
-			image = ImageIO.read(new File ("penguin.png"));
+			image = ImageIO.read(new File ("penguino.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -54,6 +55,7 @@ public class Penguin extends LifeForm {
 				((Fish) target).remove();
 				fishesEaten ++;
 				sinceEaten = 0;
+				System.out.println("omNOMNOM");
 			}
 			target = null;
 		}
@@ -63,8 +65,10 @@ public class Penguin extends LifeForm {
 	
 	public void checkAlive() 
 	{
-		if (sinceEaten > 20)
+		if (sinceEaten > 20) {
+			System.out.println ("Penguin: *dies*");
 			remove();
+		}
 	}
 	
 	public void reproduces()
@@ -88,6 +92,7 @@ public class Penguin extends LifeForm {
 		if (fish.size() == 0) {
 			// choose a random block of land
 			target = randomBlock ();
+			//System.out.println("random target");
 			return;
 		}
 		// else: 
@@ -116,9 +121,15 @@ public class Penguin extends LifeForm {
 
 	public boolean valid (int i, int j)
 	{
-		return (Math.abs(i+j) <= 1) && x+i >= 0 && x+i <= blocks.length &&
-				y+j >= 0 && y+j <= blocks[0].length && 
+		return (Math.abs(i+j) == 1) && x+i >= 0 && x+i < blocks.length &&
+				y+j >= 0 && y+j < blocks[0].length && blocks [x+i][y+j].value 
+				== LAND && free (blocks[x+i][y+j]) &&
 				blocks [x+i][y+j].distanceTo(target) < distanceTo (target);
+	}
+	
+	public boolean free (Block block) {
+		return block.lifeform == null || block.targeter == null ||
+				block.lifeform instanceof Fish;
 	}
 	
 	public void move ()
@@ -126,16 +137,19 @@ public class Penguin extends LifeForm {
 		boolean direction [][] = new boolean [3][3]; // CHANGE IN X AND Y
 		int counter = 0;
 		for (int i = -1 ; i <= 1 ; i++)
-			for (int j = -1 ; j <= 1 ; j++)
+			for (int j = -1 ; j <= 1 ; j++) {
 				if (valid (i, j)) {
 					direction [i+1][j+1] = true;
 					counter++;
 				}
+			}
 		
 		if (counter == 0) // There is nowhere to move - don't move
 			return;
-		
+
+		blocks [x][y].targeter = null;
 		int random = (int)(Math.random() * counter);
+		
 		for (int i = -1 ; i <= 1 ; i++)
 			for (int j = -1 ; j <= 1 ; j++)
 				if (direction [i+1][j+1]) {
@@ -145,6 +159,7 @@ public class Penguin extends LifeForm {
 						y += j;
 					}
 				}
+		blocks [x][y].setTargeter(this);
 	}
 
 	@Override

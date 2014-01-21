@@ -8,9 +8,8 @@ import static icys.java.Utilities.*;
 
 public abstract class LifeForm extends Entity {
 
-	int x, y, index;
+	int index;
 	BufferedImage image;
-	Block pos;
 	
 	public LifeForm (int index) {
 		this.index = index;

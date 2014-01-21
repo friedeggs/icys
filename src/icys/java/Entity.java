@@ -21,13 +21,13 @@ public abstract class Entity {
 	 * Converts a block x index into coordinates
 	 */
 	public int coordX (int index) {
-		return index * 15; // TEMPORARY
+		return index * 30; // TEMPORARY
 	}	
 	
 	/**
 	 * Converts a block y index into coordinates
 	 */
 	public int coordY (int index) {
-		return index * 15; // TEMPORARY
+		return index * 30; // TEMPORARY
 	}
 }
