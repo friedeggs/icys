@@ -12,7 +12,6 @@ import static icys.java.Utilities.*;
 public class Penguin extends LifeForm {
 	
 	Entity target; // Block or fish
-	int direction;
 	int sinceEaten;
 	int fishesEaten; 
 	
@@ -116,61 +115,22 @@ public class Penguin extends LifeForm {
 			}
 		}
 	}
-
-	public boolean valid (int i, int j)
-	{
-		return (Math.abs(i+j) == 1) && x+i >= 0 && x+i < blocks.length &&
-				y+j >= 0 && y+j < blocks[0].length && blocks [x+i][y+j].value 
-				== LAND && free (blocks[x+i][y+j]);
-	}
 	
-	public boolean free (Block block) {
-		return block.lifeform == null || block.targeter == null ||
-				block.lifeform instanceof Fish;
-	}
-	
-	public int closer (int i, int j) {
-		if (blocks [x+i][y+j].distanceTo(target) < distanceTo (target))
-			return 3;
-		if (blocks [x+i][y+j].distanceTo(target) == distanceTo (target))
-			return 2;
-		return 1;
-	}
-	
-	public void move ()
-	{
-		int direction [][] = new int [3][3]; // CHANGE IN X AND Y
-		int counter [] = new int [3];
-		for (int i = -1 ; i <= 1 ; i++)
-			for (int j = -1 ; j <= 1 ; j++) {
-				if (valid (i, j)) {
-					direction [i+1][j+1] = closer (i, j);
-					counter [direction [i+1][j+1]-1 ]++;
-				}
-			}
-
-		blocks [x][y].setTargeter(this);
-		for (int k = 2 ; k >= 0 ; k--) {
-			int random = (int)(Math.random() * counter [k]);
-			for (int i = -1 ; i <= 1 ; i++)
-				for (int j = -1 ; j <= 1 ; j++)
-					if (direction [i+1][j+1] == k+1) {
-						counter[k]--;
-						if (random == counter[k]) {
-							blocks [x][y].targeter = null;
-							x += i;
-							y += j;
-							blocks [x][y].setTargeter(this);
-							return;
-						}
-					}
-		}
-	}
-
-	public void move (int dir)
-	{
-		 
-	}
+	/**
+	 * fish appear first
+	 * eggs updated next
+	 * penguins target a new valid location in order of ranking
+	 * - closer to target
+	 * - same distance as before
+	 * - farther from target
+	 * valid: if it's land
+	 * the new location can be currently occupied by something else
+	 * if that something has to stay in the same place the targeter
+	 * must choose a new target
+	 * @param i
+	 * @param j
+	 * @return
+	 */
 	
 	@Override
 	public void remove() {
