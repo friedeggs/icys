@@ -15,7 +15,7 @@ import java.util.Random;
 public class Mode implements Screen {
 
 	Random random = new Random ();
-	LabelButton back, help, earthquake, melting, pollution; 
+	LabelButton back, help, earthquake, melt, pollution; 
 	LabelButton addEgg, addPenguin, addBear;
 	
 	public Mode () {
@@ -23,7 +23,7 @@ public class Mode implements Screen {
 		back = new LabelButton ("back", font, Color.WHITE, lightblue, blue, aqua);
 		help = new LabelButton ("help", font, Color.WHITE, lightblue, blue, aqua);
 		earthquake = new LabelButton ("earthquake", font_small, Color.WHITE, lightblue, blue, aqua);
-		melting = new LabelButton ("melt glacier", font_small, Color.WHITE, lightblue, blue, aqua);
+		melt = new LabelButton ("melt glacier", font_small, Color.WHITE, lightblue, blue, aqua);
 		pollution = new LabelButton ("pollution", font_small, Color.WHITE, lightblue, blue, aqua);
 		
 		
@@ -76,7 +76,7 @@ public class Mode implements Screen {
 		
 		main.add (back);
 		main.add (earthquake);
-		main.add (melting);
+		main.add (melt);
 		main.add (pollution);
 		main.add (help);
 		
@@ -86,7 +86,7 @@ public class Mode implements Screen {
 		addBear.setVisible(false);		
 		back.setVisible(false);		
 		earthquake.setVisible(false);
-		melting.setVisible(false);
+		melt.setVisible(false);
 		pollution.setVisible(false);
 		help.setVisible(false);
 		
@@ -178,7 +178,7 @@ public class Mode implements Screen {
 	public void show() {
 		back.setVisible (true);
 		earthquake.setVisible (true);
-		melting.setVisible (true);
+		melt.setVisible (true);
 		pollution.setVisible (true);
 		help.setVisible (true);
 		addEgg.setVisible (true);
@@ -190,7 +190,7 @@ public class Mode implements Screen {
 	public void hide() {
 		back.setVisible (false);
 		earthquake.setVisible(false);
-		melting.setVisible(false);
+		melt.setVisible(false);
 		pollution.setVisible(false);
 		help.setVisible (false);
 		addEgg.setVisible (false);
@@ -202,7 +202,7 @@ public class Mode implements Screen {
 	public void applyGraphics(Graphics g) {
 		back.applyGraphics(g);
 		earthquake.applyGraphics(g);
-		melting.applyGraphics(g);
+		melt.applyGraphics(g);
 		pollution.applyGraphics(g);
 		help.applyGraphics(g);
 		
@@ -219,7 +219,7 @@ public class Mode implements Screen {
 				border + back.getHeight() / 2);
 		
 		earthquake.setLocation(width * 4 / numOfButtons -55, border + back.getHeight() / 2);
-		melting.setLocation(width * 5 / numOfButtons -35, border + back.getHeight() / 2);
+		melt.setLocation(width * 5 / numOfButtons -35, border + back.getHeight() / 2);
 		pollution.setLocation(width * 6 / numOfButtons -25, border + back.getHeight() / 2);
 		
 		help.setLocation(width - border - help.getWidth() / 2, 
@@ -263,7 +263,7 @@ public class Mode implements Screen {
 		}
 		else if (melt.contains(x, y)) {
 			melt.setState(1);
-			MeltingGlacier melting = new MeltingGlacier();
+			MeltingGlacier melt = new MeltingGlacier();
 		}
 		else if (pollution.contains(x, y)) {
 			pollution.setState(1);
