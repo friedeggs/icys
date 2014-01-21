@@ -5,6 +5,9 @@ import static icys.java.Utilities.*;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -13,7 +16,7 @@ public class Mode implements Screen {
 
 	Random random = new Random ();
 	LabelButton back, help, addEgg, addPenguin, addBear;
-	char [][] value = new Char [15][21];
+	char [][] value = new char [15][21];
 	
 	public Mode () {
 		
