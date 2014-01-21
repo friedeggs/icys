@@ -97,9 +97,9 @@ public class Mode implements Screen {
 		}
 		splited = result.split("	");
 		int indexS = 0;
-		for (int i = 0; i < myCrap.length; i++)
-			for (int j = 0; j < myCrap[i].length; j++) {
-				myCrap[i][j] = splited[indexS].charAt(0);
+		for (int i = 0; i < value.length; i++)
+			for (int j = 0; j < value[i].length; j++) {
+				value[i][j] = splited[indexS].charAt(0);
 				indexS++;
 			}
 	}
