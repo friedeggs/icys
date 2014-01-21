@@ -3,46 +3,45 @@ package icys.java;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
+
 
 public class MeltingGlacier extends NaturalDisaster {
 	
 	char [][] myCrap = new char [15][21];
 	
-	public MeltingGlacier(ArrayList<PolarBear> list, int[][] block) {
-		lostBear(list);
-		meltArea(block);
-	}
-
-	public void lostBear(ArrayList<PolarBear> list) {
+	public MeltingGlacier() {}	
+	
+	public void lostBear() {
 		// 50%
 		// grid [row] [col] = Math.random () < density; <Boolean?
 		boolean dead = false;
-		for (int i = 0; i < list.size(); i++) {
+		for (int i = 0; i < Utilities.bears.size(); i++) {
 			dead = Math.random() < 0.5;
 			if (dead) {
-				list.remove(i);
+				Utilities.bears.remove(i);
 				i--;
 			}
 		}
 	} // End of remove polar bear list
 
-	public void meltArea(int[][] block) {
-		// Cover certain blocks around the edge with "water" blocks?
-		// Make sure that it covers bears grids?
-		// How many percent?
-		// -1 not used
-		// 0 water
-		// 1 land
-		// what are the coordinates to multiply/add for GUI
-
+	public void meltArea() {
 		// 175, 217, 255
-
-		read();
+		read("melt");
+		for (int i = 0; i < myCrap.length; i ++)
+			for (int j = 0; j <myCrap[i].length; j++)
+				Utilities.blocks[i][j].changeValue (myCrap[i][j]);
 
 	}
+	
+	public void revert ()
+	{
+		read("start");
+		for (int i = 0; i < myCrap.length; i ++)
+			for (int j = 0; j <myCrap[i].length; j++)
+				Utilities.blocks[i][j].changeValue (myCrap[i][j]);
+	}
 
-	public void read() {
+	public void read(String name) {
 
 		String[] splited = new String [315];
 		String result = "a";
@@ -50,7 +49,7 @@ public class MeltingGlacier extends NaturalDisaster {
 		BufferedReader br = null;
 		String sCurrentLine = null;
 		try {
-			br = new BufferedReader(new FileReader("melt.txt"));
+			br = new BufferedReader(new FileReader(name+".txt"));
 
 			while ((sCurrentLine = br.readLine()) != null) {
 				result = sCurrentLine;
