@@ -37,6 +37,13 @@ public abstract class LifeForm extends Entity {
 		direction [i+1][j+1] = -1;
 	}
 
+	protected void crossOffLifeForms () {
+		for (int i = -1 ; i <= 1 ; i++)
+			for (int j = -1 ; j <= 1 ; j++)
+				if (valid (i, j) && blocks [x+i][y+j].lifeform instanceof Egg)
+						direction [i+1][j+1] = -1;
+	}
+
 	protected void clearCrosses () {
 		for (int i = -1 ; i <= 1 ; i++)
 			for (int j = -1 ; j <= 1 ; j++)
@@ -94,6 +101,7 @@ public abstract class LifeForm extends Entity {
 	 */
 	protected void move ()
 	{
+		crossOffLifeForms ();
 		int counter [] = new int [3];
 		for (int i = -1 ; i <= 1 ; i++)
 			for (int j = -1 ; j <= 1 ; j++)

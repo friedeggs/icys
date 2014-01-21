@@ -132,21 +132,21 @@ public class PolarBear extends LifeForm {
 		}
 	}
 	
-	private void crossOffFish () {
+	protected void crossOffLifeForms () {
 		for (int i = -1 ; i <= 1 ; i++)
 			for (int j = -1 ; j <= 1 ; j++)
-				if (valid (i, j) && blocks [x+i][y+j].lifeform instanceof Fish)
+				if (valid (i, j) && (blocks [x+i][y+j].lifeform instanceof Egg
+						|| blocks [x+i][y+j].lifeform instanceof Fish))
 						direction [i+1][j+1] = -1;
-	}
-	
-	protected void move () {
-		crossOffFish ();
-		super.move();
 	}
 	
 	@Override
 	public void remove() {
 		blocks [x][y].set(null);
+		if (blocks [x][y].lifeform instanceof PolarBear)
+			System.out.println ("YOU. YOU'RE DEAD");
+		if (blocks [x][y].targeter instanceof PolarBear)
+			System.out.println ("c'est un polarbear qui target celui-ci");
 		bears.remove(index);
 		for (int i = index ; i < bears.size() ; i++)
 			bears.get(i).index--;
