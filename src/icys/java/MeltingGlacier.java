@@ -1,14 +1,13 @@
+package icys.java;
+
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class MeltingGlacier extends NaturalDisaster {
 	
-	
-	char [][] value = new char [15][21];
+	char [][] myCrap = new char [15][21];
 	
 	public MeltingGlacier(ArrayList<PolarBear> list, int[][] block) {
 		lostBear(list);
@@ -43,7 +42,7 @@ public class MeltingGlacier extends NaturalDisaster {
 
 	}
 
-	public void read (){
+	public void read() {
 
 		String[] splited = new String [315];
 		String result = "a";
@@ -51,8 +50,7 @@ public class MeltingGlacier extends NaturalDisaster {
 		BufferedReader br = null;
 		String sCurrentLine = null;
 		try {
-			br = new BufferedReader(new FileReader(
-					"bin/melt.txt"));
+			br = new BufferedReader(new FileReader("melt.txt"));
 
 			while ((sCurrentLine = br.readLine()) != null) {
 				result = sCurrentLine;
@@ -69,11 +67,12 @@ public class MeltingGlacier extends NaturalDisaster {
 		}
 		splited = result.split("	");
 		int indexS = 0;
-		for (int i = 0; i < value.length; i++)
-			for (int j = 0; j < value[i].length; j++) {
-				value[i][j] = splited[indexS].charAt(0);
+		for (int i = 0; i < myCrap.length; i++)
+			for (int j = 0; j < myCrap[i].length; j++) {
+				myCrap[i][j] = splited[indexS].charAt(0);
 				indexS++;
 			}
 
+	} // End of read method
 
 } // End of Class
