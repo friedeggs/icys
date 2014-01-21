@@ -108,9 +108,6 @@ public class Mode implements Screen {
 		/**
 		 * HERE GWACIE
 		 */
-		for (int i = 0 ; i < fish.size () ; i++) {
-			fish.get(i).show (g);
-		}
 		for (int i = 0 ; i < eggs.size () ; i++) {
 			eggs.get(i).update (g);
 		}
@@ -119,6 +116,9 @@ public class Mode implements Screen {
 		}
 		for (int i = 0 ; i < bears.size () ; i++) {
 			bears.get(i).update (g);
+		}
+		for (int i = 0 ; i < fish.size () ; i++) {
+			fish.get(i).show (g);
 		}
 	}
 
