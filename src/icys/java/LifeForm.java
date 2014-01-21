@@ -30,8 +30,8 @@ public abstract class LifeForm extends Entity {
 	}
 	
 	public void show(Graphics g)
-	{
-		g.drawImage (image, coordX(x), coordY(y), null);
+	{ // DRAW IN MIDDLE OF BLOCK
+		g.drawImage (image, coordX(x), coordY(y) - block_height / 2, null);
 	}
 	
 	public Block randomBlock () {

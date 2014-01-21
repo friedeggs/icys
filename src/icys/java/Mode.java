@@ -4,6 +4,7 @@ import static icys.java.Utilities.*;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Polygon;
 import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -42,7 +43,10 @@ public class Mode implements Screen {
 					blocks [i][j] = new Block (LAND, i, j);
 				else //if (value[i][j]==2)
 					blocks [i][j] = new Block (UNUSED, i, j);
-			}
+			} 
+		
+		block_width = width / blocks.length;
+		block_height = (height-offset-2*border) / blocks[0].length;
 		
 		for (int i = 0 ; i < 1 ; i++) {
 			fish.add(new Fish (i));
@@ -116,7 +120,8 @@ public class Mode implements Screen {
 		g.setColor(aqua);
 		g.fillRect(0, offset+2*border, width, height-offset-2*border);
 		g.setColor(blue);
-		g.fillRect (0, 180, main.i*15, 90);;
+		g.fillRect (0, 180, main.i*15, 90);	
+		
 		for (int i = 0 ; i < blocks.length ; i++) 
 			for (int j = 0 ; j < blocks[0].length ; j++)
 				blocks[i][j].show(g);
@@ -158,6 +163,13 @@ public class Mode implements Screen {
 		for (int i = 0 ; i < fish.size () ; i++) {
 			fish.get(i).show (g);
 		}
+		
+		int [] xPoint = {400, 400+30, 
+		400+30-15, 400-15};
+		int [] yPoint = {300, 300, 300+30, 300+30};
+		g.setColor(Color.ORANGE);
+		Polygon poly = new Polygon (xPoint, yPoint, xPoint.length);
+		g.fillPolygon (poly);	
 	}
 
 	@Override

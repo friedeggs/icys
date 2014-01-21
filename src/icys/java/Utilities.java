@@ -1,4 +1,6 @@
 package icys.java;
+import static icys.java.Utilities.border;
+import static icys.java.Utilities.offset;
 import icys.java.Main.Background;
 
 import java.awt.Color;
@@ -29,7 +31,9 @@ public class Utilities {
 	
 	public static int width = screenSize.width, height = screenSize.height;
 	
-	public static int border = 10, offset = 50;
+	public static int border = 10, offset = 50, shift = 0;
+	
+	public static int block_width, block_height;
 	
 	public static Color lightblue = new Color (175, 217, 255),
 			blue = new Color (124, 175, 222),
