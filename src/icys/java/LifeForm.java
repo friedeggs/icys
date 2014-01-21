@@ -38,7 +38,7 @@ public abstract class LifeForm extends Entity {
 		int x, y;
 		do {
 			x = (int)(Math.random () * blocks.length);
-			y = (int)(Math.random () * blocks.length);
+			y = (int)(Math.random () * blocks[0].length);
 		} while (blocks[x][y].lifeform != null || blocks[x][y].value != LAND);
 		return blocks [x][y];
 	}

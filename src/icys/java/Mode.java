@@ -33,7 +33,7 @@ public class Mode implements Screen {
 		bears = new ArrayList <PolarBear> ();
 		
 		read ();
-		blocks = new Block [15][21];
+		//blocks = new Block [15][21];
 		for (int i = 0 ; i < blocks.length ; i++)
 			for (int j = 0 ; j < blocks[0].length ; j++) {
 				if (value[i][j]=='0')
@@ -44,8 +44,9 @@ public class Mode implements Screen {
 					blocks [i][j] = new Block (UNUSED, i, j);
 			} 
 		
-		block_width = width / blocks.length;
-		block_height = (height-offset-2*border) / blocks[0].length;
+		block_width = width / (blocks.length - 3);
+		block_height = (height-offset-border) / blocks[0].length;
+		shift = block_width * 3 / 6;
 		
 		for (int i = 0 ; i < 1 ; i++) {
 			fish.add(new Fish (i));
@@ -102,9 +103,9 @@ public class Mode implements Screen {
 		}
 		splited = result.split("	");
 		int indexS = 0;
-		for (int i = 0; i < value.length; i++)
-			for (int j = 0; j < value[i].length; j++) {
-				value[i][j] = splited[indexS].charAt(0);
+		for (int i = 0; i < value[1].length; i++)
+			for (int j = 0; j < value.length; j++) {
+				value[j][i] = splited[indexS].charAt(0);
 				indexS++;
 			}
 	}
@@ -116,10 +117,8 @@ public class Mode implements Screen {
 		// Toolbars
 		g.setColor (blue);
 		g.fillRect (0, offset + border, width, border);
-		g.setColor(aqua);
+		g.setColor(water);
 		g.fillRect(0, offset+2*border, width, height-offset-2*border);
-		g.setColor(blue);
-		g.fillRect (0, 180, main.i*15, 90);	
 		
 		for (int i = 0 ; i < blocks.length ; i++) 
 			for (int j = 0 ; j < blocks[0].length ; j++)
@@ -162,13 +161,6 @@ public class Mode implements Screen {
 		for (int i = 0 ; i < fish.size () ; i++) {
 			fish.get(i).show (g);
 		}
-		
-		int [] xPoint = {400, 400+30, 
-		400+30-15, 400-15};
-		int [] yPoint = {300, 300, 300+30, 300+30};
-		g.setColor(Color.ORANGE);
-		Polygon poly = new Polygon (xPoint, yPoint, xPoint.length);
-		g.fillPolygon (poly);	
 	}
 
 	@Override

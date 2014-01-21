@@ -22,7 +22,8 @@ public abstract class Entity {
 	 * Converts a block x index into coordinates
 	 */
 	public int coordX (int index) {
-		return index * block_width + y * shift; // TEMPORARY
+		//return index * block_width - y * shift; // TEMPORARY
+		return (index + 3) * block_width - y * shift; // TEMPORARY
 	}	
 	
 	/**

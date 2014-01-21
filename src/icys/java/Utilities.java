@@ -31,20 +31,21 @@ public class Utilities {
 	
 	public static int width = screenSize.width, height = screenSize.height;
 	
-	public static int border = 10, offset = 50, shift = 0;
+	public static int border = 10, offset = 50, shift = 10;
 	
 	public static int block_width, block_height;
 	
 	public static Color lightblue = new Color (175, 217, 255),
 			blue = new Color (124, 175, 222),
-			aqua = new Color (221, 240, 255);
+			aqua = new Color (221, 240, 255),
+			water = aqua;//new Color (103, 213, 235);
 	
 	public static Font font = new Font ("Calibri", Font.BOLD, 32),
 	font_large = new Font ("Calibri", Font.BOLD, 144);
 	
-	public static Block blocks [][];
+	public static Block blocks [][] = new Block [21][15];
 	
-	public static char [][] value = new char [15][21];;
+	public static char [][] value = new char [21][15];
 	
 	public static final int WATER = 0, LAND = 1, UNUSED = 2;
 	
