@@ -14,7 +14,6 @@ import javax.imageio.ImageIO;
 public class PolarBear extends LifeForm {
 
 	Entity target;
-	int direction;
 	int sinceEaten;
 	int penguinsEaten; 
 
@@ -59,7 +58,7 @@ public class PolarBear extends LifeForm {
 		move();
 	}
 	
-	public void eatPenguin ()
+	private void eatPenguin ()
 	{
 		if (x == target.x && y == target.y)
 		{
@@ -76,7 +75,7 @@ public class PolarBear extends LifeForm {
 			sinceEaten ++ ;
 	}
 	
-	public void checkAlive() 
+	private void checkAlive() 
 	{
 		if (sinceEaten > 20) {
 			System.out.println ("Polar bear: *dies*");
@@ -85,7 +84,7 @@ public class PolarBear extends LifeForm {
 	}
 	
 	
-	public ArrayList<PolarBear> reproduces()
+	private ArrayList<PolarBear> reproduces()
 	{
 		
 		if (penguinsEaten == 5)
@@ -101,13 +100,13 @@ public class PolarBear extends LifeForm {
 	 * updateTarget: This method checks if target is alive, and calls 
 	 * method to choose new target if current target is dead
 	 */
-	public void updateTarget() 
+	private void updateTarget() 
 	{
 		if (target == null || (penguins.size() > 0 && target instanceof Block))
 			chooseTarget();
 	}
 	
-	public void chooseTarget() //Chooses closest fish for new target
+	private void chooseTarget() //Chooses closest fish for new target
 	{		
 		if (penguins.size() == 0) {
 			target = randomBlock ();
@@ -133,60 +132,17 @@ public class PolarBear extends LifeForm {
 			}
 		}
 	}
-
-	public boolean valid (int i, int j)
-	{
-		return (Math.abs(i+j) == 1) && x+i >= 0 && x+i < blocks.length &&
-				y+j >= 0 && y+j < blocks[0].length && blocks [x+i][y+j].value 
-				== LAND && free (blocks[x+i][y+j]);
-	}
 	
-	public boolean free (Block block) {
-		return block.lifeform == null || block.targeter == null ||
-				block.lifeform instanceof Penguin;
-	}
-	
-	public int closer (int i, int j) {
-		if (blocks [x+i][y+j].distanceTo(target) < distanceTo (target))
-			return 3;
-		if (blocks [x+i][y+j].distanceTo(target) == distanceTo (target))
-			return 2;
-		return 1;
-	}
-	
-	public void move ()
-	{
-		int direction [][] = new int [3][3]; // CHANGE IN X AND Y
-		int counter [] = new int [3];
+	private void crossOffFish () {
 		for (int i = -1 ; i <= 1 ; i++)
-			for (int j = -1 ; j <= 1 ; j++) {
-				if (valid (i, j)) {
-					direction [i+1][j+1] = closer (i, j);
-					counter [direction [i+1][j+1]-1 ]++;
-				}
-			}
-
-		blocks [x][y].setTargeter(this);
-		for (int k = 2 ; k >= 0 ; k--) {
-			int random = (int)(Math.random() * counter [k]);
-			for (int i = -1 ; i <= 1 ; i++)
-				for (int j = -1 ; j <= 1 ; j++)
-					if (direction [i+1][j+1] == k+1) {
-						counter[k]--;
-						if (random == counter[k]) {
-							blocks [x][y].targeter = null;
-							x += i;
-							y += j;
-							blocks [x][y].setTargeter(this);
-							return;
-						}
-					}
-		}
+			for (int j = -1 ; j <= 1 ; j++)
+				if (valid (i, j) && blocks [x+i][y+j].lifeform instanceof Fish)
+						direction [i][j] = -1;
 	}
-
-	public void move (int dir)
-	{
-		 
+	
+	protected void move () {
+		crossOffFish ();
+		super.move();
 	}
 	
 	@Override

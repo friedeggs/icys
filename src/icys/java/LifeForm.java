@@ -19,6 +19,7 @@ public abstract class LifeForm extends Entity {
 	 * 2 - same distance as before   \
 	 * 1 - farther from target   \
 	 * 0 - !valid
+	 * -1 - don't change until the blocks are drawn
 	 */
 	int direction [][] = new int [3][3]; // CHANGE IN X AND Y
 	
@@ -32,13 +33,21 @@ public abstract class LifeForm extends Entity {
 		this.y = y;
 	}
 
-	public void crossOff (int i, int j) {
-		direction [i+1][j+1] = 0;
+	protected void crossOff (int i, int j) {
+		direction [i+1][j+1] = -1;
+	}
+
+	protected void clearCrosses () {
+		for (int i = -1 ; i <= 1 ; i++)
+			for (int j = -1 ; j <= 1 ; j++)
+				if (direction [i+1][j+1] == -1)
+					direction [i+1][j+1] = 0;
 	}
 	
 	public void show(Graphics g)
 	{ // DRAW IN MIDDLE OF BLOCK
 		g.drawImage (image, coordX(x), coordY(y) - block_height / 2, null);
+		clearCrosses();
 	}
 	
 	public Block randomBlock () {
@@ -59,7 +68,7 @@ public abstract class LifeForm extends Entity {
 	 * @param j
 	 * @return
 	 */
-	public boolean valid (int i, int j)
+	protected boolean valid (int i, int j)
 	{
 		return (Math.abs(i+j) == 1) && x+i >= 0 && x+i < blocks.length &&
 				y+j >= 0 && y+j < blocks[0].length && blocks [x+i][y+j].value 
@@ -72,7 +81,11 @@ public abstract class LifeForm extends Entity {
 	 * @param j
 	 * @return
 	 */
-	public int closer (int i, int j) {
+	protected int closer (int i, int j) {
+		if (target == null) {
+			System.out.println("null whyyy");
+			return 1;
+		}
 		if (blocks [x+i][y+j].distanceTo(target) < distanceTo (target))
 			return 3;
 		if (blocks [x+i][y+j].distanceTo(target) == distanceTo (target))
@@ -83,18 +96,20 @@ public abstract class LifeForm extends Entity {
 	/**
 	 * Choose a location to target but don't actually change the location
 	 */
-	public void move ()
+	protected void move ()
 	{
 		int counter [] = new int [3];
 		for (int i = -1 ; i <= 1 ; i++)
-			for (int j = -1 ; j <= 1 ; j++) {
-				if (valid (i, j)) {
-					direction [i+1][j+1] = closer (i, j);
-					counter [direction [i+1][j+1]-1 ]++;
-				}
+			for (int j = -1 ; j <= 1 ; j++)
+				if (direction [i+1][j+1] != -1)
+				{
+					if (valid (i, j)) {
+						direction [i+1][j+1] = closer (i, j);
+						counter [direction [i+1][j+1]-1 ]++;
+					}
 				else
 					direction [i+1][j+1] = 0;
-			}
+				}
 
 		blocks [x][y].setTargeter(this);
 		for (int k = 2 ; k >= 0 ; k--) {
