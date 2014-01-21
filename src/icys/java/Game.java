@@ -1,6 +1,7 @@
 package icys.java;
 
 import static icys.java.Utilities.*;
+import java.awt.Graphics;
 
 public class Game extends Mode {
 	
@@ -17,9 +18,13 @@ public class Game extends Mode {
 		
 		//need to alter penguin class to allow for user-chosen directions
 		//cannot use update method, use new gaming method? or just move?
-		//maybe use move, but overridden with a parameter giving direction
-		
-		
-		
+		//maybe use move, but overridden with a parameter giving direction	
 	}
+	
+	public void draw()
+	{	
+		super.draw(null);
+	}
+	
+	
 }

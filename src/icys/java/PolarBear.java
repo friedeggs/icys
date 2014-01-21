@@ -69,6 +69,7 @@ public class PolarBear extends LifeForm {
 				penguinsEaten ++;
 				sinceEaten = 0;
 				System.out.println("nom. RAWR");
+				System.out.println("Penguin: *eaten by Polar Bear*");
 			}
 			target = null;
 		}
