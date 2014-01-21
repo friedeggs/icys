@@ -99,6 +99,7 @@ public abstract class LifeForm extends Entity {
 	/**
 	 * Choose a location to target but don't actually change the location
 	 */
+	// CAN'T SWITCH POSITIONS
 	protected void move ()
 	{
 		crossOffLifeForms ();
