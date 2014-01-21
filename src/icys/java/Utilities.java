@@ -40,6 +40,8 @@ public class Utilities {
 	
 	public static Block blocks [][];
 	
+	public static char [][] value = new char [15][21];;
+	
 	public static final int WATER = 0, LAND = 1, UNUSED = 2;
 	
 	public static ArrayList <Fish> fish;

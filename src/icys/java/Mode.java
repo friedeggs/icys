@@ -16,7 +16,6 @@ public class Mode implements Screen {
 
 	Random random = new Random ();
 	LabelButton back, help, addEgg, addPenguin, addBear;
-	char [][] value = new char [15][21];
 	
 	public Mode () {
 		
