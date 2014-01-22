@@ -67,7 +67,7 @@ public class Mode implements Screen {
 			penguins.add(new Penguin (i, 10, 10));
 		}
 		
-		for (int i = 0 ; i < 1 ; i++) {
+		for (int i = 0 ; i < 3 ; i++) {
 			bears.add(new PolarBear (i, 5, 12));
 		}
 		

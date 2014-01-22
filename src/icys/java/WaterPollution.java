@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class WaterPollution extends NaturalDisaster {
 
-	char [][] myCrap = new char [15][21];
+	char [][] myCrap = new char [21][15];
 	
 	public WaterPollution() {
 		stopFish();
@@ -59,9 +59,9 @@ public class WaterPollution extends NaturalDisaster {
 		}
 		splited = result.split("	");
 		int indexS = 0;
-		for (int i = 0; i < myCrap.length; i++)
-			for (int j = 0; j < myCrap[i].length; j++) {
-				myCrap[i][j] = splited[indexS].charAt(0);
+		for (int i = 0; i < myCrap[0].length; i++)
+			for (int j = 0; j < myCrap.length; j++) {
+				myCrap[j][i] = splited[indexS].charAt(0);
 				indexS++;
 			}
 
