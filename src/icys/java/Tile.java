@@ -9,7 +9,7 @@ import static icys.java.Utilities.*;
 
 public class Tile extends Entity implements Button {
 	
-	int x, y, state; // X AND Y ARE INDICES, UNLESS IN BOX BUTTON
+	int state; // X AND Y ARE INDICES, UNLESS IN BOX BUTTON
 	Color color [] = {
 			new Color (170, 255, 240),  // MOUSE OVER
 			Color.WHITE,
@@ -22,7 +22,7 @@ public class Tile extends Entity implements Button {
 	Polygon poly, smallPoly;
 	
 	public Tile (int x, int y) {
-		int shift2 = shift * border / block_height;
+		int shift2 = shift * (block_height-2*border) / block_height;
 		this.x = x;
 		this.y = y;
 		xPoints [0] = coordX(x);
@@ -34,16 +34,26 @@ public class Tile extends Entity implements Button {
 		yPoints [2] = coordY(y)+block_height;
 		yPoints [3] = coordY(y)+block_height;
 		poly = new Polygon (xPoints, yPoints, 4);
-
+		
 		xPoints2 [0] = coordX(x)+border;
-		xPoints2 [1] = coordX(x)+block_width-border;
-		xPoints2 [2] = coordX(x)+block_width-shift-border;
-		xPoints2 [3] = coordX(x)-shift+border;
+		xPoints2 [1] = coordX(x)+block_width-2* border;
+		xPoints2 [2] = coordX(x)+block_width-shift2-2* border;
+		xPoints2 [3] = coordX(x)-shift2+border;
 		yPoints2 [0] = coordY(y)+border;
 		yPoints2 [1] = coordY(y)+border;
 		yPoints2 [2] = coordY(y)+block_height-border;
-		yPoints2 [3] = coordY(y)+block_height+border;
+		yPoints2 [3] = coordY(y)+block_height-border;
 		smallPoly = new Polygon (xPoints2, yPoints2, 4);
+		
+
+		
+		for (int i = 0 ; i < 4; i ++) {
+			if (xPoints [i] != blocks [x][y].poly.xpoints [i])
+				System.out.println ("NOOOOOPPPPPPPEEEEEEEEEEEEEEE");
+			System.out.println (x + " " + blocks[x][y].x);
+			System.out.println (coordX(x) + " " + coordX(blocks[x][y].x));
+			System.out.println (coordX(y) + " " + coordX(blocks[x][y].y));
+		}
 	}
 
 	@Override
@@ -83,6 +93,13 @@ public class Tile extends Entity implements Button {
 			g.fillPolygon(poly);
 			g.setColor(color [state*2 - 1]);
 			g.fillPolygon(smallPoly);
+		}
+		else
+		{
+			g.setColor(Color.BLACK);
+			g.drawPolygon(poly);
+			g.setColor(Color.WHITE);
+			g.drawPolygon(smallPoly);
 		}
 	}
 

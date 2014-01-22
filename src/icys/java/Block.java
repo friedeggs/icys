@@ -10,13 +10,20 @@ import java.awt.Graphics;
 
 public class Block extends Entity {
 
-	public int value, nudgeX = 0, nudgeY = 0;
+	public int value;
 	public LifeForm lifeform, targeter;
+	public Polygon poly;
 
 	public Block(int value1, int i, int j) {
 		value = value1;
 		x = i;
 		y = j;
+		int [] xPoint = {coordX(x), coordX(x)+block_width, 
+				coordX(x)+block_width-shift, coordX(x)-shift};
+		int [] yPoint = {coordY(y), coordY(y), 
+				coordY(y)+block_height, coordY(y)+block_height};
+		poly = new Polygon (xPoint, yPoint, xPoint.length);
+		System.out.println(x + " " + coordX(x));
 	}
 
 	public void set(LifeForm l) {
@@ -72,7 +79,7 @@ public class Block extends Entity {
 		int [] yPoint = {coordY(y), coordY(y), 
 				coordY(y)+block_height, coordY(y)+block_height};
 		g.setColor(use);
-		Polygon poly = new Polygon (xPoint, yPoint, xPoint.length);
+		poly = new Polygon (xPoint, yPoint, xPoint.length);
 		g.fillPolygon (poly);
 		if (value == 1) {
 			g.setColor (blue);
@@ -99,7 +106,7 @@ public class Block extends Entity {
 			g.fillPolygon (threed);
 		}
 		
-		if (currentScreen instanceof Game) {
+		if (currentScreen instanceof Game && value == LAND) {
 			tile [x][y].draw(g);
 			if (tile [x][y].getState () != 0)
 				System.out.println(x + " " + y);

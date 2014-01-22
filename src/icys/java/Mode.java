@@ -39,8 +39,11 @@ public class Mode implements Screen {
 		penguins = new ArrayList <Penguin> ();
 		bears = new ArrayList <PolarBear> ();
 		
+		block_width = width / (blocks.length - 3);
+		block_height = (height-offset-border) / blocks[0].length;
+		shift = block_width * 3 / 6;
+		
 		read ();
-		//blocks = new Block [15][21];
 		for (int i = 0 ; i < blocks.length ; i++)
 			for (int j = 0 ; j < blocks[0].length ; j++) 
 			{
@@ -51,10 +54,6 @@ public class Mode implements Screen {
 				else //if (value[i][j]==2)
 					blocks [i][j] = new Block (UNUSED, i, j);
 			} 
-		
-		block_width = width / (blocks.length - 3);
-		block_height = (height-offset-border) / blocks[0].length;
-		shift = block_width * 3 / 6;
 	
 		main.add (addEgg);
 		main.add (addPenguin);

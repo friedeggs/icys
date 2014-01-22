@@ -58,51 +58,31 @@ public class Game extends Mode {
 		System.out.println("==========");
 	}
 	
-	/**
-	 * Converts a coordinate into a block index
-	 */
-	private int convX (int x, int y) {
-		//return index * block_width - y * shift; // TEMPORARY
-		return (x - nudgeX + convY(y) * shift) / block_width - 3;
-		//return (x + 3) * block_width - y * shift + nudgeX; // TEMPORARY
-	}	
-	
-	/**
-	 * Converts a coordinate into a block index
-	 */
-	private int convY (int y) {
-		return (y - nudgeY - offset - 2 * border) / block_height;
-		//return y * block_height + offset+2*border + nudgeY; // TEMPORARY
-	}
-	
-	private boolean valid (int x, int y) {
-		return x >= 0 && x < blocks.length && y >= 0 && y < blocks [0].length
-				&& blocks [x][y].value == LAND;
-	}
-	
 	@Override
 	public void mouseReleased (MouseEvent e) {
 		super.mouseReleased (e);
-		int x = convX (e.getX(), e.getY()),
-				y = convY (e.getY());
-		if (valid (x, y)) {
-			if (player.target != null)
-				tile [player.target.x][player.target.y].setState (0);
-			tile [x][y].setState (2);
-			player.target = blocks [x][y];
+		int x = e.getX(), y = e.getY();
+		for (int i = 0 ; i < tile.length ; i++) {
+			for (int j = 0 ; j < tile[0].length ; j++) {
+				if (tile [i][j].contains(x, y))
+					tile [i][j].setState (2);
+				else
+					tile [i][j].setState (0);
+			}
 		}
 	}
 	
 	@Override
 	public void mouseMoved (MouseEvent e) {
 		System.out.println ("mouse moved");
-		int x = convX (e.getX(), e.getY()),
-				y = convY (e.getY());
-		if (valid (x, y)) {
-			if (hovered != null)
-				hovered.setState (0);
-			hovered = tile [x][y];
-			tile [x][y].setState (1);
+		int x = e.getX(), y = e.getY();
+		for (int i = 0 ; i < tile.length ; i++) {
+			for (int j = 0 ; j < tile[0].length ; j++) {
+				if (tile [i][j].getState() != 2 && tile [i][j].contains(x, y))
+					tile [i][j].setState (1);
+				else if (tile [i][j].getState() != 2)
+					tile [i][j].setState (0);
+			}
 		}
 	}
 	
