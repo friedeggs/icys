@@ -47,7 +47,7 @@ public class Main extends JFrame implements MouseListener, MouseMotionListener {
 		SelectionScreen = new SelectionScreen ();
 		AboutScreen = new AboutScreen ();
 		HelpScreen = new HelpScreen ();
-		mode = new Mode ();
+		//mode = new Mode ();
 		currentScreen = StartScreen;
 
 		//currentScreen.add();
@@ -60,7 +60,7 @@ public class Main extends JFrame implements MouseListener, MouseMotionListener {
 		SelectionScreen.applyGraphics (getGraphics ());
 		AboutScreen.applyGraphics (getGraphics ());
 		HelpScreen.applyGraphics (getGraphics ());
-		mode.applyGraphics (getGraphics ());
+		//mode.applyGraphics (getGraphics ());
 		
 		setBackground (lightblue);
 		setLocationRelativeTo (null);
