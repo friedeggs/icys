@@ -50,12 +50,6 @@ public class Block extends Entity {
 			value = Utilities.UNUSED;
 	}
 
-	public void nudgeChange (int i, int j)
-	{
-		nudgeX = i;
-		nudgeY = j;
-	}
-	
 	public void show(Graphics g) // and char a??
 	{
 		Color //aqua, //new Color(175, 217, 255), 
@@ -73,10 +67,10 @@ public class Block extends Entity {
 			use = new Color (255-x*3,255, 255-y*3);
 		}
 
-		int [] xPoint = {coordX(x) + nudgeX, coordX(x)+block_width + nudgeX, 
-				coordX(x)+block_width-shift + nudgeX, coordX(x)-shift + nudgeX};
-		int [] yPoint = {coordY(y) + nudgeY, coordY(y) + nudgeY, 
-				coordY(y)+block_height + nudgeY, coordY(y)+block_height + nudgeY};
+		int [] xPoint = {coordX(x), coordX(x)+block_width, 
+				coordX(x)+block_width-shift, coordX(x)-shift};
+		int [] yPoint = {coordY(y), coordY(y), 
+				coordY(y)+block_height, coordY(y)+block_height};
 		g.setColor(use);
 		Polygon poly = new Polygon (xPoint, yPoint, xPoint.length);
 		g.fillPolygon (poly);
