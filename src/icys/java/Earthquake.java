@@ -1,32 +1,34 @@
 package icys.java;
 
+
 import java.util.ArrayList;
+import static icys.java.Utilities.*;
 
 public class Earthquake extends NaturalDisaster {
-	public Earthquake(ArrayList<PolarBear> list, ArrayList<Penguin> list2) {
-		loseBears(list);
-		losePenguins(list2);
+	public Earthquake() {
+		loseBears();
+		losePenguins();
 	}
 
-	public void loseBears(ArrayList<PolarBear> list) {
+	public void loseBears() {
 		// 25%
 		boolean dead = false;
-		for (int i = 0; i < list.size(); i++) {
+		for (int i = 0; i < bears.size(); i++) {
 			dead = Math.random() < 0.25;
 			if (dead) {
-				list.remove(i);
+				bears.remove(i);
 				i--;
 			}
 		}
 	} // End of lose Bears
 
-	public void losePenguins(ArrayList<Penguin> list) {
+	public void losePenguins() {
 		// 30%
 		boolean dead = false;
-		for (int i = 0; i < list.size(); i++) {
+		for (int i = 0; i < penguins.size(); i++) {
 			dead = Math.random() < 0.3;
 			if (dead) {
-				list.remove(i);
+				penguins.remove(i);
 				i--;
 			}
 		}

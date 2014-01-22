@@ -315,7 +315,18 @@ public class Mode implements Screen {
 			pollution.setState(1);
 		else
 			pollution.setState(0);
-		
+		if (addEgg.contains (x,y))
+			addEgg.setState(1);
+		else 
+			addEgg.setState(0);
+		if (addPenguin.contains (x,y))
+			addPenguin.setState(1);
+		else 
+			addPenguin.setState(0);
+		if (addBear.contains (x,y))
+			addBear.setState(1);
+		else 
+			addBear.setState(0);
 		
 	}
 

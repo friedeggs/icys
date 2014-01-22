@@ -2,6 +2,7 @@ package icys.java;
 
 //import java.awt.Color;
 import java.util.ArrayList;
+import static icys.java.Utilities.*;
 
 public class WaterPollution extends NaturalDisaster {
 
