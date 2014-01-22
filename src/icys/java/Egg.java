@@ -19,6 +19,7 @@ public class Egg extends LifeForm{
 		super(index);
 	}
 	//arbitrary commmnets
+	//scridfs. wait does it work
 	public Egg(int index, int x, int y)
 	{
 		super (index);
