@@ -23,13 +23,13 @@ public abstract class Entity {
 	 */
 	public int coordX (int index) {
 		//return index * block_width - y * shift; // TEMPORARY
-		return (index + 3) * block_width - y * shift + nudge; // TEMPORARY
+		return (index + 3) * block_width - y * shift + nudgeX; // TEMPORARY
 	}	
 	
 	/**
 	 * Converts a block y index into coordinates
 	 */
 	public int coordY (int index) {
-		return index * block_height + offset+2*border + nudge; // TEMPORARY
+		return index * block_height + offset+2*border + nudgeY; // TEMPORARY
 	}
 }
