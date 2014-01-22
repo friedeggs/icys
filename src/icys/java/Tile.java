@@ -94,13 +94,13 @@ public class Tile extends Entity implements Button {
 			g.setColor(color [state*2 - 1]);
 			g.fillPolygon(smallPoly);
 		}
-		else
-		{
-			g.setColor(Color.BLACK);
-			g.drawPolygon(poly);
-			g.setColor(Color.WHITE);
-			g.drawPolygon(smallPoly);
-		}
+//		else
+//		{
+//			g.setColor(Color.BLACK);
+//			g.drawPolygon(poly);
+//			g.setColor(Color.WHITE);
+//			g.drawPolygon(smallPoly);
+//		}
 	}
 
 	@Override

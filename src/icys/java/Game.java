@@ -9,7 +9,7 @@ public class Game extends Mode {
 	
 	int score = 0;
 	boolean alive = true;
-	Penguin player;
+	Player player;
 	Tile hovered;
 	
 	public Game () {
@@ -50,10 +50,13 @@ public class Game extends Mode {
 	public void draw(Graphics g) {
 
 		super.draw(g);
+
+		if (TIMER % sleep == 0) 
+			player.update(g);
 		
-//		for (int i = 0 ; i < penguins.size () ; i++) {
-//			penguins.get(i).update ();
-//		}
+		for (int i = 0 ; i < blocks.length ; i++) 
+			for (int j = 0 ; j < blocks[0].length ; j++)
+				blocks[i][j].show(g);
 
 		System.out.println("==========");
 	}
@@ -64,8 +67,10 @@ public class Game extends Mode {
 		int x = e.getX(), y = e.getY();
 		for (int i = 0 ; i < tile.length ; i++) {
 			for (int j = 0 ; j < tile[0].length ; j++) {
-				if (tile [i][j].contains(x, y))
+				if (tile [i][j].contains(x, y)) {
 					tile [i][j].setState (2);
+					player.target = blocks [i][j];
+				}
 				else
 					tile [i][j].setState (0);
 			}

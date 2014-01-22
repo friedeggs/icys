@@ -1,9 +1,11 @@
 package icys.java;
 
+import java.awt.Graphics;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import static icys.java.Utilities.*;
 
 public class Player extends Penguin {
 
@@ -27,10 +29,11 @@ public class Player extends Penguin {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void update () {
+	public void update (Graphics g) {
 		if (target == null)
 			return;
 		move ();
+		blocks [x][y].lifeform = this;
 	}
 	
 	protected void move () {
