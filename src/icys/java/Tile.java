@@ -22,6 +22,7 @@ public class Tile extends Entity implements Button {
 	Polygon poly, smallPoly;
 	
 	public Tile (int x, int y) {
+		int shift2 = shift * border / block_height;
 		this.x = x;
 		this.y = y;
 		xPoints [0] = coordX(x);

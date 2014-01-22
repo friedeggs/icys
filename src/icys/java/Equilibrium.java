@@ -35,7 +35,7 @@ public class Equilibrium extends Mode {
 		super.draw(g);
 		
 		for (int i = 0 ; i < penguins.size () ; i++) {
-			penguins.get(i).update ();
+			penguins.get(i).update (g);
 		}
 
 		System.out.println("==========");

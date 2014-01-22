@@ -33,15 +33,6 @@ public class Penguin extends LifeForm {
 			e.printStackTrace();
 		}	
 	}
-	
-	public void update()
-	{
-		this.eatFish();
-		this.checkAlive();
-		this.reproduces ();
-		this.updateTarget();
-		this.move();
-	}
 
 	public void eatFish ()
 	{
@@ -148,5 +139,14 @@ public class Penguin extends LifeForm {
 			newlist.add(penguins.get(i));
 			newlist.get(i).index = i;
 		}
+	}
+
+	public void update(Graphics g) {
+		// TODO Auto-generated method stub
+		this.eatFish();
+		this.checkAlive();
+		this.reproduces ();
+		this.updateTarget();
+		this.move();
 	}
 }
