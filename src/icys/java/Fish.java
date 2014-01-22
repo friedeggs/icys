@@ -28,10 +28,6 @@ public class Fish extends LifeForm {
 		}
 	}
 	
-	public void update () {
-		blocks[x][y].setTargeter(this);
-	}
-	
 	public boolean byWater (Block block) {
 		return (block.x == 0 || block.y == 0 || 
 				block.x == blocks.length-1 || block.y == blocks.length-1 ||

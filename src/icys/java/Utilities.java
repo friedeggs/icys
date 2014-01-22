@@ -35,6 +35,8 @@ public class Utilities {
 	
 	public static int block_width, block_height;
 	
+	public static int interval = 10;
+	
 	public static Color lightblue = new Color (175, 217, 255),
 			blue = new Color (124, 175, 222),
 			aqua = new Color (221, 240, 255),

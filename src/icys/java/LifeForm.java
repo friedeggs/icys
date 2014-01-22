@@ -10,7 +10,7 @@ public abstract class LifeForm extends Entity {
 	// Many things are really only applicable to penguin and polarbear
 	
 	Entity target; // Block or fish
-	int index;
+	int index, meltY = 0;
 	BufferedImage image;
 	/**
 	 * Indices: 1 more than change in x and y	\
@@ -53,7 +53,7 @@ public abstract class LifeForm extends Entity {
 	
 	public void show(Graphics g)
 	{ // DRAW IN MIDDLE OF BLOCK
-		g.drawImage (image, coordX(x), coordY(y) - block_height / 2, null);
+		g.drawImage (image, coordX(x), coordY(y) - block_height / 2 + meltY, null);
 		clearCrosses();
 	}
 	
@@ -137,6 +137,14 @@ public abstract class LifeForm extends Entity {
 			blocks [x][y].targeter.crossOff (x - blocks [x][y].targeter.x,
 					y - blocks [x][y].targeter.y);
 			blocks [x][y].targeter.move();
+		}
+	}
+	
+	public void sink () {
+		if (meltY > 0) {
+			meltY += 2 * block_height / interval;
+			if (meltY == block_height)
+				remove ();
 		}
 	}
 	

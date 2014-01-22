@@ -13,16 +13,25 @@ public class MeltingGlacier extends NaturalDisaster {
 	
 	public MeltingGlacier() {
 		melted = true;
-		lostBear();
+		//lostBear();
 		meltArea();
+		sinkLifeForms ();
 	}	
 	
 	public void update () {
 		time++;
-		if (time == 10) {
+		if (time == interval) {
 			revert ();
 			melted = false;
 		}
+	}
+	
+	public void sinkLifeForms () {
+		for (int i = 0 ; i < blocks.length ; i++)
+			for (int j = 0 ; j < blocks[0].length ; j++)
+				if (blocks [i][j].lifeform != null && 
+				blocks [i][j].value != LAND)
+					blocks [i][j].lifeform.meltY += 2 * block_height / interval;
 	}
 	
 	public void lostBear() {
