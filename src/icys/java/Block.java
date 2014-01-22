@@ -10,7 +10,7 @@ import java.awt.Graphics;
 
 public class Block extends Entity {
 
-	public int value;
+	public int value, nudgeX = 0, nudgeY = 0;
 	public LifeForm lifeform, targeter;
 
 	public Block(int value1, int i, int j) {
@@ -21,6 +21,8 @@ public class Block extends Entity {
 
 	public void set(LifeForm l) {
 		lifeform = l;
+		//if (lifeform == null)
+			//System.out.println ("NULL LIFE FORM @" + x + " " + y);
 	}	
 	
 	public void setTargeter(LifeForm l) {
@@ -104,7 +106,7 @@ public class Block extends Entity {
 		}
 		
 		if (lifeform != null) {
-			System.out.println(x+" "+y+" "+lifeform);
+			//System.out.println(x+" "+y+" "+lifeform);
 			lifeform.sink(); // does nothing if glacier is not melting
 			lifeform.show(g);
 		}

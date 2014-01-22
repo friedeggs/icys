@@ -127,7 +127,11 @@ public class Main extends JFrame implements MouseListener, MouseMotionListener {
 				repaint ();
 			}
 			try {
+<<<<<<< HEAD
+				Thread.sleep(1000);
+=======
 				Thread.sleep(timeInterval);
+>>>>>>> ea8915af86fee7c8112178c5ebcf535644506f98
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

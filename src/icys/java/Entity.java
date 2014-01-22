@@ -32,4 +32,5 @@ public abstract class Entity {
 	public int coordY (int index) {
 		return index * block_height + offset+2*border + nudgeY; // TEMPORARY
 	}
+		
 }
