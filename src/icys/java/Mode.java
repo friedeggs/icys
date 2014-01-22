@@ -305,6 +305,28 @@ public class Mode implements Screen {
 			back.setState(0);
 			main.setScreen(SelectionScreen);
 		}
+		if (help.getState() == 1){
+			help.setState(0);
+			main.setScreen(HelpScreen);
+		}
+		if (addEgg.getState() == 1) {
+			addEgg.setState(0);
+		}
+		if (addPenguin.getState() == 1){
+			addPenguin.setState(0);
+		}
+		if (addBear.getState() == 1){
+			addBear.setState(0);
+		}
+		if (earthquake.getState() == 1){
+			earthquake.setState(0);
+		}
+		if (melt.getState() == 1){
+			melt.setState(0);
+		}
+		if (pollution.getState() == 1){
+			pollution.setState(0);
+		}
 	}
 
 	@Override
