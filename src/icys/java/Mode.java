@@ -181,6 +181,7 @@ public class Mode implements Screen {
 		for (int i = 0 ; i < blocks.length ; i++) 
 			for (int j = 0 ; j < blocks[0].length ; j++)
 				blocks[i][j].update(g);
+		System.out.println("==========");
 	}
 
 	@Override
