@@ -176,13 +176,14 @@ public class SelectionScreen implements Screen {
 			box[0].setState(0);
 			selectLabel[0].setState(0);
 			mode = new Mode();
+			//mode
 			//System.out.println("cast");
 			main.setScreen(mode);
 		}
 		else if (box[1].getState() == 1) {
 			box[1].setState(0);
 			selectLabel[1].setState(0);
-			//mode = new Simulation ();
+			mode = new Simulation ();
 			main.setScreen(mode);
 		}
 		else if (box[2].getState() == 1) {
