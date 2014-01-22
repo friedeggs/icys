@@ -81,6 +81,7 @@ public class Mode implements Screen {
 		main.add (pollution);
 		main.add (help);
 		main.add(main.background);
+		applyGraphics (main.getGraphics());
 		
 		
 		addEgg.setVisible(false);		
