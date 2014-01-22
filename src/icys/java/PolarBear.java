@@ -39,7 +39,7 @@ public class PolarBear extends LifeForm {
 	
 	public void update(Graphics g)
 	{
-		eatPenguin();
+		//eatPenguin();
 		checkAlive();
 		reproduces ();
 		updateTarget();
@@ -65,7 +65,7 @@ public class PolarBear extends LifeForm {
 	
 	private void checkAlive() 
 	{
-		if (sinceEaten > 20) {
+		if (sinceEaten > 60) {
 			System.out.println ("Polar bear: *dies*");
 			remove();
 		}
@@ -145,6 +145,54 @@ public class PolarBear extends LifeForm {
 		for (int i = 0 ; i < bears.size () - 1 ; i++) {
 			newlist.add(bears.get(i));
 			newlist.get(i).index = i;
+		}
+	}
+	
+	protected void move ()
+	{
+		crossOffLifeForms ();
+		
+		// Don't allow lifeforms to switch positions
+		if (blocks[x][y].targeter != null)
+			direction [blocks[x][y].targeter.x - x +1]
+					[blocks[x][y].targeter.y - y +1] = -1;
+		
+		int counter [] = new int [3];
+		for (int i = -1 ; i <= 1 ; i++)
+			for (int j = -1 ; j <= 1 ; j++)
+				if (direction [i+1][j+1] != -1)
+				{
+					if (valid (i, j)) {
+						direction [i+1][j+1] = closer (i, j);
+						counter [direction [i+1][j+1]-1 ]++;
+					}
+				else
+					direction [i+1][j+1] = 0;
+				}
+
+		blocks [x][y].setTargeter(this);
+		for (int k = 2 ; k >= 0 ; k--) {
+			int random = (int)(Math.random() * counter [k]);
+			for (int i = -1 ; i <= 1 ; i++)
+				for (int j = -1 ; j <= 1 ; j++)
+					if (direction [i+1][j+1] == k+1) {
+						counter[k]--;
+						if (random == counter[k]) {
+							blocks [x][y].targeter = null;
+							x += i;
+							y += j;
+							eatPenguin ();
+							blocks [x][y].setTargeter(this);
+							blocks [x][y].set(this);
+							return;
+						}
+					}
+		}
+		// Couldn't make a move! Inform whatever is targeting this block
+		if (blocks [x][y].targeter != null) {
+			blocks [x][y].targeter.crossOff (x - blocks [x][y].targeter.x,
+					y - blocks [x][y].targeter.y);
+			blocks [x][y].targeter.move();
 		}
 	}
 

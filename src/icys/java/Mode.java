@@ -167,14 +167,14 @@ public class Mode implements Screen {
 		/**
 		 * HERE GWACIE
 		 */
+		for (int i = 0 ; i < bears.size () ; i++) {
+			bears.get(i).update (g);
+		}
 		for (int i = 0 ; i < eggs.size () ; i++) {
 			eggs.get(i).update (g);
 		}
 		for (int i = 0 ; i < penguins.size () ; i++) {
 			penguins.get(i).update (g);
-		}
-		for (int i = 0 ; i < bears.size () ; i++) {
-			bears.get(i).update (g);
 		}
 		for (int i = 0 ; i < blocks.length ; i++) 
 			for (int j = 0 ; j < blocks[0].length ; j++)
@@ -303,6 +303,7 @@ public class Mode implements Screen {
 			bears.add(bwear);
 			System.out.println("A bear was spontaneously generated!");
 		}
+		main.repaint ();
 		
 	}
 

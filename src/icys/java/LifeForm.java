@@ -77,7 +77,7 @@ public abstract class LifeForm extends Entity {
 	 */
 	protected boolean valid (int i, int j)
 	{
-		return (Math.abs(i+j) == 1) && x+i >= 0 && x+i < blocks.length &&
+		return (i*j == 0) && x+i >= 0 && x+i < blocks.length &&
 				y+j >= 0 && y+j < blocks[0].length && blocks [x+i][y+j].value 
 				== LAND && blocks [x+i][y+j].targeter == null;
 	}
