@@ -45,7 +45,6 @@ public class Fish extends LifeForm {
 	public void remove() {
 		blocks [x][y].set(null);
 		ArrayList <Fish> newlist = new ArrayList <Fish> ();
-		//fish.remove(index);
 		for (int i = 0 ; i < fish.size() ; i ++) {
 			if (equals(fish.get(i)))
 				fish.remove(i);

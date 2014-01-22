@@ -48,9 +48,18 @@ public class Egg extends LifeForm{
 
 	@Override
 	public void remove() {
-		eggs.remove(index);
-		for (int i = index ; i < eggs.size() ; i++)
-			eggs.get(i).index--;
+		blocks [x][y].set(null);
+		ArrayList <Egg> newlist = new ArrayList <Egg> ();
+		for (int i = 0 ; i < eggs.size() ; i ++) {
+			if (equals(eggs.get(i)))
+				eggs.remove(i);
+		}
+		
+		for (int i = 0 ; i < eggs.size () - 1 ; i++) {
+				newlist.add(eggs.get(i));
+				newlist.get(i).index = i;
+				System.out.println (i);
+		}
 	}
 	
 }

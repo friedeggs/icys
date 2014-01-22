@@ -147,9 +147,11 @@ public class PolarBear extends LifeForm {
 	@Override
 	public void remove() {
 		blocks [x][y].set(null);
-		ArrayList <PolarBear> newlist = 
-				new ArrayList <PolarBear> (bears.size() - 1);
-		bears.remove(bears.indexOf(this));
+		ArrayList <PolarBear> newlist = new ArrayList <PolarBear> ();
+		for (int i = 0 ; i < bears.size() ; i ++) {
+			if (equals(bears.get(i)))
+				bears.remove(i);
+		}
 		
 		for (int i = 0 ; i < bears.size () - 1 ; i++) {
 			newlist.add(bears.get(i));

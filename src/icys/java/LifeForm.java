@@ -143,8 +143,8 @@ public abstract class LifeForm extends Entity {
 	public void sink () {
 		if (meltY > 0) {
 			meltY += 2 * block_height / interval;
-			if (meltY == block_height)
-				remove ();
+//			if (meltY >= 2 * block_height)
+//				remove ();
 		}
 	}
 	

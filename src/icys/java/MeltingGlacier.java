@@ -58,6 +58,14 @@ public class MeltingGlacier extends NaturalDisaster {
 	
 	public void revert ()
 	{
+		for (int i = 0 ; i < blocks.length ; i++)
+			for (int j = 0 ; j < blocks[0].length ; j++)
+				if (blocks [i][j].lifeform != null && 
+				blocks [i][j].value != LAND) {
+					System.out.println("sunk");
+					blocks [i][j].lifeform.remove();
+					System.out.println(blocks [i][j].lifeform);
+				}
 		read("start");
 		for (int i = 0; i < myCrap.length; i ++)
 			for (int j = 0; j <myCrap[i].length; j++)
