@@ -14,6 +14,11 @@ public class Egg extends LifeForm{
 	boolean alive;
 	int timeAlive;
 	
+	public Egg (int index)
+	{
+		super(index);
+	}
+	
 	public Egg(int index, int x, int y)
 	{
 		super (index);

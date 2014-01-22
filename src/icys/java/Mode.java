@@ -281,7 +281,7 @@ public class Mode implements Screen {
 		}
 		else if (addEgg.contains(x, y)){
 			addEgg.setState(1);
-			Egg babyPen = new Egg (1, 1, 1); //Arbitrary, will be redefined later
+			Egg babyPen = new Egg (eggs.size()); 
 			Block home = babyPen.randomBlock();
 			babyPen = new Egg (eggs.size(), home.x, home.y);
 			eggs.add(babyPen);
