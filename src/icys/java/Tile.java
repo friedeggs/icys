@@ -42,7 +42,7 @@ public class Tile extends Entity implements Button {
 		yPoints2 [0] = coordY(y)+border;
 		yPoints2 [1] = coordY(y)+border;
 		yPoints2 [2] = coordY(y)+block_height-border;
-		yPoints2 [3] = coordY(y)+block_height-border;
+		yPoints2 [3] = coordY(y)+block_height+border;
 		smallPoly = new Polygon (xPoints2, yPoints2, 4);
 	}
 
