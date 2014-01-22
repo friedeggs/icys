@@ -175,9 +175,8 @@ public class SelectionScreen implements Screen {
 		if (box[0].getState() == 1) {
 			box[0].setState(0);
 			selectLabel[0].setState(0);
-			mode = new Mode();
-			//mode
-			//System.out.println("cast");
+			mode = new Game();
+			System.out.println("Game chosen");
 			main.setScreen(mode);
 		}
 		else if (box[1].getState() == 1) {
@@ -185,17 +184,20 @@ public class SelectionScreen implements Screen {
 			selectLabel[1].setState(0);
 			mode = new Simulation ();
 			main.setScreen(mode);
+			System.out.println("SIM chosen");
 		}
 		else if (box[2].getState() == 1) {
 			box[2].setState(0);
 			selectLabel[2].setState(0);
-			//mode = new Mode ();
+			mode = new Extinction ();
+			System.out.println("Extinction chosen");
 			main.setScreen(mode);
 		}
 		else if (box[3].getState() == 1) {
 			box[3].setState(0);
 			selectLabel[3].setState(0);
-			//mode = new Mode ();
+			mode = new Equilibrium ();
+			System.out.println("Equilibrium chosen");
 			main.setScreen(mode);
 		}
 		
