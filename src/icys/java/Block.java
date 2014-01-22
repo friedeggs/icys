@@ -28,10 +28,13 @@ public class Block extends Entity {
 	}
 	
 	public void update (Graphics g) {
-		if (targeter != null) {
+		if (!(targeter == null && (lifeform instanceof Egg 
+				|| lifeform instanceof Fish))) {
+		//if (targeter != null) {
 			lifeform = targeter;
 			targeter = null;
 		}
+		//}
 		show (g);
 	}
 	

@@ -34,6 +34,7 @@ public abstract class LifeForm extends Entity {
 	}
 
 	protected void crossOff (int i, int j) {
+		blocks [x][y].targeter = null;
 		direction [i+1][j+1] = -1;
 	}
 
@@ -106,6 +107,10 @@ public abstract class LifeForm extends Entity {
 		return 1;
 	}
 	
+	protected boolean equals (LifeForm l) {
+		return l == null || (l.x == x && l.y == y);
+	}
+	
 	/**
 	 * Choose a location to target but don't actually change the location
 	 */
@@ -115,9 +120,11 @@ public abstract class LifeForm extends Entity {
 		crossOffLifeForms ();
 		
 		// Don't allow lifeforms to switch positions
-		if (blocks[x][y].targeter != null && blocks [x][y].targeter != this)
+		if (blocks[x][y].targeter != null && !equals(blocks [x][y].targeter))
 			direction [blocks[x][y].targeter.x - x +1]
 					[blocks[x][y].targeter.y - y +1] = -1;
+		if (equals (blocks [x][y].lifeform))
+			blocks [x][y].lifeform = null;
 		
 		int counter [] = new int [3];
 		for (int i = -1 ; i <= 1 ; i++)
@@ -140,8 +147,6 @@ public abstract class LifeForm extends Entity {
 					if (direction [i+1][j+1] == k+1) {
 						counter[k]--;
 						if (random == counter[k]) {
-							if (blocks [x][y].targeter == this)
-								blocks [x][y].targeter = null;
 							x += i;
 							y += j;
 							blocks [x][y].setTargeter(this);
