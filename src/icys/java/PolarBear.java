@@ -149,10 +149,7 @@ public class PolarBear extends LifeForm {
 		blocks [x][y].set(null);
 		ArrayList <PolarBear> newlist = 
 				new ArrayList <PolarBear> (bears.size() - 1);
-		for (int i = 0 ; i < bears.size() ; i ++) {
-			if (equals(bears.get(i)))
-				bears.remove(i);
-		}
+		bears.remove(bears.indexOf(this));
 		
 		for (int i = 0 ; i < bears.size () - 1 ; i++) {
 			newlist.add(bears.get(i));

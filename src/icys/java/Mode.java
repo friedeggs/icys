@@ -259,7 +259,7 @@ public class Mode implements Screen {
 		}
 		else if (earthquake.contains(x,y)) {
 			earthquake.setState(1);
-			Earthquake quake = new Earthquake();
+			//Earthquake quake = new Earthquake();
 			System.out.println("Oh no! An earthquake!");
 		}
 		else if (melt.contains(x, y)) {
