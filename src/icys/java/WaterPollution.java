@@ -12,8 +12,7 @@ public class WaterPollution extends NaturalDisaster {
 	}
 
 	public void stopFish () {
-		for (int i = 0; i < Utilities.fish.size(); i++)
-			Utilities.fish.get(i).canAppear = false;
+		stopFish = true;
 	}
 
 	public void blackenWater() {

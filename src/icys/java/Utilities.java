@@ -58,4 +58,6 @@ public class Utilities {
 	public static ArrayList <Penguin> penguins;
 	
 	public static ArrayList <PolarBear> bears;
+	
+	public static boolean stopFish = false;
 }

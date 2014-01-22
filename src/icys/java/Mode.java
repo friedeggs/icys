@@ -135,10 +135,12 @@ public class Mode implements Screen {
 		g.fillRect(0, offset+2*border, width, height-offset-2*border);
 		
 		// DON'T ADD MORE FISH THAN CAN BE ADDED
-		int rand = (int)(Math.abs(random.nextGaussian()*2/3));
-		for (int i = 0 ; i < rand ; i++) {
-			fish.add(new Fish (fish.size()));
-		}		
+		if (!stopFish) {
+			int rand = (int)(Math.abs(random.nextGaussian()*2/3));
+			for (int i = 0 ; i < rand ; i++) {
+				fish.add(new Fish (fish.size()));
+			}		
+		}
 //		rand = (int)(Math.abs(random.nextGaussian()/2));
 //		for (int i = 0 ; i < rand ; i++) {
 //			eggs.add(new Egg (eggs.size(),
