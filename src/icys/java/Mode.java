@@ -17,6 +17,7 @@ public class Mode implements Screen {
 	Random random = new Random ();
 	LabelButton back, help, earthquake, melt, pollution; 
 	LabelButton addEgg, addPenguin, addBear;
+	MeltingGlacier glacier;
 	
 	public Mode () {
 		
@@ -117,7 +118,7 @@ public class Mode implements Screen {
 		}
 		splited = result.split("	");
 		int indexS = 0;
-		for (int i = 0; i < value[1].length; i++)
+		for (int i = 0; i < value[0].length; i++)
 			for (int j = 0; j < value.length; j++) {
 				value[j][i] = splited[indexS].charAt(0);
 				indexS++;
@@ -135,6 +136,10 @@ public class Mode implements Screen {
 		g.fillRect(0, offset+2*border, width, height-offset-2*border);
 		
 		// DON'T ADD MORE FISH THAN CAN BE ADDED
+		if (melted) {
+			glacier.update();
+		}
+		
 		if (!stopFish) {
 			int rand = (int)(Math.abs(random.nextGaussian()*2/3));
 			for (int i = 0 ; i < rand ; i++) {
@@ -266,7 +271,7 @@ public class Mode implements Screen {
 		}
 		else if (melt.contains(x, y)) {
 			melt.setState(1);
-			MeltingGlacier melt = new MeltingGlacier();
+			glacier = new MeltingGlacier();
 			System.out.println("Gasp! The glacier is melting!");
 		}
 		else if (pollution.contains(x, y)) {

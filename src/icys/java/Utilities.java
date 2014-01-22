@@ -59,5 +59,5 @@ public class Utilities {
 	
 	public static ArrayList <PolarBear> bears;
 	
-	public static boolean stopFish = false;
+	public static boolean stopFish = false, melted = false;
 }

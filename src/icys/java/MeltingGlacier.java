@@ -3,17 +3,27 @@ package icys.java;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import static icys.java.Utilities.*;
 
 
 public class MeltingGlacier extends NaturalDisaster {
 	
 	char [][] myCrap = new char [21][15];
+	int time = 0;
 	
 	public MeltingGlacier() {
+		melted = true;
 		lostBear();
 		meltArea();
-		revert();
 	}	
+	
+	public void update () {
+		time++;
+		if (time == 10) {
+			revert ();
+			melted = false;
+		}
+	}
 	
 	public void lostBear() {
 		// 50%
@@ -70,9 +80,9 @@ public class MeltingGlacier extends NaturalDisaster {
 		}
 		splited = result.split("	");
 		int indexS = 0;
-		for (int i = 0; i < myCrap.length; i++)
-			for (int j = 0; j < myCrap[i].length; j++) {
-				myCrap[i][j] = splited[indexS].charAt(0);
+		for (int i = 0; i < myCrap[0].length; i++)
+			for (int j = 0; j < myCrap.length; j++) {
+				myCrap[j][i] = splited[indexS].charAt(0);
 				indexS++;
 			}
 
