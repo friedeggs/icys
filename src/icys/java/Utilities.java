@@ -31,7 +31,7 @@ public class Utilities {
 	
 	public static int width = screenSize.width, height = screenSize.height;
 	
-	public static int border = 10, offset = 50, shift = 10;
+	public static int border = 10, offset = 50, shift = 10, nudgeX = 0, nudgeY = 0;
 	
 	public static int block_width, block_height;
 	
