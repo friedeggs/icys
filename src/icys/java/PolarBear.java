@@ -182,7 +182,8 @@ public class PolarBear extends LifeForm {
 							x += i;
 							y += j;
 							eatPenguin ();
-							blocks [x][y].setTargeter(this);
+							if (i+j != 0)
+								blocks [x][y].setTargeter(this);
 							blocks [x][y].set(this);
 							return;
 						}

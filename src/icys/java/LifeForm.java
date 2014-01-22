@@ -58,12 +58,22 @@ public abstract class LifeForm extends Entity {
 	}
 	
 	public Block randomBlock () {
-		int x, y;
-		do {
-			x = (int)(Math.random () * blocks.length);
-			y = (int)(Math.random () * blocks[0].length);
-		} while (blocks[x][y].lifeform != null || blocks[x][y].value != LAND);
-		return blocks [x][y];
+		int counter = 0;
+		for (int i = 0 ; i < blocks.length ; i++)
+			for (int j = 0 ; j < blocks[0].length ; j++)
+				if (blocks[i][j].lifeform == null && blocks[i][j].value== LAND)
+					counter++;
+		int x = (int)(Math.random () * counter);
+		for (int i = 0 ; i < blocks.length ; i++)
+			for (int j = 0 ; j < blocks[0].length ; j++)
+				if (blocks[i][j].lifeform == null && blocks[i][j].value== LAND)
+				{
+					counter--;
+					if (x == counter)
+						return blocks [i][j];
+				}
+		// WHAT IF COUNTER = 0
+		return null;
 	}
 	
 	public abstract void remove ();
@@ -105,7 +115,7 @@ public abstract class LifeForm extends Entity {
 		crossOffLifeForms ();
 		
 		// Don't allow lifeforms to switch positions
-		if (blocks[x][y].targeter != null)
+		if (blocks[x][y].targeter != null && blocks [x][y].targeter != this)
 			direction [blocks[x][y].targeter.x - x +1]
 					[blocks[x][y].targeter.y - y +1] = -1;
 		
@@ -118,11 +128,11 @@ public abstract class LifeForm extends Entity {
 						direction [i+1][j+1] = closer (i, j);
 						counter [direction [i+1][j+1]-1 ]++;
 					}
-				else
-					direction [i+1][j+1] = 0;
+					else
+						direction [i+1][j+1] = 0;
 				}
 
-		blocks [x][y].setTargeter(this);
+		//blocks [x][y].setTargeter(this);
 		for (int k = 2 ; k >= 0 ; k--) {
 			int random = (int)(Math.random() * counter [k]);
 			for (int i = -1 ; i <= 1 ; i++)
@@ -130,7 +140,7 @@ public abstract class LifeForm extends Entity {
 					if (direction [i+1][j+1] == k+1) {
 						counter[k]--;
 						if (random == counter[k]) {
-							blocks [x][y].targeter = null;
+							//blocks [x][y].targeter = null;
 							x += i;
 							y += j;
 							blocks [x][y].setTargeter(this);
@@ -138,6 +148,7 @@ public abstract class LifeForm extends Entity {
 						}
 					}
 		}
+		
 		// Couldn't make a move! Inform whatever is targeting this block
 		if (blocks [x][y].targeter != null) {
 			blocks [x][y].targeter.crossOff (x - blocks [x][y].targeter.x,
