@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class MeltingGlacier extends NaturalDisaster {
 	
-	char [][] myCrap = new char [15][21];
+	char [][] myCrap = new char [21][15];
 	
 	public MeltingGlacier() {
 		lostBear();
