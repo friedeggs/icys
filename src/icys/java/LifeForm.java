@@ -140,7 +140,8 @@ public abstract class LifeForm extends Entity {
 					if (direction [i+1][j+1] == k+1) {
 						counter[k]--;
 						if (random == counter[k]) {
-							//blocks [x][y].targeter = null;
+							if (blocks [x][y].targeter == this)
+								blocks [x][y].targeter = null;
 							x += i;
 							y += j;
 							blocks [x][y].setTargeter(this);
