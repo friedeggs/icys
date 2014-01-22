@@ -3,6 +3,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -16,7 +18,8 @@ import javax.swing.JPanel;
 import static icys.java.Utilities.*;
 
 @SuppressWarnings("serial")
-public class Main extends JFrame implements MouseListener, MouseMotionListener {
+public class Main extends JFrame implements MouseListener, MouseMotionListener,
+KeyListener {
 	//Mode selection;
 	BufferedImage fish;
 	Font font = new Font ("Calibri", Font.BOLD, 32);
@@ -40,6 +43,8 @@ public class Main extends JFrame implements MouseListener, MouseMotionListener {
 		background = new Background ();
 		background.addMouseListener (this);
 		background.addMouseMotionListener (this);
+		background.addKeyListener(this);
+		addKeyListener (this);
 		//add (selectLabel [0]);
 
 		
@@ -125,9 +130,10 @@ public class Main extends JFrame implements MouseListener, MouseMotionListener {
 				if (i == 40)
 					i = 0;
 				repaint ();
+				running = false;
 			}
 			try {
-				Thread.sleep(500);
+				Thread.sleep(100);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -195,5 +201,23 @@ public class Main extends JFrame implements MouseListener, MouseMotionListener {
 	public void mouseMoved(MouseEvent e) {
 		// TODO Auto-generated method stub
 		currentScreen.mouseMoved(e);
+	}
+
+	@Override
+	public void keyPressed(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		running = true;
+	}
+
+	@Override
+	public void keyTyped(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 }

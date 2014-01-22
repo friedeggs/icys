@@ -103,6 +103,12 @@ public abstract class LifeForm extends Entity {
 	protected void move ()
 	{
 		crossOffLifeForms ();
+		
+		// Don't allow lifeforms to switch positions
+		if (blocks[x][y].targeter != null)
+			direction [blocks[x][y].targeter.x - x +1]
+					[blocks[x][y].targeter.y - y +1] = -1;
+		
 		int counter [] = new int [3];
 		for (int i = -1 ; i <= 1 ; i++)
 			for (int j = -1 ; j <= 1 ; j++)
