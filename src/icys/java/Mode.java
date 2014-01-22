@@ -279,6 +279,28 @@ public class Mode implements Screen {
 			WaterPollution pollutedWater = new WaterPollution();
 			System.out.println("Ah! The water was polluted!");
 		}
+		else if (addEgg.contains(x, y)){
+			addEgg.setState(1);
+			Egg babyPen = new Egg (1, 1, 1); //Arbitrary, will be redefined later
+			Block home = babyPen.randomBlock();
+			babyPen = new Egg (eggs.size(), home.x, home.y);
+			eggs.add(babyPen);
+		}
+		else if (addPenguin.contains(x, y)){
+			addPenguin.setState(1);
+			Penguin newPen = new Penguin (penguins.size());
+			Block place = newPen.randomBlock();
+			newPen = new Penguin (penguins.size(), place.x, place.y);
+		    penguins.add(newPen);
+		}
+		else if (addBear.contains(x,y)){
+			addBear.setState(1);
+			PolarBear bwear = new PolarBear (bears.size());
+			Block territory = bwear.randomBlock();
+			bwear = new PolarBear (bears.size(), territory.x, territory.y);
+			bears.add(bwear);
+		}
+		
 	}
 
 
