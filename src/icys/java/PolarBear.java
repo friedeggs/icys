@@ -140,18 +140,24 @@ public class PolarBear extends LifeForm {
 						direction [i+1][j+1] = -1;
 	}
 	
+	public boolean equals (PolarBear p) {
+		return (p.x == x && p.y == y);
+	}
+	
 	@Override
 	public void remove() {
-		System.out.println("REMOVE");
-		blocks [x][y].lifeform = null;
 		blocks [x][y].set(null);
-		if (blocks [x][y].lifeform instanceof PolarBear)
-			System.out.println ("YOU. YOU'RE DEAD");
-		if (blocks [x][y].targeter instanceof PolarBear)
-			System.out.println ("c'est un polarbear qui target celui-ci");
-		bears.remove(index);
-		for (int i = index ; i < bears.size() ; i++)
-			bears.get(i).index--;
+		ArrayList <PolarBear> newlist = 
+				new ArrayList <PolarBear> (bears.size() - 1);
+		for (int i = 0 ; i < bears.size() ; i ++) {
+			if (equals(bears.get(i)))
+				bears.remove(i);
+		}
+		
+		for (int i = 0 ; i < bears.size () - 1 ; i++) {
+			newlist.add(bears.get(i));
+			newlist.get(i).index = i;
+		}
 	}
 
 }

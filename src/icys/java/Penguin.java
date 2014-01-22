@@ -131,13 +131,22 @@ public class Penguin extends LifeForm {
 	 * @return
 	 */
 	
+	public boolean equals (Penguin p) {
+		return (p.x == x && p.y == y);
+	}
+	
 	@Override
 	public void remove() {
-		System.out.println("REMOVE");
 		blocks [x][y].set(null);
-		blocks [x][y].lifeform = null;
-		penguins.remove(index);
-		for (int i = index ; i < penguins.size() ; i++)
-			penguins.get(i).index--;
+		ArrayList <Penguin> newlist = new ArrayList <Penguin> ();
+		for (int i = 0 ; i < penguins.size() ; i ++) {
+			if (equals(penguins.get(i)))
+				penguins.remove(i);
+		}
+		
+		for (int i = 0 ; i < penguins.size () - 1 ; i++) {
+			newlist.add(penguins.get(i));
+			newlist.get(i).index = i;
+		}
 	}
 }

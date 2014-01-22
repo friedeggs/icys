@@ -2,6 +2,7 @@ package icys.java;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import static icys.java.Utilities.*;
@@ -38,17 +39,27 @@ public class Fish extends LifeForm {
 				blocks [block.x+1][block.y].value == WATER ||
 				blocks [block.x][block.y-1].value == WATER || 
 				blocks [block.x][block.y+1].value == WATER);
+	}	
+	
+	public boolean equals (Fish f) {
+		return (f.x == x && f.y == y);
 	}
 
 	@Override
 	public void remove() {
-		System.out.println("REMOVE");
 		blocks [x][y].set(null);
-		fish.remove(index); // SOMETHING'S WRONG I THINK FISH
-		// KEEP GETTING REMOVED WHEN THEY DON'T EXIST
-		// java.lang.IndexOutOfBoundsException: Index: 0, Size: 0
-		for (int i = index ; i < fish.size() ; i++)
-			fish.get(i).index--;
+		ArrayList <Fish> newlist = new ArrayList <Fish> ();
+		//fish.remove(index);
+		for (int i = 0 ; i < fish.size() ; i ++) {
+			if (equals(fish.get(i)))
+				fish.remove(i);
+		}
+		
+		for (int i = 0 ; i < fish.size () - 1 ; i++) {
+				newlist.add(fish.get(i));
+				newlist.get(i).index = i;
+				System.out.println (i);
+		}
 	}
 	
 }
