@@ -34,7 +34,7 @@ public class Penguin extends LifeForm {
 		}	
 	}
 	
-	public void update(Graphics g)
+	public void update()
 	{
 		this.eatFish();
 		this.checkAlive();

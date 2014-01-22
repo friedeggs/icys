@@ -61,5 +61,7 @@ public class Utilities {
 	
 	public static ArrayList <PolarBear> bears;
 	
-	public static boolean stopFish = false, melted = false;
+	public static boolean stopFish = false, melted = false, quake = false;
+	
+	public static Block userTarget;
 }

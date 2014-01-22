@@ -36,7 +36,7 @@ public class Extinction extends Mode{
 		super.draw(g);
 		
 		for (int i = 0 ; i < penguins.size () ; i++) {
-			penguins.get(i).update (g);
+			penguins.get(i).update ();
 		}
 
 		System.out.println("==========");
