@@ -178,11 +178,11 @@ public class PolarBear extends LifeForm {
 					if (direction [i+1][j+1] == k+1) {
 						counter[k]--;
 						if (random == counter[k]) {
-							blocks [x][y].targeter = null;
+							//blocks [x][y].targeter = null;
 							x += i;
 							y += j;
 							eatPenguin ();
-							if (i+j != 0)
+							//if (i+j != 0)
 								blocks [x][y].setTargeter(this);
 							blocks [x][y].set(this);
 							return;
