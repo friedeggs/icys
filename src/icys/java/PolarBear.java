@@ -26,7 +26,7 @@ public class PolarBear extends LifeForm {
 		penguinsEaten = 0;
 		chooseTarget();
 		try {
-			image = ImageIO.read(new File ("polarbear.png"));
+			image = ImageIO.read(new File ("polar.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
