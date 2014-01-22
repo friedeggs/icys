@@ -1,34 +1,70 @@
 package icys.java;
 
-//import java.awt.Color;
-import java.util.ArrayList;
-import static icys.java.Utilities.*;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class WaterPollution extends NaturalDisaster {
 
+	char [][] myCrap = new char [15][21];
+	
 	public WaterPollution() {
 		stopFish();
 		blackenWater();
 	}
 
 	public void stopFish () {
-		stopFish = true;
+		Utilities.fish.clear (); //Deletes all fish
 	}
 
 	public void blackenWater() {
-		// Cover all water block with darker shade
-		// Black or dark blue?
-		// (11,23,59)
-
-		boolean[][] cover = new boolean[Utilities.blocks.length][Utilities.blocks[0].length];
-		for (int i = 0; i < cover.length; i++)
-			for (int j = 0; j < cover[i].length; j++)
-				cover[i][j] = false;
-		for (int i = 0; i < Utilities.blocks.length; i++)
-			for (int j = 0; j < Utilities.blocks[i].length; j++)
-				if (Utilities.blocks[i][j].value == 2 || Utilities.blocks[i][j].value == 0)
-					cover[i][j] = true;
+		read("blackWater");
+		for (int i = 0; i < myCrap.length; i ++)
+			for (int j = 0; j <myCrap[i].length; j++)
+				Utilities.blocks[i][j].changeValue (myCrap[i][j]);
 
 	}
+	
+	public void revert ()
+	{
+		read("start");
+		for (int i = 0; i < myCrap.length; i ++)
+			for (int j = 0; j <myCrap[i].length; j++)
+				Utilities.blocks[i][j].changeValue (myCrap[i][j]);
+	}
+
+	public void read(String name) {
+
+		String[] splited = new String [315];
+		String result = "a";
+
+		BufferedReader br = null;
+		String sCurrentLine = null;
+		try {
+			br = new BufferedReader(new FileReader(name+".txt"));
+
+			while ((sCurrentLine = br.readLine()) != null) {
+				result = sCurrentLine;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (br != null)
+					br.close();
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		}
+		splited = result.split("	");
+		int indexS = 0;
+		for (int i = 0; i < myCrap.length; i++)
+			for (int j = 0; j < myCrap[i].length; j++) {
+				myCrap[i][j] = splited[indexS].charAt(0);
+				indexS++;
+			}
+
+	} // End of read method
 
 } // End of Class
