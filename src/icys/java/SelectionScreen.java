@@ -7,7 +7,6 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 
 import static icys.java.Utilities.*;
@@ -172,14 +171,45 @@ public class SelectionScreen implements Screen {
 			help.setState (0);
 			main.setScreen (HelpScreen);
 		}
-		for (int i = 0 ; i < 4 ; i++) {
+		
+		if (box[0].getState() == 1) {
+			box[0].setState(0);
+			selectLabel[0].setState(0);
+			mode = new Game();
+			System.out.println("Game chosen");
+			main.setScreen(mode);
+		}
+		else if (box[1].getState() == 1) {
+			box[1].setState(0);
+			selectLabel[1].setState(0);
+			mode = new Simulation ();
+			main.setScreen(mode);
+			System.out.println("SIM chosen");
+		}
+		else if (box[2].getState() == 1) {
+			box[2].setState(0);
+			selectLabel[2].setState(0);
+			mode = new Extinction ();
+			System.out.println("Extinction chosen");
+			main.setScreen(mode);
+		}
+		else if (box[3].getState() == 1) {
+			box[3].setState(0);
+			selectLabel[3].setState(0);
+			mode = new Equilibrium ();
+			System.out.println("Equilibrium chosen");
+			main.setScreen(mode);
+		}
+		
+			
+		/*for (int i = 0 ; i < 4 ; i++) {
 			if (box [i].getState () == 1) {
 				box [i].setState (0);
 				selectLabel [i].setState (0);
 				//mode = new Mode ();
 				main.setScreen(mode);
 			}
-		}
+		}*/
 	}
 
 	@Override

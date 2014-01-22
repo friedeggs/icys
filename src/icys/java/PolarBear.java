@@ -1,5 +1,7 @@
 package icys.java;
 
+import static icys.java.Utilities.*;
+
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -11,191 +13,189 @@ import javax.imageio.ImageIO;
 
 public class PolarBear extends LifeForm {
 
-	boolean alive;
-	Penguin target;
-	int x, y;
-	int direction;
 	int sinceEaten;
 	int penguinsEaten; 
 
-	public PolarBear(ArrayList <Penguin> pencils)
+	public PolarBear(int index)
 	{
-		//x int
-		//y int
-		alive = true;
-		sinceEaten = 0;
-		penguinsEaten = 0;
-		chooseTarget(pencils);
-		try {
-			image = ImageIO.read(new File ("polarbear.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		super (index);
 	}
 	
-	public PolarBear (int x, int y, ArrayList <Penguin> pens)
+	public PolarBear (int index, int x, int y)
 	{
-		alive = true;
+		super (index);
+		blocks [x][y].set(this);
 		sinceEaten = 0;
 		penguinsEaten = 0;
 		this.x = x;
 		this.y = y;
-		chooseTarget(pens);
+		chooseTarget();
 		try {
-			image = ImageIO.read(new File ("polarbear.png"));
+			image = ImageIO.read(new File ("polar.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public void update(ArrayList <PolarBear> rawr, ArrayList<Penguin> pencils,
-			Block[][] iii, Graphics g)
+	public void update(Graphics g)
 	{
-		eatPenguin();
+		//eatPenguin();
 		checkAlive();
-		reproduces (rawr, pencils);
-		updateTarget(pencils);
-		move(iii);
-		show(g);
+		reproduces ();
+		updateTarget();
+		move();
 	}
 	
-	public void eatPenguin ()
+	private void eatPenguin ()
 	{
-		if ((this.x == target.x) && (this.y == target.y)&& this.alive)
+		if (x == target.x && y == target.y)
 		{
-			target.alive = false;
-			penguinsEaten ++;
-			sinceEaten = 0;
-		} else
-			sinceEaten ++;
+			if (target instanceof Penguin) {
+				((Penguin) target).remove();
+				penguinsEaten ++;
+				sinceEaten = 0;
+				System.out.println("nom. RAWR");
+				System.out.println("Penguin: *eaten by Polar Bear*");
+			}
+			target = null;
+		}
+		else
+			sinceEaten ++ ;
 	}
 	
-	public void checkAlive() 
+	private void checkAlive() 
 	{
-		if (alive)
-		{
-			if (sinceEaten > 20)
-				alive = false;
+		if (sinceEaten > 60) {
+			System.out.println ("Polar bear: *dies*");
+			remove();
 		}
 	}
 	
 	
-	public ArrayList<PolarBear> reproduces(ArrayList<PolarBear> bears, ArrayList<Penguin> pens)
+	private ArrayList<PolarBear> reproduces()
 	{
 		
 		if (penguinsEaten == 5)
 		{
-			PolarBear baby = new PolarBear(x, y, pens);
+			PolarBear baby = new PolarBear(bears.size(), x, y);
 			penguinsEaten = 0;
 			bears.add(baby);
 		}
 		return bears; 	
 	}
 	
-	public void updateTarget(ArrayList<Penguin> penGUIno) 
+	/**
+	 * updateTarget: This method checks if target is alive, and calls 
+	 * method to choose new target if current target is dead
+	 */
+	private void updateTarget() 
 	{
-		boolean targetAlive = false; 
-		for (int i = 0; i < penGUIno.size(); i ++) 
-		{
-			if (this.target == penGUIno.get(i)) //Checks if target penguin is still in penguin ArrayList
-				targetAlive = true; 
-		}
-		if (targetAlive == false) //Chooses new target if target is dead
-			this.chooseTarget(penGUIno);
+		if (target == null || (penguins.size() > 0 && target instanceof Block))
+			chooseTarget();
 	}
 	
-	public void chooseTarget(ArrayList<Penguin> pens) //Chooses closest fish for new target
+	private void chooseTarget() //Chooses closest fish for new target
 	{		
-		if (pens.size() == 0) {
-			// WHAT NOW D:
+		if (penguins.size() == 0) {
+			target = randomBlock ();
+			return;
 		}
-		else {
 		
-		int[] distances = new int [pens.size()]; 
+		int[] distances = new int [penguins.size()]; 
 		int min; 
 		
-		for (int i = 0; i < pens.size(); i ++) 
+		for (int i = 0; i < penguins.size(); i ++) 
 		{
-			distances [i] = this.distanceTo(pens.get(i)); //Creates an array for the distance of each fish from penguin
+			distances [i] = this.distanceTo(penguins.get(i)); //Creates an array for the distance of each fish from penguin
 		}
 		
 		min = distances[0]; 
-		this.target = pens.get (0);
+		target = penguins.get (0);
 		for (int j = 0; j< distances.length; j++)
 		{
-			
 			if (distances[j] < min ) //If current element is smaller than minimum... 
 			{
 				min = distances[j];	//...set as minimum.
-				this.target = pens.get(j); //And set the respective fish as new target
+				this.target = penguins.get(j); //And set the respective fish as new target
 			}
 		}
+	}
+	
+	protected void crossOffLifeForms () {
+		for (int i = -1 ; i <= 1 ; i++)
+			for (int j = -1 ; j <= 1 ; j++)
+				if (valid (i, j) && (blocks [x+i][y+j].lifeform instanceof Egg
+						|| blocks [x+i][y+j].lifeform instanceof Fish))
+						direction [i+1][j+1] = -1;
+	}
+	
+	public boolean equals (PolarBear p) {
+		return (p.x == x && p.y == y);
+	}
+	
+	@Override
+	public void remove() {
+		blocks [x][y].set(null);
+		ArrayList <PolarBear> newlist = new ArrayList <PolarBear> ();
+		for (int i = 0 ; i < bears.size() ; i ++) {
+			if (equals(bears.get(i)))
+				bears.remove(i);
+		}
 		
+		for (int i = 0 ; i < bears.size () - 1 ; i++) {
+			newlist.add(bears.get(i));
+			newlist.get(i).index = i;
 		}
 	}
 	
-	public int distanceTo (Penguin pen) //distanceTo: This method finds the distance between the penguin and fish parameter
+	protected void move ()
 	{
-		int distanceTo = (Math.abs(this.x - pen.x)) + (Math.abs(this.y - pen.y));
-		return distanceTo;
-	}
-	
-	public void chooseDirection() //chooseDirection: This method chooses a direction for the penguin to go, towards the fish
-	{
-		int[] possibilities = new int [2];
-		int direction; //8- up, 6-right, 2- down, 4- left
+		crossOffLifeForms ();
 		
-		if (this.x == target.x) //Compares x-coordinate of penguin vs. target
-			possibilities[0]= 0; 
-		else if(this.x - target.x > 0)
-			possibilities[0] = 4;
-		else
-			possibilities[0] = 6;
+		// Don't allow lifeforms to switch positions
+		if (blocks[x][y].targeter != null)
+			direction [blocks[x][y].targeter.x - x +1]
+					[blocks[x][y].targeter.y - y +1] = -1;
 		
-		if (this.y == target.y) //Compares y-coordinate of penguin vs. target
-			possibilities[0] = 0;
-		else if (this.y - target.y > 0)
-			possibilities[1] = 8;
-		else
-			possibilities[1] = 2;
-		
-		int random = (int)(Math.random() * 2); //Chooses random direction within two possible directions
-		direction = possibilities [random];
-		
-		if (direction == 0) //If direction chosen is not valid, choose other direction
-		{
-			if (random == 1)
-				random = 2;
-			else
-				random = 1;
-			direction = possibilities[random-1];
+		int counter [] = new int [3];
+		for (int i = -1 ; i <= 1 ; i++)
+			for (int j = -1 ; j <= 1 ; j++)
+				if (direction [i+1][j+1] != -1)
+				{
+					if (valid (i, j)) {
+						direction [i+1][j+1] = closer (i, j);
+						counter [direction [i+1][j+1]-1 ]++;
+					}
+				else
+					direction [i+1][j+1] = 0;
+				}
+
+		blocks [x][y].setTargeter(this);
+		for (int k = 2 ; k >= 0 ; k--) {
+			int random = (int)(Math.random() * counter [k]);
+			for (int i = -1 ; i <= 1 ; i++)
+				for (int j = -1 ; j <= 1 ; j++)
+					if (direction [i+1][j+1] == k+1) {
+						counter[k]--;
+						if (random == counter[k]) {
+							//blocks [x][y].targeter = null;
+							x += i;
+							y += j;
+							eatPenguin ();
+							//if (i+j != 0)
+								blocks [x][y].setTargeter(this);
+							blocks [x][y].set(this);
+							return;
+						}
+					}
 		}
-		this.direction = direction;
+		// Couldn't make a move! Inform whatever is targeting this block
+		if (blocks [x][y].targeter != null) {
+			blocks [x][y].targeter.crossOff (x - blocks [x][y].targeter.x,
+					y - blocks [x][y].targeter.y);
+			blocks [x][y].targeter.move();
+		}
 	}
 
-	public boolean valid(Block[][] thegreatbigworld)
-	{
-		if (this.direction == 8 && this.y > 0)
-			this.y = this.y - 1 ;
-		else if (this.direction == 2 && this.y < thegreatbigworld[0].length)
-			this.y = this.y + 1; 
-		else if (this.direction == 6 && this.x > 0)
-			this.x = this.x -1 ;
-		else if (this.direction == 4 && this.x < thegreatbigworld.length)
-			this.x = this.x + 1;
-		
-		if (thegreatbigworld[x][y].isOccupied == false && thegreatbigworld[x][y].value == 1)
-			return true;
-		else
-			return false;
-	}
-	
-	public void move(Block[][] thegreatbigworld)
-	{
-		do 
-		{
-			this.chooseDirection();
-		}
-		while (this.valid(thegreatbigworld) == false);
-	}
 }
+

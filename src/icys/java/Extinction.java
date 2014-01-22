@@ -7,9 +7,10 @@ import static icys.java.Utilities.penguins;
 
 import java.awt.Graphics;
 
-public class Equilibrium extends Mode {
-	
-	public Equilibrium () {
+public class Extinction extends Mode{
+
+	public Extinction()
+	{
 		super();
 		
 		for (int i = 0 ; i < 1 ; i++) {
@@ -40,5 +41,6 @@ public class Equilibrium extends Mode {
 
 		System.out.println("==========");
 	}
+	
 	
 }

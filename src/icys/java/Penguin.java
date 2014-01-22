@@ -7,55 +7,44 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
+import static icys.java.Utilities.*;
 
 public class Penguin extends LifeForm {
-
-	boolean alive;
-	Fish target;
-	int x, y;
-	int direction;
+	
 	int sinceEaten;
 	int fishesEaten; 
 	
-	public Penguin () {
-		
+	public Penguin (int index) {
+		super (index);
 	}
 	
-	public Penguin (int x, int y) 
+	public Penguin (int index, int x, int y) 
 	{
+		super (index);
 		this.x = x;
 		this.y = y;
-		alive = true; 
+		blocks [x][y].set(this);
 		fishesEaten = 0;
 		sinceEaten = 0;
-		//choose target
-		target = Mode.fish.get(0); // TEMPORARY
+		chooseTarget ();
 		try {
-			image = ImageIO.read(new File ("penguin.png"));
+			image = ImageIO.read(new File ("penguino.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-		
-	}
-	
-	public void update(ArrayList<Penguin> pencils, ArrayList <Fish> blub, 
-			ArrayList<Egg> frieda, Block[][] iii, Graphics g)
-	{
-		this.eatFish();
-		this.checkAlive();
-		this.reproduces (frieda);
-		this.updateTarget(blub);
-		this.move(iii);
-		this.show(g);
+		}	
 	}
 
 	public void eatFish ()
 	{
-		if ((this.x == target.x) && (this.y == target.y) && this.alive)
+		if (x == target.x && y == target.y)
 		{
-			target.alive = false;
-			fishesEaten ++;
-			sinceEaten = 0;
+			if (target instanceof Fish) {
+				((Fish) target).remove();
+				fishesEaten ++;
+				sinceEaten = 0;
+				System.out.println("omNOMNOM");
+			}
+			target = null;
 		}
 		else
 			sinceEaten ++ ;
@@ -63,124 +52,101 @@ public class Penguin extends LifeForm {
 	
 	public void checkAlive() 
 	{
-		if (alive)
-		{
-			if (sinceEaten > 20)
-				alive = false;
+		if (sinceEaten > 20) {
+			System.out.println ("Penguin: *dies of hunger*");
+			remove();
 		}
 	}
 	
-	public ArrayList<Egg> reproduces(ArrayList<Egg> eggs)
+	public void reproduces()
 	{
 		if (fishesEaten == 5)
 		{
-			Egg baby = new Egg(x, y);
 			fishesEaten = 0;
+			Egg baby = new Egg(eggs.size(), x, y);
 			eggs.add(baby);
-		}
-		return eggs; 	
+		}	
 	}
 	
-	public void updateTarget(ArrayList<Fish> fishes) //updateTarget: This method checks if target is alive, and calls method to choose new target if current target is dead
+	public void updateTarget() //updateTarget: This method checks if target is alive, and calls method to choose new target if current target is dead
 	{
-		boolean targetAlive = false; 
-		for (int i = 0; i < fishes.size(); i ++) 
-		{
-			if (this.target == fishes.get(i)) //Checks if target fish is still in fish ArrayList
-				targetAlive = true; 
-		}
-		if (targetAlive == false) //Chooses new target if target is dead
-			this.chooseTarget(fishes);
+		if (target == null || (fish.size() > 0 && target instanceof Block))
+			chooseTarget();
 	}
 	
-	public void chooseTarget(ArrayList<Fish> fishes) //Chooses closest fish for new target
-	{		
-		int[] distances = new int [fishes.size()]; 
+	public void chooseTarget() //Chooses closest fish for new target
+	{
+		if (fish.size() == 0) {
+			// choose a random block of land
+			target = randomBlock ();
+			//System.out.println("random target");
+			return;
+		}
+		// else: 
+		int[] distances = new int [fish.size()]; 
 		int min; 
 		
-		for (int i = 0; i < fishes.size(); i ++) 
+		for (int i = 0; i < fish.size(); i ++) 
 		{
-			distances [i] = this.distanceTo(fishes.get(i)); //Creates an array for the distance of each fish from penguin
+			distances [i] = this.distanceTo(fish.get(i)); 
+			//Creates an array for the distance of each fish from penguin
 		}
 		
 		min = distances[0]; 
+		target = fish.get(0);
 		for (int j = 0; j< distances.length; j++)
 		{
 			
-			if (distances[j] < min ) //If current element is smaller than minimum... 
+			if (distances[j] < min ) //If current element is smaller than minimum 
 			{
 				min = distances[j];	//...set as minimum.
-				this.target = fishes.get(j); //And set the respective fish as new target
+				this.target = fish.get(j); 
+				//And set the respective fish as new target
 			}
 		}
 	}
 	
-	public int distanceTo (Fish fish) //distanceTo: This method finds the distance between the penguin and fish parameter
-	{
-		int distanceTo = (Math.abs(this.x - fish.x)) + (Math.abs(this.y - fish.y));
-		return distanceTo;
+	/**
+	 * fish appear first
+	 * eggs updated next
+	 * penguins target a new valid location in order of ranking
+	 * - closer to target
+	 * - same distance as before
+	 * - farther from target
+	 * valid: if it's land
+	 * the new location can be currently occupied by something else
+	 * if that something has to stay in the same place the targeter
+	 * must choose a new target
+	 * @param i
+	 * @param j
+	 * @return
+	 */
+	
+	public boolean equals (Penguin p) {
+		return (p.x == x && p.y == y);
 	}
 	
-	public void chooseDirection() //chooseDirection: This method chooses a direction for the penguin to go, towards the fish
-	{
-		int[] possibilities = new int [2];
-		int direction; //8- up, 6-right, 2- down, 4- left
-		
-		if (this.x == target.x) //Compares x-coordinate of penguin vs. target
-			possibilities[0]= 0; 
-		else if(this.x - target.x > 0)
-			possibilities[0] = 4;
-		else
-			possibilities[0] = 6;
-		
-		if (this.y == target.y) //Compares y-coordinate of penguin vs. target
-			possibilities[0] = 0;
-		else if (this.y - target.y > 0)
-			possibilities[1] = 8;
-		else
-			possibilities[1] = 2;
-		
-		int random = (int)(Math.random() * 2); //Chooses random direction within two possible directions
-		direction = possibilities [random];
-		
-		if (direction == 0) //If direction chosen is not valid, choose other direction
-		{
-			if (random == 1)
-				random = 2;
-			else
-				random = 1;
-			direction = possibilities[random - 1];
+	@Override
+	public void remove() {
+		blocks [x][y].set(null);
+		ArrayList <Penguin> newlist = new ArrayList <Penguin> ();
+		for (int i = 0 ; i < penguins.size() ; i ++) {
+			if (equals(penguins.get(i)))
+				penguins.remove(i);
 		}
-		this.direction = direction;
+		
+		for (int i = 0 ; i < penguins.size () - 1 ; i++) {
+			newlist.add(penguins.get(i));
+			newlist.get(i).index = i;
+		}
 	}
 
-	/** YO. THIS CHANGES THE POSITION BEFORE CHECKING IF THE NEW BLOCK
-	   IS OCCUPIED OR NOT LAND ? */
-	public boolean valid(Block[][] thegreatbigworld)
-	{
-		if (this.direction == 8 && this.y > 0)		
-			this.y = this.y - 1 ;
-		else if (this.direction == 2 && this.y < thegreatbigworld[0].length-1)
-			this.y = this.y + 1; 
-		else if (this.direction == 6 && this.x > 0)
-			this.x = this.x - 1 ;
-		else if (this.direction == 4 && this.x < thegreatbigworld.length-1)
-			this.x = this.x + 1; 
-		
-		if (thegreatbigworld[x][y].isOccupied == false && thegreatbigworld[x][y].value == 1)
-			return true;
-		else
-			return false;
-	}
-	
-	public void move (Block [][] thegreatbigworld)
-	{
-		/** shouldn't you cross off invalid directions
-		 and also what if there is no valid direction? */
-		do 
-		{
-			this.chooseDirection();
-		}
-		while (!this.valid(thegreatbigworld));
+	public void update(Graphics g) {
+		// TODO Auto-generated method stub
+		this.eatFish();
+		this.checkAlive();
+		this.reproduces ();
+		this.updateTarget();
+		this.move();
 	}
 }

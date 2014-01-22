@@ -3,7 +3,7 @@ package icys.java;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class BoxButton {
+public class BoxButton implements Button {
 	
 	int x, y, width, height, state;
 	Color color [] = new Color [2];
@@ -31,11 +31,6 @@ public class BoxButton {
 	public void setSize (int width, int height) {
 		this.width = width;
 		this.height = height;
-	}
-	
-	public void setColors (Color color1, Color color2) {
-		color [0] = color1;
-		color [1] = color2;
 	}
 
 	public void setState (int state) {

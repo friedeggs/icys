@@ -1,49 +1,70 @@
 package icys.java;
-import static icys.java.Utilities.*;
-
-import java.awt.Color;
-import java.awt.Graphics;
-import java.util.ArrayList;
-
-public class WaterPollution extends NaturalDisaster
-{
-    boolean [][] cover;
-    public WaterPollution (ArrayList < Fish > list, int [][] block, Graphics g)
-    {
-        cover = new boolean [block.length][block[0].length];
-        for (int i = 0; i < cover.length; i ++)
-            for (int j = 0; j < cover[i].length; j ++)
-                    cover[i][j] = false;
-        for (int i = 0; i < block.length; i ++)
-            for (int j = 0; j < block[i].length; j ++)
-                if (block[i][j]== -1 || block [i][j] == 0)
-                    cover[i][j] = true;
-
-        stopFish (list);
-        blackenWater (g, blocks  /*Other Crap*/);
-    }
 
 
-    public void stopFish (ArrayList < Fish > list)
-    {
-        //for (int i = 0 ; i < list.size () ; i++)
-          //  list.get ( i ) .canAppear = false;
-    }
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
-    public void blackenWater (Graphics g, Block[][] block) //(this is going to be the draw method)
-    {
-        //Cover all water block with darker shade
-        //(11,23,59)
-        
-		for (int i = 0; i < block.length; i ++)
-            for (int j = 0; j < block[i].length; j ++)
-                if (cover[i][j]);
-                    
-                            
-        Color dark = new Color (11,23,59);
+public class WaterPollution extends NaturalDisaster {
 
-        
-        
-    }
-} //End of Class
+	char [][] myCrap = new char [21][15];
+	
+	public WaterPollution() {
+		stopFish();
+		blackenWater();
+	}
 
+	public void stopFish () {
+		Utilities.fish.clear (); //Deletes all fish
+	}
+
+	public void blackenWater() {
+		read("blackWater");
+		for (int i = 0; i < myCrap.length; i ++)
+			for (int j = 0; j <myCrap[i].length; j++)
+				Utilities.blocks[i][j].changeValue (myCrap[i][j]);
+
+	}
+	
+	public void revert ()
+	{
+		read("start");
+		for (int i = 0; i < myCrap.length; i ++)
+			for (int j = 0; j <myCrap[i].length; j++)
+				Utilities.blocks[i][j].changeValue (myCrap[i][j]);
+	}
+
+	public void read(String name) {
+
+		String[] splited = new String [315];
+		String result = "a";
+
+		BufferedReader br = null;
+		String sCurrentLine = null;
+		try {
+			br = new BufferedReader(new FileReader(name+".txt"));
+
+			while ((sCurrentLine = br.readLine()) != null) {
+				result = sCurrentLine;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (br != null)
+					br.close();
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		}
+		splited = result.split("	");
+		int indexS = 0;
+		for (int i = 0; i < myCrap[0].length; i++)
+			for (int j = 0; j < myCrap.length; j++) {
+				myCrap[j][i] = splited[indexS].charAt(0);
+				indexS++;
+			}
+
+	} // End of read method
+
+} // End of Class

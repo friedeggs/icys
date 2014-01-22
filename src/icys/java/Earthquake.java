@@ -1,51 +1,28 @@
 package icys.java;
 
 import java.util.ArrayList;
+import static icys.java.Utilities.*;
 
-public class Earthquake extends NaturalDisaster
-{
-    public Earthquake (ArrayList < PolarBear > list, ArrayList < Penguin > list2)
-    {
-        loseBears (list);
-        losePenguins (list2);
-    }
+public class Earthquake extends NaturalDisaster {
+	public Earthquake() {
+		quake = true;
+		dieDieDIE();
+	}
 
-
-    public void loseBears (ArrayList < PolarBear > list)
-    {
-        //25%
-        boolean dead = false;
-        for (int i = 0 ; i < list.size () ; i++)
-        {
-            dead = Math.random () < 0.25;
-            if (dead)
-            {
-                list.remove (i);
-                i--;
-            }
-        }
-    } //End of lose Bears
-
-
-    public void losePenguins (ArrayList < Penguin > list)
-    {
-        //30%
-        boolean dead = false;
-        for (int i = 0 ; i < list.size () ; i++)
-        {
-            dead = Math.random () < 0.3;
-            if (dead)
-            {
-                list.remove (i);
-                i--;
-            }
-        }
-
-    } //End of lose penguins
-
-
-    public void nudge (Block[] [] block)
-    {
-        //lol WUT.
-    }
-} //End of Class
+	public void dieDieDIE() {
+		bears.clear();
+		fish.clear();
+		penguins.clear();
+	} // I WILL NEVER GIVE UP!!!  dieDieDIE
+	
+	public void update (){
+		if (nudgeX == 0)
+			nudgeX = (int)(Math.random ()*6);
+		else
+			nudgeX = 0;
+		if (nudgeY == 0)
+			nudgeY = (int)(Math.random ()*6);
+		else
+			nudgeY = 0;
+	}	
+}

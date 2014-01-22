@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.border.EmptyBorder;
 
 
-public class LabelButton extends JLabel {
+public class LabelButton extends JLabel implements Button {
 	Color fore[], back[];
 	int state; // 0 or 1
 	boolean clicked = false;
@@ -72,5 +72,11 @@ public class LabelButton extends JLabel {
 	
 	public void setLocation (int x, int y) {
 		super.setLocation(x - getWidth() / 2, y - getHeight() / 2);
+	}
+
+	@Override
+	public void draw(Graphics g) {
+		// TODO Auto-generated method stub
+		
 	}
 }

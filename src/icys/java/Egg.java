@@ -7,44 +7,65 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
+import static icys.java.Utilities.*;
 
 public class Egg extends LifeForm{
 
 	boolean alive;
-	int x, y;
 	int timeAlive;
 	
-	public Egg(int x, int y)
+	public Egg (int index)
 	{
+		super(index);
+	}
+	//arbitrary commmnets
+	//scridfs. wait does it work
+	public Egg(int index, int x, int y)
+	{
+		super (index);
 		this.x = x;
 		this.y = y;
+		blocks [x][y].set(this);
 		alive = true;
 		timeAlive = 0;
 		try {
-            image = ImageIO.read(new File ("egg.png"));
+            image = ImageIO.read(new File ("egggg.png"));
 		} catch (IOException e) {
             e.printStackTrace();
 		}
 	}
 	
-	public void update(ArrayList<Penguin> penGUI, Block[][] iii, Graphics g)
+	public void update(Graphics g)
 	{
 		timeAlive ++;
 		if (grownUp())
 		{
-			alive = false;
-			Penguin penS = new Penguin (this.x, this.y);
-			penGUI.add(penS);
+			remove ();
+			Penguin penS = new Penguin (penguins.size(), x, y);
+			penguins.add(penS);
 		}
-		show(g);
+		//blocks[x][y].setTargeter(this);
 	}
 	
 	public boolean grownUp()
 	{
-		if (timeAlive == 20)
-			return true; 
-		else
-			return false;
+		return (timeAlive == 20);
+	}
+
+	@Override
+	public void remove() {
+		blocks [x][y].set(null);
+		ArrayList <Egg> newlist = new ArrayList <Egg> ();
+		for (int i = 0 ; i < eggs.size() ; i ++) {
+			if (equals(eggs.get(i)))
+				eggs.remove(i);
+		}
+		
+		for (int i = 0 ; i < eggs.size () - 1 ; i++) {
+				newlist.add(eggs.get(i));
+				newlist.get(i).index = i;
+				System.out.println (i);
+		}
 	}
 	
 }
