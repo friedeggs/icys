@@ -293,6 +293,13 @@ public class Mode implements Screen {
 			newPen = new Penguin (penguins.size(), place.x, place.y);
 		    penguins.add(newPen);
 		}
+		else if (addBear.contains(x,y)){
+			addBear.setState(1);
+			PolarBear bwear = new PolarBear (bears.size());
+			Block territory = bwear.randomBlock();
+			bwear = new PolarBear (bears.size(), territory.x, territory.y);
+			bears.add(bwear);
+		}
 		
 	}
 
