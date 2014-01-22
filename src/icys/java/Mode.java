@@ -80,6 +80,7 @@ public class Mode implements Screen {
 		main.add (melt);
 		main.add (pollution);
 		main.add (help);
+		main.add(main.background);
 		
 		
 		addEgg.setVisible(false);		
