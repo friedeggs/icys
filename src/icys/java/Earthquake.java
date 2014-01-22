@@ -6,6 +6,7 @@ import static icys.java.Utilities.*;
 
 public class Earthquake extends NaturalDisaster {
 	public Earthquake() {
+		quake = true;
 		loseBears();
 		losePenguins();
 	}
