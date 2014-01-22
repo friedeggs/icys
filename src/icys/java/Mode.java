@@ -285,6 +285,7 @@ public class Mode implements Screen {
 			Block home = babyPen.randomBlock();
 			babyPen = new Egg (eggs.size(), home.x, home.y);
 			eggs.add(babyPen);
+			System.out.println("An egg was spontaneously generated!");
 		}
 		else if (addPenguin.contains(x, y)){
 			addPenguin.setState(1);
@@ -292,6 +293,7 @@ public class Mode implements Screen {
 			Block place = newPen.randomBlock();
 			newPen = new Penguin (penguins.size(), place.x, place.y);
 		    penguins.add(newPen);
+		    System.out.println("A penguin was spontaneously generated!");
 		}
 		else if (addBear.contains(x,y)){
 			addBear.setState(1);
@@ -299,6 +301,7 @@ public class Mode implements Screen {
 			Block territory = bwear.randomBlock();
 			bwear = new PolarBear (bears.size(), territory.x, territory.y);
 			bears.add(bwear);
+			System.out.println("A bear was spontaneously generated!");
 		}
 		
 	}
