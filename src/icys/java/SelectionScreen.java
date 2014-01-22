@@ -149,7 +149,7 @@ public class SelectionScreen implements Screen {
 			help.setState (1);
 			main.repaint ();
 		}
-		/*else {
+		else {
 			for (int i = 0 ; i < 4; i ++) {
 				if (box [i].contains (x, y)) {
 					box [i].setState (1);
@@ -158,12 +158,6 @@ public class SelectionScreen implements Screen {
 					i = 4;
 				}
 			}
-		}*/
-		else if (box[0].contains(x, y)){
-			box[0].setState(1);
-			selectLabel[0].setState(1);
-			mode = new Game();
-			main.repaint();			
 		}
 	}
 
