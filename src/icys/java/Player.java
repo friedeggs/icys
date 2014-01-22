@@ -1,19 +1,42 @@
 package icys.java;
 
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 public class Player extends Penguin {
 
-	public Player(int index) {
-		super(index);
+	public Player() {
+		super(0);
+		try {
+			image = ImageIO.read(new File ("penguinina.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}	
 		// TODO Auto-generated constructor stub
 	}	
 	
-	public Player(int index, int x, int y) {
-		super(index, x, y);
+	public Player(int x, int y) {
+		super(0, x, y);
+		try {
+			image = ImageIO.read(new File ("penguinina.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}	
 		// TODO Auto-generated constructor stub
 	}
 	
 	public void update () {
+		if (target == null)
+			return;
 		move ();
+	}
+	
+	protected void move () {
+		if (target == null)
+			return;
+		super.move();
 	}
 	
 }

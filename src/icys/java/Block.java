@@ -28,8 +28,9 @@ public class Block extends Entity {
 	}
 	
 	public void update (Graphics g) {
-		if (!(targeter == null && (lifeform instanceof Egg 
-				|| lifeform instanceof Fish))) {
+		if (TIMER % sleep == 0 && 
+				!(targeter == null && (lifeform instanceof Egg 
+				|| lifeform instanceof Fish || lifeform instanceof Player))) {
 		//if (targeter != null) {
 			lifeform = targeter;
 			targeter = null;
@@ -94,6 +95,12 @@ public class Block extends Entity {
 			g.setColor(Color.GRAY);
 			Polygon threed = new Polygon (threedX, threedY, threedX.length);
 			g.fillPolygon (threed);
+		}
+		
+		if (currentScreen instanceof Game) {
+			tile [x][y].draw(g);
+			if (tile [x][y].getState () != 0)
+				System.out.println(x + " " + y);
 		}
 		
 		if (lifeform != null) {

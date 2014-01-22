@@ -121,13 +121,13 @@ public class Main extends JFrame implements MouseListener, MouseMotionListener {
 	public void animate () {
 		while (true) {
 			if (running) {
-				i++;
-				if (i == 40)
-					i = 0;
+				TIMER += timeInterval;
+				if (TIMER == sleep)
+					TIMER = 0;
 				repaint ();
 			}
 			try {
-				Thread.sleep(500);
+				Thread.sleep(timeInterval);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

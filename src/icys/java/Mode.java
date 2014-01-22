@@ -123,6 +123,7 @@ public class Mode implements Screen {
 		g.setColor(water);
 		g.fillRect(0, offset+2*border, width, height-offset-2*border);
 		
+		if (TIMER % sleep == 0) {
 		// DON'T ADD MORE FISH THAN CAN BE ADDED
 		if (melted) {
 			glacier.update();
@@ -162,6 +163,8 @@ public class Mode implements Screen {
 		for (int i = 0 ; i < eggs.size () ; i++) {
 			eggs.get(i).update (g);
 		}
+		} // timer stuff
+
 		for (int i = 0 ; i < blocks.length ; i++) 
 			for (int j = 0 ; j < blocks[0].length ; j++)
 				blocks[i][j].update(g);
@@ -289,7 +292,6 @@ public class Mode implements Screen {
 			bears.add(bwear);
 			System.out.println("A bear was spontaneously generated!");
 		}
-		main.repaint ();
 		
 	}
 
