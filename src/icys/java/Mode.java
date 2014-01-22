@@ -1,6 +1,7 @@
 package icys.java;
 
 import static icys.java.Utilities.*;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Polygon;
@@ -54,23 +55,7 @@ public class Mode implements Screen {
 		block_width = width / (blocks.length - 3);
 		block_height = (height-offset-border) / blocks[0].length;
 		shift = block_width * 3 / 6;
-		
-		for (int i = 0 ; i < 1 ; i++) {
-			fish.add(new Fish (i));
-		}
-		
-		for (int i = 0 ; i < 1 ; i++) {
-			eggs.add(new Egg (i, 8, 12));
-		}
-		
-		for (int i = 0 ; i < 1 ; i++) {
-			penguins.add(new Penguin (i, 10, 10));
-		}
-		
-		for (int i = 0 ; i < 1 ; i++) {
-			bears.add(new PolarBear (i, 5, 12));
-		}
-		
+	
 		main.add (addEgg);
 		main.add (addPenguin);
 		main.add (addBear);
@@ -170,19 +155,16 @@ public class Mode implements Screen {
 		/**
 		 * HERE GWACIE
 		 */
+		
 		for (int i = 0 ; i < bears.size () ; i++) {
 			bears.get(i).update (g);
 		}
 		for (int i = 0 ; i < eggs.size () ; i++) {
 			eggs.get(i).update (g);
 		}
-		for (int i = 0 ; i < penguins.size () ; i++) {
-			penguins.get(i).update (g);
-		}
 		for (int i = 0 ; i < blocks.length ; i++) 
 			for (int j = 0 ; j < blocks[0].length ; j++)
 				blocks[i][j].update(g);
-		System.out.println("==========");
 	}
 
 	@Override
