@@ -19,17 +19,6 @@ public class PolarBear extends LifeForm {
 	public PolarBear(int index)
 	{
 		super (index);
-		//x int
-		//y int
-		blocks [x][y].set(this);
-		sinceEaten = 0;
-		penguinsEaten = 0;
-		chooseTarget();
-		try {
-			image = ImageIO.read(new File ("polarbear.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 	
 	public PolarBear (int index, int x, int y)
