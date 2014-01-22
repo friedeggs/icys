@@ -79,9 +79,9 @@ public class Tile extends Entity implements Button {
 	public void draw(Graphics g) {
 		if (state != 0) {
 			g.setColor(color [state*2 - 2]);
-			g.drawPolygon(poly);
+			g.fillPolygon(poly);
 			g.setColor(color [state*2 - 1]);
-			g.drawPolygon(smallPoly);
+			g.fillPolygon(smallPoly);
 		}
 	}
 

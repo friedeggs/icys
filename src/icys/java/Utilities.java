@@ -35,7 +35,7 @@ public class Utilities {
 	
 	public static int block_width, block_height;
 	
-	public static int interval = 10;
+	public static int interval = 10, timeInterval = 5, sleep = 500, TIMER = 0;
 	
 	public static Color lightblue = new Color (175, 217, 255),
 			blue = new Color (124, 175, 222),
@@ -49,7 +49,7 @@ public class Utilities {
 	
 	public static Block blocks [][] = new Block [21][15];
 	
-	public static char [][] value = new char [21][15];
+	public static char [][] value = new char [blocks.length][blocks [0].length];
 	
 	public static final int WATER = 0, LAND = 1, UNUSED = 2;
 	
@@ -64,4 +64,6 @@ public class Utilities {
 	public static boolean stopFish = false, melted = false, quake = false;
 	
 	public static Block userTarget;
+	
+	public static Tile tile [][] = new Tile [blocks.length][blocks [0].length];
 }
