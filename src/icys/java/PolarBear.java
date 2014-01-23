@@ -1,26 +1,27 @@
 package icys.java;
 
+//Imports
 import static icys.java.Utilities.*;
-
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-
 import javax.imageio.ImageIO;
 
 
 public class PolarBear extends LifeForm {
 
+	//Initialization
 	int sinceEaten = 0;
 	int penguinsEaten = 0; 
 
+	//Constructor
 	public PolarBear(int index)
 	{
 		super (index);
 	}
 	
+	//Modified constructor
 	public PolarBear (int index, int x, int y)
 	{
 		super (index);
@@ -37,6 +38,7 @@ public class PolarBear extends LifeForm {
 		}
 	}
 	
+	//update the state of the bear
 	public void update(Graphics g)
 	{
 		if (blocks [x][y].value == LAND) {
@@ -47,6 +49,7 @@ public class PolarBear extends LifeForm {
 		}
 	}
 	
+	//removes the target penguin that was eaten
 	private void eatPenguin ()
 	{
 		if (x == target.x && y == target.y)
@@ -58,27 +61,24 @@ public class PolarBear extends LifeForm {
 					((Penguin) target).remove();
 				penguinsEaten ++;
 				sinceEaten = 0;
-				System.out.println("nom. RAWR");
-				System.out.println("Penguin: *eaten by Polar Bear*");
 			}
 			target = null;
 			blocks [x][y].set(this);
 		}
 		else {
 			sinceEaten ++ ;
-			System.out.println("SINNNCCEEEE EEAAAAAAAAAAAATTTTTTTENNNN");
 		}
 	}
 	
+	// is this still alive?
 	private void checkAlive() 
 	{
 		if (sinceEaten > 60) {
-			System.out.println ("Polar bear: *dies*");
 			remove();
 		}
 	}
 	
-	
+	//HOW DOES IT EVEN--
 	private ArrayList<PolarBear> reproduces()
 	{
 		
@@ -214,7 +214,6 @@ public class PolarBear extends LifeForm {
 					}
 		}
 		
-		System.out.println ("SORROW MISERY DEATH FEAR SORROW MISUNDERSTANDING");
 		chosenDir [0] = 0; // MARK AS CHOSEN
 		chosenDir [1] = 0; 
 		

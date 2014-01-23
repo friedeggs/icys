@@ -1,4 +1,5 @@
 package icys.java;
+
 //Imports
 import static icys.java.Utilities.*;
 
@@ -17,6 +18,7 @@ public class AboutScreen implements Screen {
 	LabelButton back, title;
 	JTextArea area;
 	
+	//constructor
 	public AboutScreen () {
 		
 		//set title and back

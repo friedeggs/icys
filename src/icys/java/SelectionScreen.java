@@ -1,27 +1,28 @@
 package icys.java;
+
+//imports
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
-
 import static icys.java.Utilities.*;
 
 public class SelectionScreen implements Screen {
+	
+	// Initialization
 	LabelButton selectLabel [], back, help, title;
 	BoxButton box [];
 	
+	// Constructor
 	public SelectionScreen () {
 		
+		//set title, back, help
 		title = new LabelButton ("SELECT A MODE", new Font ("Calibri Light", Font.PLAIN, 48), 
 				Color.WHITE, lightblue);
 		back = new LabelButton ("back", font, Color.WHITE, lightblue, blue, aqua);
 		help = new LabelButton ("help", font, Color.WHITE, lightblue, blue, aqua);
 		
+		//put different labels in the selectLabel array
 		selectLabel = new LabelButton [4];
 		selectLabel [0] = new LabelButton ("game", font,
 				Color.WHITE, lightblue, blue, aqua);
@@ -32,12 +33,14 @@ public class SelectionScreen implements Screen {
 		selectLabel [3] = new LabelButton ("equilibrium",  font,
 				Color.WHITE, lightblue, blue, aqua);
 		
+		//create box for putting things in
 		box = new BoxButton [4];
 		for (int i = 0 ; i < 4 ; i++) {
 			box [i] = new BoxButton ((width - 3 * border) / 2,
 					(height - 3 * border - offset) / 2, aqua, Color.WHITE);
 		}
 		
+		//add everything
 		main.add (back);
 		main.add (help);
 		main.add (title);
@@ -48,6 +51,7 @@ public class SelectionScreen implements Screen {
 		hide ();
 	}
 
+	//Draws GUI
 	@Override
 	public void draw(Graphics g) {
 		g.setColor (aqua);
@@ -56,6 +60,7 @@ public class SelectionScreen implements Screen {
 			box [i].draw(g);
 	}
 
+	//displays the class
 	@Override
 	public void show() {
 		title.setVisible(true);
@@ -65,6 +70,7 @@ public class SelectionScreen implements Screen {
 			selectLabel [i].setVisible(true);
 	}
 
+	//hide when unnecessary
 	@Override
 	public void hide() {
 		title.setVisible(false);
@@ -74,6 +80,7 @@ public class SelectionScreen implements Screen {
 			selectLabel [i].setVisible (false);
 	}
 
+	//apply border and etc
 	@Override
 	public void applyGraphics (Graphics g) {
 		// TODO Auto-generated method stub
@@ -117,6 +124,8 @@ public class SelectionScreen implements Screen {
 				(3 * height - 3 * offset - border) / 4 + offset);
 	}
 
+	
+	/*--------ALL THE MOUSE MOVEMENTS------------*/
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -199,9 +208,7 @@ public class SelectionScreen implements Screen {
 			mode = new Equilibrium ();
 			System.out.println("Equilibrium chosen");
 			main.setScreen(mode);
-		}
-		
-			
+		}	
 		/*for (int i = 0 ; i < 4 ; i++) {
 			if (box [i].getState () == 1) {
 				box [i].setState (0);

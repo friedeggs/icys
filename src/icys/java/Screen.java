@@ -1,9 +1,10 @@
 package icys.java;
-import java.awt.Font;
-import java.awt.FontMetrics;
+
+//imports
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 
+//interface, provides many methods to other similar items/classes
 public interface Screen {
 	
 	public void draw (Graphics g);

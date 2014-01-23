@@ -1,14 +1,12 @@
 package icys.java;
-import static icys.java.Utilities.border;
-import static icys.java.Utilities.offset;
-import icys.java.Main.Background;
 
+//imports
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.util.ArrayList;
 
-
+//Provides the variable to other classes to use. Warehouse like place.
 public class Utilities {
 	
 	public static Main main;

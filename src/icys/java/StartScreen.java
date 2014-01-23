@@ -1,30 +1,29 @@
 package icys.java;
+
+//Imports
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
-import javax.swing.JLabel;
-
 import static icys.java.Utilities.*;
 
-
 public class StartScreen implements Screen  {
+	
+	//initialization of variables and constants
 	LabelButton title;
 	LabelButton play, instructions;
-	
+
+	//constructor
 	public StartScreen () {
+		
+		//set title
 		title = new LabelButton ("ICY-S", font_large, Color.WHITE, lightblue);
-		
+		//set play
 		play = new LabelButton ("play", font, Color.WHITE, lightblue, blue, aqua);
-		
+		//set instructions
 		instructions = new LabelButton ("about", font,
 				Color.WHITE, lightblue, blue, aqua);
 		
+		//add all to show
 		main.add (play);
 		main.add (instructions);
 		main.add (title);
@@ -32,11 +31,13 @@ public class StartScreen implements Screen  {
 		show ();
 	}
 
+	//GUI
 	@Override
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
 	}
 
+	//Display all parts
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub	
@@ -45,6 +46,7 @@ public class StartScreen implements Screen  {
 		instructions.setVisible (true);
 	}
 
+	//hide when unnecessary
 	@Override
 	public void hide() {
 		// TODO Auto-generated method stub	
@@ -53,6 +55,7 @@ public class StartScreen implements Screen  {
 		instructions.setVisible (false);
 	}
 
+	//apply border and etc
 	@Override
 	public void applyGraphics (Graphics g) {
 		// TODO Auto-generated method stub
@@ -67,22 +70,20 @@ public class StartScreen implements Screen  {
 				- play.getHeight() / 2);
 	}
 
+	/*--------ALL THE MOUSE MOVEMENTS------------*/
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

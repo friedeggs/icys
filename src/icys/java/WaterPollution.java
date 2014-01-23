@@ -1,6 +1,6 @@
 package icys.java;
 
-
+//imports
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -8,19 +8,23 @@ import static icys.java.Utilities.*;
 
 public class WaterPollution extends NaturalDisaster {
 
+	//Initialization
 	char [][] values = new char [21][15];
 	
+	//Constructor
 	public WaterPollution() {
 		polluted = true;
 		stopFish();
 		blackenWater();
 	}
 
+	//wipes out fish for this certain time
 	public void stopFish () {
 		Utilities.fish.clear (); //Deletes all fish
 		stopFish = 30;
 	}
 
+	//set water area to black
 	public void blackenWater() {
 		if (melted)
 			read ("blackWaterAndMelt");
@@ -29,9 +33,10 @@ public class WaterPollution extends NaturalDisaster {
 		for (int i = 0; i < values.length; i ++)
 			for (int j = 0; j <values[i].length; j++)
 				Utilities.blocks[i][j].changeValue (values[i][j]);
-
 	}
 	
+	
+	//revert and set all water area to normal color
 	public void revert ()
 	{
 		polluted = false;
@@ -41,6 +46,7 @@ public class WaterPollution extends NaturalDisaster {
 				Utilities.blocks[i][j].changeValue (values[i][j]);
 	}
 
+	//read .txt files method
 	public void read(String name) {
 
 		String[] splited = new String [315];
