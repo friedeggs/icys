@@ -64,7 +64,11 @@ public class Penguin extends LifeForm {
 		{
 			fishesEaten = 0;
 			Egg baby = new Egg(eggs.size(), x, y);
+			blocks [x][y].targeter = baby;
+			blocks [x][y].set(this);
 			eggs.add(baby);
+			direction [1][1] = -1;
+			//System.out.println("EEEEEEGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
 		}	
 	}
 	

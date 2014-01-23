@@ -125,7 +125,7 @@ public abstract class LifeForm extends Entity {
 		if (blocks[x][y].targeter != null && !equals(blocks [x][y].targeter))
 			direction [blocks[x][y].targeter.x - x +1]
 					[blocks[x][y].targeter.y - y +1] = -1;
-		//if (equals (blocks [x][y].lifeform))
+		if (equals (blocks [x][y].lifeform))
 			blocks [x][y].lifeform = null;
 			//blocks[x][y].set(null);
 		
@@ -142,12 +142,12 @@ public abstract class LifeForm extends Entity {
 						direction [i+1][j+1] = 0;
 				}
 
-		for (int i = -1 ; i <= 1 ; i++) {
-			for (int j = -1 ; j <= 1 ; j++) {
-				System.out.print(direction [i+1][j+1]+" ");
-			}
-			System.out.println();
-		}
+//		for (int i = -1 ; i <= 1 ; i++) {
+//			for (int j = -1 ; j <= 1 ; j++) {
+//				System.out.print(direction [i+1][j+1]+" ");
+//			}
+//			System.out.println();
+//		}
 		//blocks [x][y].setTargeter(this);
 		for (int k = 2 ; k >= 0 ; k--) {
 			int random = (int)(Math.random() * counter [k]);

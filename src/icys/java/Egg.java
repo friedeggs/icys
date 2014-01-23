@@ -17,6 +17,11 @@ public class Egg extends LifeForm{
 	public Egg (int index)
 	{
 		super(index);
+		try {
+            image = ImageIO.read(new File ("egggg.png"));
+		} catch (IOException e) {
+            e.printStackTrace();
+		}
 	}
 	//arbitrary commmnets
 	//scridfs. wait does it work
