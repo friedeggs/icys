@@ -48,6 +48,14 @@ public class Game extends Mode {
 		//but we still need crosses.. what.
 	}
 	
+	public boolean ongoing () {
+		return alive;
+	}
+	
+	public Penguin getPlayer () {
+		return player;
+	}
+	
 	public void draw(Graphics g) {
 
 		super.draw(g);

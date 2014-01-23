@@ -2,7 +2,7 @@ package icys.java;
 
 import java.util.ArrayList;
 
-public abstract class NaturalDisaster extends Mode {
+public abstract class NaturalDisaster {
 }// End of Class
 
 /*

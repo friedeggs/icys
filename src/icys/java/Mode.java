@@ -121,7 +121,10 @@ public class Mode implements Screen {
 		// Toolbars
 		g.setColor (blue);
 		g.fillRect (0, offset + border, width, border);
-		g.setColor(water);
+		if (polluted)
+			g.setColor (dark);
+		else
+			g.setColor(water);
 		g.fillRect(0, offset+2*border, width, height-offset-2*border);
 		
 		

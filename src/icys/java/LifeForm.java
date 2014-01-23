@@ -167,7 +167,7 @@ public abstract class LifeForm extends Entity {
 	}
 	
 	public void sink () {
-		if (meltY > 0) {
+		if (TIMER % sleep == 0 && meltY > 0) {
 			System.out.println("HELP I 'M SINKINGGGGGGGG");
 			meltY += 2 * block_height / interval;
 //			if (meltY >= 2 * block_height)
