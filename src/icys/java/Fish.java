@@ -16,9 +16,12 @@ public class Fish extends LifeForm {
 	{
 		super (index);
 		// WHAT IF THERE ISN'T ANY AVAILABLE SPACE?
-		do
-			pos = randomBlock ();
-		while (!byWater (pos) || pos.lifeform != null);
+		pos = randomBlock ();
+		if (pos == null) {
+			System.out.println("null pos");
+			remove ();
+		}
+		else {
 		x = pos.x;
 		y = pos.y;
 		pos.set(this);
@@ -27,15 +30,38 @@ public class Fish extends LifeForm {
 		} catch (IOException e) {
             e.printStackTrace();
 		}
+		}
+	}
+	
+	public Block randomBlock () {
+		int counter = 0;
+		for (int i = 0 ; i < blocks.length ; i++)
+			for (int j = 0 ; j < blocks[0].length ; j++)
+				if (blocks[i][j].lifeform == null && blocks[i][j].value== LAND
+				&& byWater (blocks [i][j]))
+					counter++;
+
+		int x = (int)(Math.random () * counter);
+		for (int i = 0 ; i < blocks.length ; i++)
+			for (int j = 0 ; j < blocks[0].length ; j++)
+				if (blocks[i][j].lifeform == null && blocks[i][j].value== LAND
+				&& byWater (blocks [i][j]))
+				{
+					counter--;
+					if (x == counter)
+						return blocks [i][j];
+				}
+		// WHAT IF COUNTER = 0
+		return null;
 	}
 	
 	public boolean byWater (Block block) {
 		return (block.x == 0 || block.y == 0 || 
 				block.x == blocks.length-1 || block.y == blocks.length-1 ||
-				blocks [block.x-1][block.y].value == WATER || 
-				blocks [block.x+1][block.y].value == WATER ||
-				blocks [block.x][block.y-1].value == WATER || 
-				blocks [block.x][block.y+1].value == WATER);
+				blocks [block.x-1][block.y].value != LAND || 
+				blocks [block.x+1][block.y].value != LAND ||
+				blocks [block.x][block.y-1].value != LAND || 
+				blocks [block.x][block.y+1].value != LAND);
 	}	
 	
 	public boolean equals (Fish f) {

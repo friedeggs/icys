@@ -151,8 +151,8 @@ public class Main extends JFrame implements MouseListener, MouseMotionListener {
 		else {
 			i = 0;
 			running = false;
+			repaint ();
 		}
-		repaint ();
 	}
 	
 	@Override
