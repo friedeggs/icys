@@ -19,7 +19,16 @@ public class Game extends Mode {
 	// Constructor
 	public Game() {
 		super();
+		
+		//Remove buttons that should be disabled
+		main.remove (earthquake);
+		main.remove (pollution);
+		main.remove (melt);
+		main.remove (addEgg);
+		main.remove (addPenguin);
+		main.remove (addBear);
 
+		//Comments 
 		score = 0;
 		scoreLabel = new LabelButton("Fish eaten: " + score, font, Color.WHITE, blue);
 		endLabel = new LabelButton("THE END", 
