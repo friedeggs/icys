@@ -1,25 +1,27 @@
 package icys.java;
 
+//Imports
 import static icys.java.Utilities.*;
-
 import java.awt.Graphics;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-
 import javax.imageio.ImageIO;
 
 
 public class PolarBear extends LifeForm {
 
+	//Initialization
 	int sinceEaten = 0;
 	int penguinsEaten = 0; 
 
+	//Constructor
 	public PolarBear(int index)
 	{
 		super (index);
 	}
 	
+	//Modified constructor
 	public PolarBear (int index, int x, int y)
 	{
 		super (index);
@@ -36,6 +38,7 @@ public class PolarBear extends LifeForm {
 		}
 	}
 	
+	//update the state of the bear
 	public void update(Graphics g)
 	{
 		if (blocks [x][y].value == LAND) {
@@ -46,6 +49,7 @@ public class PolarBear extends LifeForm {
 		}
 	}
 	
+	//removes the target penguin that was eaten
 	private void eatPenguin ()
 	{
 		if (x == target.x && y == target.y)
@@ -66,6 +70,7 @@ public class PolarBear extends LifeForm {
 		}
 	}
 	
+	// is this still alive?
 	private void checkAlive() 
 	{
 		if (mode != currentScreen && sinceEaten > 60) {
@@ -73,7 +78,7 @@ public class PolarBear extends LifeForm {
 		}
 	}
 	
-	
+	//HOW DOES IT EVEN--
 	private ArrayList<PolarBear> reproduces()
 	{
 		
@@ -209,7 +214,6 @@ public class PolarBear extends LifeForm {
 					}
 		}
 		
-		System.out.println ("SORROW MISERY DEATH FEAR SORROW MISUNDERSTANDING");
 		chosenDir [0] = 0; // MARK AS CHOSEN
 		chosenDir [1] = 0; 
 		

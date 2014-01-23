@@ -44,7 +44,7 @@ public class Egg extends LifeForm{
 		}
 	}
 	
-	//update the sate of the egg
+	//update the state of the egg
 	public void update(Graphics g)
 	{
 		timeAlive ++; //increase on time until it "hatches"
