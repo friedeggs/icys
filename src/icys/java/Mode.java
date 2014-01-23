@@ -260,17 +260,14 @@ public class Mode implements Screen {
 		else if (earthquake.contains(x,y)) {
 			earthquake.setState(1);
 			quake = new Earthquake();
-			System.out.println("Oh no! An earthquake!");
 		}
 		else if (melt.contains(x, y)) {
 			melt.setState(1);
 			glacier = new MeltingGlacier();
-			System.out.println("Gasp! The glacier is melting!");
 		}
 		else if (pollution.contains(x, y)) {
 			pollution.setState(1);
 			pollutedWater = new WaterPollution();
-			System.out.println("Ah! The water was polluted!");
 		}
 		else if (addEgg.contains(x, y)){
 			addEgg.setState(1);
@@ -279,7 +276,6 @@ public class Mode implements Screen {
 			if (home != null) {
 			babyPen = new Egg (eggs.size(), home.x, home.y);
 			eggs.add(babyPen);
-			System.out.println("An egg was spontaneously generated!");
 			}
 		}
 		else if (addPenguin.contains(x, y)){
@@ -289,7 +285,6 @@ public class Mode implements Screen {
 			if (place != null) {
 			newPen = new Penguin (penguins.size(), place.x, place.y);
 		    penguins.add(newPen);
-		    System.out.println("A penguin was spontaneously generated!");
 			}
 		}
 		else if (addBear.contains(x,y)){
@@ -299,7 +294,6 @@ public class Mode implements Screen {
 			if (territory != null) {
 			bwear = new PolarBear (bears.size(), territory.x, territory.y);
 			bears.add(bwear);
-			System.out.println("A bear was spontaneously generated!");
 			}
 		}
 		
