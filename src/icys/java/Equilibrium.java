@@ -1,24 +1,21 @@
 package icys.java;
 
-import static icys.java.Utilities.LAND;
-import static icys.java.Utilities.WATER;
-import static icys.java.Utilities.bears;
-import static icys.java.Utilities.blocks;
-import static icys.java.Utilities.eggs;
-import static icys.java.Utilities.fish;
-import static icys.java.Utilities.penguins;
-
+//Imports
+import static icys.java.Utilities.*;
 import java.awt.Graphics;
 
 public class Equilibrium extends Mode {
 	
+	//Initialization
 	public Equilibrium () {
 		super();
 		
+		//Add fish
 		for (int i = 0 ; i < 64 ; i++) {
 			fish.add(new Fish (i));
 		}
 		
+		//Add eggs
 		for (int i = 0 ; i < 3 ; i++) {
 			Egg babyPen = new Egg (eggs.size()); 
 			Block home = babyPen.randomBlock();
@@ -29,6 +26,7 @@ public class Equilibrium extends Mode {
 			}
 		}
 		
+		//Add penguins
 		for (int i = 0 ; i < 2 ; i++) {
 			Penguin newPen = new Penguin (penguins.size());
 			Block place = newPen.randomBlock();
@@ -39,6 +37,7 @@ public class Equilibrium extends Mode {
 			}
 		}
 		
+		//Add polar bears
 		for (int i = 0 ; i < 1 ; i++) {
 			PolarBear bwear = new PolarBear (bears.size());
 			Block territory = bwear.randomBlock();
@@ -51,6 +50,7 @@ public class Equilibrium extends Mode {
 		
 	}	
 	
+	//Draw, GUI, update fish, etc.
 	public void draw(Graphics g) {
 		if (fish.size() < 30)
 		for (int i = 0 ; i < 10 ; i++) {

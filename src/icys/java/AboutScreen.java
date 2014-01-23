@@ -1,5 +1,5 @@
 package icys.java;
-
+//Imports
 import static icys.java.Utilities.*;
 
 import java.awt.Color;
@@ -13,37 +13,50 @@ import javax.swing.border.EmptyBorder;
 
 public class AboutScreen implements Screen {
 	
+	//initialization of variables and constants
 	LabelButton back, title;
 	JTextArea area;
 	
 	public AboutScreen () {
 		
+		//set title and back
 		title = new LabelButton ("About", new Font ("Calibri Light", Font.PLAIN, 48), 
 				Color.WHITE, lightblue);
 		back = new LabelButton ("back", font, Color.WHITE, lightblue, blue, aqua);
+		
+		//Write in the text area the text we need
 		area = new JTextArea ("an ice themed simulation of " +
 				"life forms. \ninteract with the environment by randomly adding " +
 				"life forms or triggering disasters. \nno keyboard input. " +
 				"\ngame mode also available.");
+		
+		//set fond and desired effect
 		area.setFont(font);
 		area.setEditable(false);
 		area.setOpaque(true);
 		area.setBackground(lightblue);
 		area.setForeground(Color.WHITE);
 		
+		//add everything to display
 		main.add(title);
 		main.add(area);
 		main.add (back);
 		
+		//hide when not needed
 		hide ();
 	}
 
+	
+	//Down here below is a ton of methods that make this functional
+	
+	//Draws GUI
 	@Override
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	//displays the class
 	@Override
 	public void show() {
 		back.setVisible (true);
@@ -51,6 +64,7 @@ public class AboutScreen implements Screen {
 		title.setVisible (true);
 	}
 
+	//hide when unecessary
 	@Override
 	public void hide() {
 		back.setVisible (false);
@@ -58,6 +72,7 @@ public class AboutScreen implements Screen {
 		title.setVisible (false);
 	}
 
+	//apply border and etc
 	@Override
 	public void applyGraphics(Graphics g) {
 		back.applyGraphics(g);
@@ -77,6 +92,7 @@ public class AboutScreen implements Screen {
 		title.setLocation (width / 2, height / 2 - h / 2 - title.getHeight () / 2);
 	}
 
+	/*--------ALL THE MOUSE MOVEMENTS------------*/
 	@Override
 	public void mouseClicked(MouseEvent e) {
 	}
@@ -92,11 +108,15 @@ public class AboutScreen implements Screen {
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
+		
+		//Get X and Y position
 		int x = e.getX ();
 		int y = e.getY ();
+		
+		//Check if anything is required to change
 		if (back.contains (x, y)) {
 			back.setState (1);
-			main.repaint ();
+			main.repaint (); //if yes, update
 		}
 	}
 
@@ -105,7 +125,7 @@ public class AboutScreen implements Screen {
 		// TODO Auto-generated method stub
 		if (back.getState () == 1) {
 			back.setState(0);
-			main.setScreen(StartScreen);
+			main.setScreen(StartScreen); //Returns to start screen
 		}
 	}
 
@@ -116,8 +136,11 @@ public class AboutScreen implements Screen {
 	@Override
 	public void mouseMoved(MouseEvent e) {
 		// TODO Auto-generated method stub
+		
+		//Get X and Y position
 		int x = e.getX ();
 		int y = e.getY ();
+		
 		if (back.contains (x, y))
 			back.setState (1);
 		else 

@@ -1,8 +1,10 @@
 package icys.java;
 
+//Imports
 import java.awt.Graphics;
 import static icys.java.Utilities.*;
 
+//abstract class. doesn't execute anything by itself
 public abstract class Entity {
 	public int x, y; // X AND Y ARE INDEXES OF THE 2D ARRAY CALLED BLOCKS
 	
@@ -22,7 +24,7 @@ public abstract class Entity {
 	 * Converts a block x index into coordinates
 	 */
 	public int coordX (int index) {
-		//return index * block_width - y * shift; // TEMPORARY
+
 		return (index + 3) * block_width - y * shift + nudgeX; // TEMPORARY
 	}	
 	

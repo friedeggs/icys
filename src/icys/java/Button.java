@@ -1,8 +1,9 @@
 package icys.java;
 
-import java.awt.Color;
+//Imports
 import java.awt.Graphics;
 
+//Inferface BUTTON is used in other classes.
 public interface Button {
 	
 	public void setLocation (int x, int y);
