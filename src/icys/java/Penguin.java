@@ -55,7 +55,7 @@ public class Penguin extends LifeForm {
 	// is this still alive?
 	public void checkAlive() 
 	{
-		if (sinceEaten > 20) 
+		if (mode != currentScreen && sinceEaten > 20) 
 			remove();
 	}
 	
