@@ -2,17 +2,15 @@ package icys.java;
 
 import static icys.java.Utilities.*;
 
-
-
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
 
 public class Extinction extends Mode{
 
 	public Extinction()
 	{
 		super();		
-		/*
-		earthquake.setEnabled(false);
+		/*earthquake.setEnabled(false);
 		pollution.setEnabled(false);
 		melt.setEnabled(false);
 		addEgg.setEnabled(false);
@@ -59,6 +57,77 @@ public class Extinction extends Mode{
 		}
 		//System.out.println("==========");
 	}
+	
+	
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		int x = e.getX ();
+		int y = e.getY ();
+		if (back.contains (x, y)) {
+			back.setState (1);
+			main.repaint ();
+		}
+		else if (help.contains (x, y)) {
+			help.setState (1);
+			main.repaint ();
+		}
+				
+	}
+
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		if (back.getState () == 1) {
+			back.setState(0);
+			main.setScreen(SelectionScreen);
+		}
+		if (help.getState() == 1){
+			help.setState(0);
+			main.setScreen(HelpScreen);
+		}
+		
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		// TODO Auto-generated method stub
+		int x = e.getX ();
+		int y = e.getY ();
+		if (back.contains (x, y))
+			back.setState (1);
+		else 
+			back.setState (0);
+		if (help.contains (x, y))
+			help.setState (1);
+		else
+			help.setState (0);
+		}
 	
 	
 }
