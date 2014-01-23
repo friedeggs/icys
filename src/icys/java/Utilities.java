@@ -69,4 +69,6 @@ public class Utilities {
 	public static Block userTarget;
 	
 	public static Tile tile [][] = new Tile [blocks.length][blocks [0].length];
+	
+	public static int score;
 }

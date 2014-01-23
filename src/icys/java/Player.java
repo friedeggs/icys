@@ -42,9 +42,17 @@ public class Player extends Penguin {
 	
 	//moves player around and around and around
 	protected void move () {
-		if (target == null)
-			return;
-		super.move();
+        if (target == null) {
+            if (blocks [x][y].targeter != null) {
+                    blocks [x][y].targeter.crossOff (x - blocks [x][y].targeter.x,
+                                    y - blocks [x][y].targeter.y);
+                    if (blocks [x][y].targeter != null)
+                            blocks [x][y].targeter.move();
+            }
+            blocks [x][y].targeter = this;
+            return;
+        }
+        super.move();
 	}
 	
 }

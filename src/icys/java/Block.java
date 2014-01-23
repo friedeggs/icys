@@ -38,6 +38,8 @@ public class Block extends Entity {
 		if (TIMER % sleep == 0 && value == LAND &&
 				!(targeter == null && (lifeform instanceof Egg 
 				|| lifeform instanceof Fish || lifeform instanceof Player))) {
+			if (targeter instanceof Player && lifeform instanceof Fish)
+				score++;
 			lifeform = targeter;
 			if (lifeform != null) {
 				lifeform.x += lifeform.chosenDir [0];
@@ -120,7 +122,8 @@ public class Block extends Entity {
 		//if life form is not empty, draw lifeform on the block
 		if (lifeform != null) {
 			lifeform.sink(); // does nothing if glacier is not melting
-			lifeform.show(g);
+            if (!(lifeform instanceof Player && !((Game)mode).ongoing()))
+                lifeform.show(g);
 		}
 	}
 }

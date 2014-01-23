@@ -3,7 +3,6 @@ package icys.java;
 import static icys.java.Utilities.*;
 
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -58,22 +57,18 @@ public class PolarBear extends LifeForm {
 					((Penguin) target).remove();
 				penguinsEaten ++;
 				sinceEaten = 0;
-				System.out.println("nom. RAWR");
-				System.out.println("Penguin: *eaten by Polar Bear*");
 			}
 			target = null;
 			blocks [x][y].set(this);
 		}
 		else {
 			sinceEaten ++ ;
-			System.out.println("SINNNCCEEEE EEAAAAAAAAAAAATTTTTTTENNNN");
 		}
 	}
 	
 	private void checkAlive() 
 	{
-		if (sinceEaten > 60) {
-			System.out.println ("Polar bear: *dies*");
+		if (mode != currentScreen && sinceEaten > 60) {
 			remove();
 		}
 	}
