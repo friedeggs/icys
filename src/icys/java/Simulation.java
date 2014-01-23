@@ -35,7 +35,7 @@ public class Simulation extends Mode{
 //			penguins.get(i).update ();
 //		}
 
-		System.out.println("==========");
+		//System.out.println("==========");
 	}
 	
 }

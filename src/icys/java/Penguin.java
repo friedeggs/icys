@@ -143,10 +143,12 @@ public class Penguin extends LifeForm {
 
 	public void update(Graphics g) {
 		// TODO Auto-generated method stub
-		this.eatFish();
-		this.checkAlive();
-		this.reproduces ();
-		this.updateTarget();
-		this.move();
+		if (blocks [x][y].value == LAND) {
+			this.eatFish();
+			this.checkAlive();
+			this.reproduces ();
+			this.updateTarget();
+			this.move();
+		}
 	}
 }
