@@ -10,7 +10,7 @@ public abstract class LifeForm extends Entity {
 	// Many things are really only applicable to penguin and polarbear
 	
 	Entity target; // Block or fish
-	int index, meltY = 0;
+	int index, meltY = 0, chosenDir [] = new int [2];
 	BufferedImage image;
 	/**
 	 * Indices: 1 more than change in x and y	\
@@ -142,6 +142,12 @@ public abstract class LifeForm extends Entity {
 						direction [i+1][j+1] = 0;
 				}
 
+		for (int i = -1 ; i <= 1 ; i++) {
+			for (int j = -1 ; j <= 1 ; j++) {
+				System.out.print(direction [i+1][j+1]+" ");
+			}
+			System.out.println();
+		}
 		//blocks [x][y].setTargeter(this);
 		for (int k = 2 ; k >= 0 ; k--) {
 			int random = (int)(Math.random() * counter [k]);
@@ -150,19 +156,24 @@ public abstract class LifeForm extends Entity {
 					if (direction [i+1][j+1] == k+1) {
 						counter[k]--;
 						if (random == counter[k]) {
-							x += i;
-							y += j;
-							blocks [x][y].setTargeter(this);
+							chosenDir [0] = i; // MARK AS CHOSEN
+							chosenDir [1] = j; 
+							blocks [x+i][y+j].setTargeter(this);
 							return;
 						}
 					}
 		}
 		
+		System.out.println ("SORROW MISERY DEATH FEAR SORROW MISUNDERSTANDING");
+		chosenDir [0] = 0; // MARK AS CHOSEN
+		chosenDir [1] = 0; 
+		
 		// Couldn't make a move! Inform whatever is targeting this block
 		if (blocks [x][y].targeter != null) {
 			blocks [x][y].targeter.crossOff (x - blocks [x][y].targeter.x,
 					y - blocks [x][y].targeter.y);
-			blocks [x][y].targeter.move();
+			if (blocks [x][y].targeter != null)
+				blocks [x][y].targeter.move();
 		}
 	}
 	

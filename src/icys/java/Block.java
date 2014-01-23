@@ -18,12 +18,6 @@ public class Block extends Entity {
 		value = value1;
 		x = i;
 		y = j;
-		int [] xPoint = {coordX(x), coordX(x)+block_width, 
-				coordX(x)+block_width-shift, coordX(x)-shift};
-		int [] yPoint = {coordY(y), coordY(y), 
-				coordY(y)+block_height, coordY(y)+block_height};
-		poly = new Polygon (xPoint, yPoint, xPoint.length);
-		System.out.println(x + " " + coordX(x));
 	}
 
 	public void set(LifeForm l) {
@@ -42,6 +36,10 @@ public class Block extends Entity {
 				|| lifeform instanceof Fish || lifeform instanceof Player))) {
 		//if (targeter != null) {
 			lifeform = targeter;
+			if (lifeform != null) {
+				lifeform.x += lifeform.chosenDir [0];
+				lifeform.y += lifeform.chosenDir [1];
+			}
 			targeter = null;
 		}
 		//}
@@ -110,8 +108,6 @@ public class Block extends Entity {
 		
 		if (currentScreen instanceof Game && value == LAND) {
 			tile [x][y].draw(g);
-			if (tile [x][y].getState () != 0)
-				System.out.println(x + " " + y);
 		}
 		
 		if (lifeform != null) {

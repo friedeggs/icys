@@ -44,16 +44,6 @@ public class Tile extends Entity implements Button {
 		yPoints2 [2] = coordY(y)+block_height-border;
 		yPoints2 [3] = coordY(y)+block_height-border;
 		smallPoly = new Polygon (xPoints2, yPoints2, 4);
-		
-
-		
-		for (int i = 0 ; i < 4; i ++) {
-			if (xPoints [i] != blocks [x][y].poly.xpoints [i])
-				System.out.println ("NOOOOOPPPPPPPEEEEEEEEEEEEEEE");
-			System.out.println (x + " " + blocks[x][y].x);
-			System.out.println (coordX(x) + " " + coordX(blocks[x][y].x));
-			System.out.println (coordX(y) + " " + coordX(blocks[x][y].y));
-		}
 	}
 
 	@Override

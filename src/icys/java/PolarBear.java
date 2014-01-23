@@ -52,9 +52,9 @@ public class PolarBear extends LifeForm {
 		if (x == target.x && y == target.y)
 		{
 			if (target instanceof Penguin) {
+				((Penguin) target).remove();
 				if (target instanceof Player)
 					((Game)currentScreen).endGame ();
-				((Penguin) target).remove();
 				penguinsEaten ++;
 				sinceEaten = 0;
 				System.out.println("nom. RAWR");
@@ -184,7 +184,7 @@ public class PolarBear extends LifeForm {
 					direction [i+1][j+1] = 0;
 				}
 
-		blocks [x][y].setTargeter(this);
+		//blocks [x][y].setTargeter(this);
 		for (int k = 2 ; k >= 0 ; k--) {
 			int random = (int)(Math.random() * counter [k]);
 			for (int i = -1 ; i <= 1 ; i++)
@@ -193,22 +193,34 @@ public class PolarBear extends LifeForm {
 						counter[k]--;
 						if (random == counter[k]) {
 							//blocks [x][y].targeter = null;
+							chosenDir [0] = i; // MARK AS CHOSEN
+							chosenDir [1] = j; 
 							x += i;
 							y += j;
+							if (x == target.x && y == target.y
+									&& target instanceof Penguin) {
 							eatPenguin ();
 							//if (i+j != 0)
-								blocks [x][y].setTargeter(this);
 							blocks [x][y].set(this);
+							}
+							blocks [x][y].setTargeter(this);
+							x -= i;
+							y -= j;
 							return;
 						}
 					}
 		}
+		
+		System.out.println ("SORROW MISERY DEATH FEAR SORROW MISUNDERSTANDING");
+		chosenDir [0] = 0; // MARK AS CHOSEN
+		chosenDir [1] = 0; 
+		
 		// Couldn't make a move! Inform whatever is targeting this block
 		if (blocks [x][y].targeter != null) {
 			blocks [x][y].targeter.crossOff (x - blocks [x][y].targeter.x,
 					y - blocks [x][y].targeter.y);
 			if (blocks [x][y].targeter != null)
-			blocks [x][y].targeter.move();
+				blocks [x][y].targeter.move();
 		}
 	}
 

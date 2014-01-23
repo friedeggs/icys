@@ -10,7 +10,7 @@ public class Game extends Mode {
 	int score = 0;
 	boolean alive = true;
 	Penguin player;
-	Tile hovered;
+	Tile hovered, targeted;
 	
 	public Game () {
 		super();
@@ -41,6 +41,7 @@ public class Game extends Mode {
 		
 		player = new Player (12, 7); 
 		player.target = null;
+		penguins.add(player);
 		
 		//need to alter penguin class to allow for user-chosen directions
 		//cannot use update method, use new gaming method? or just move?
@@ -53,8 +54,12 @@ public class Game extends Mode {
 	}
 	
 	public void endGame () {
+		if (targeted != null)
+			targeted.setState(0);
 		alive = false;
 		player = null;
+		if (hovered != null)
+			hovered.setState(0);
 	}
 	
 	public Penguin getPlayer () {
@@ -65,8 +70,8 @@ public class Game extends Mode {
 
 		super.draw(g);
 
-		if (TIMER % sleep == 0 && alive) 
-			player.update(g);
+//		if (TIMER % sleep == 0 && alive) 
+//			player.update(g);
 		
 		for (int i = 0 ; i < blocks.length ; i++) 
 			for (int j = 0 ; j < blocks[0].length ; j++)
@@ -85,6 +90,7 @@ public class Game extends Mode {
 				if (tile [i][j].contains(x, y)) {
 					tile [i][j].setState (2);
 					player.target = blocks [i][j];
+					targeted = tile [i][j];
 				}
 				else
 					tile [i][j].setState (0);
@@ -101,8 +107,10 @@ public class Game extends Mode {
 		int x = e.getX(), y = e.getY();
 		for (int i = 0 ; i < tile.length ; i++) {
 			for (int j = 0 ; j < tile[0].length ; j++) {
-				if (tile [i][j].getState() != 2 && tile [i][j].contains(x, y))
+				if (tile [i][j].getState() != 2 && tile [i][j].contains(x, y)) {
 					tile [i][j].setState (1);
+					hovered = tile [i][j];
+				}
 				else if (tile [i][j].getState() != 2)
 					tile [i][j].setState (0);
 			}
