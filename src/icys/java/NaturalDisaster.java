@@ -1,5 +1,6 @@
 package icys.java;
 
+//Just a parent class to all the horrible disasters? Nothing here
 public abstract class NaturalDisaster {
 }// End of Class
 

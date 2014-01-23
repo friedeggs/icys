@@ -1,10 +1,9 @@
 package icys.java;
 
+//import
 import static icys.java.Utilities.*;
-
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Polygon;
 import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -12,9 +11,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
-//arbitary comment?
 public class Mode implements Screen {
 
+	//initialization
 	Random random = new Random ();
 	LabelButton back, help, earthquake, melt, pollution; 
 	LabelButton addEgg, addPenguin, addBear;
@@ -22,20 +21,23 @@ public class Mode implements Screen {
 	WaterPollution pollutedWater;
 	Earthquake quake;
 	
+	//Constructor
 	public Mode () {
 		
+		/*-----------LABEL BUTTONS------------*/
+		//Always there
 		back = new LabelButton ("back", font, Color.WHITE, lightblue, blue, aqua);
 		help = new LabelButton ("help", font, Color.WHITE, lightblue, blue, aqua);
+		//Disaster
 		earthquake = new LabelButton ("earthquake", font_small, Color.WHITE, lightblue, blue, aqua);
 		melt = new LabelButton ("melt glacier", font_small, Color.WHITE, lightblue, blue, aqua);
 		pollution = new LabelButton ("pollution", font_small, Color.WHITE, lightblue, blue, aqua);
-		
-		
-		// make icons later
+		//Adding entities
 		addEgg = new LabelButton ("egg", font_small, Color.WHITE, lightblue, blue, aqua);
 		addPenguin = new LabelButton ("penguin", font_small, Color.WHITE, lightblue, blue, aqua);
 		addBear = new LabelButton ("bear", font_small, Color.WHITE, lightblue, blue, aqua);
 
+		//ArrayList of objects
 		fish = new ArrayList <Fish> ();
 		eggs = new ArrayList <Egg> ();
 		penguins = new ArrayList <Penguin> ();
@@ -45,6 +47,7 @@ public class Mode implements Screen {
 		block_height = (height-offset-border) / blocks[0].length;
 		shift = block_width * 3 / 6;
 		
+		//Read start file to initialize block values
 		read ();
 		for (int i = 0 ; i < blocks.length ; i++)
 			for (int j = 0 ; j < blocks[0].length ; j++) 
@@ -57,6 +60,7 @@ public class Mode implements Screen {
 					blocks [i][j] = new Block (UNUSED, i, j);
 			} 
 	
+		//ADD EVERYTHING ON THE PANEL TO DISPLAY EVERYTHING.
 		main.add (addEgg);
 		main.add (addPenguin);
 		main.add (addBear);
@@ -69,9 +73,8 @@ public class Mode implements Screen {
 		main.add(main.background);
 		applyGraphics (main.getGraphics());
 		
-		
+		//Set visible = false
 		addEgg.setVisible(false);		
-		
 		addPenguin.setVisible(false);		
 		addBear.setVisible(false);		
 		back.setVisible(false);		
@@ -82,6 +85,7 @@ public class Mode implements Screen {
 		
 	}
 	
+	//read .txt file method
 	public void read ()
 	{
 		String[] splited = new String [315];
@@ -114,6 +118,7 @@ public class Mode implements Screen {
 			}
 	}
 
+	//the main draw method
 	@Override
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
@@ -149,28 +154,6 @@ public class Mode implements Screen {
 			if (stopFish == 0)
 				pollutedWater.revert ();
 		}
-//		rand = (int)(Math.abs(random.nextGaussian()/2));
-//		for (int i = 0 ; i < rand ; i++) {
-//			eggs.add(new Egg (eggs.size(),
-//					(int)(Math.random()*blocks.length),
-//					(int)(Math.random()*blocks[0].length)));
-//		}		
-//		rand = (int)(Math.abs(random.nextGaussian()/2));
-//		for (int i = 0 ; i < rand ; i++) {
-//			penguins.add(new Penguin (penguins.size(),
-//					(int)(Math.random()*blocks.length),
-//					(int)(Math.random()*blocks[0].length)));
-//		}	
-//		rand = (int)(Math.abs(random.nextGaussian()/2));
-//		for (int i = 0 ; i < rand ; i++) {
-//			bears.add(new PolarBear (bears.size(),
-//					(int)(Math.random()*blocks.length),
-//					(int)(Math.random()*blocks[0].length)));
-//		}
-		/**
-		 * HERE GWACIE
-		 */
-		
 		for (int i = 0 ; i < bears.size () ; i++) {
 			bears.get(i).update (g);
 		}
@@ -187,6 +170,7 @@ public class Mode implements Screen {
 				blocks[i][j].update(g);
 	}
 
+	//the main show
 	@Override
 	public void show() {
 		back.setVisible (true);
@@ -199,6 +183,7 @@ public class Mode implements Screen {
 		addBear.setVisible (true);
 	}
 
+	//the main hide-your-everything
 	@Override
 	public void hide() {
 		back.setVisible (false);
@@ -211,6 +196,7 @@ public class Mode implements Screen {
 		addBear.setVisible (false);
 	}
 
+	//all the borders, etc all here
 	@Override
 	public void applyGraphics(Graphics g) {
 		back.applyGraphics(g);
@@ -239,6 +225,7 @@ public class Mode implements Screen {
 				border + help.getHeight() / 2);
 	}
 
+	/*--------ALL THE MOUSE MOVEMENTS------------*/
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub

@@ -105,7 +105,6 @@ public class Game extends Mode {
 	@Override
 	public void mouseMoved (MouseEvent e) {
 		super.mouseMoved(e);
-		System.out.println ("mouse moved");
 		if (alive) {
 		int x = e.getX(), y = e.getY();
 		for (int i = 0 ; i < tile.length ; i++) {

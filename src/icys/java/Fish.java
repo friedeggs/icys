@@ -19,10 +19,8 @@ public class Fish extends LifeForm {
 		super (index);
 		//sets position
 		pos = randomBlock ();
-		if (pos == null) {
-			System.out.println("null pos");
+		if (pos == null) 
 			remove ();
-		}
 		else {
 		x = pos.x; //set x
 		y = pos.y; //set y
@@ -87,7 +85,6 @@ public class Fish extends LifeForm {
 		for (int i = 0 ; i < fish.size () - 1 ; i++) {
 				newlist.add(fish.get(i));
 				newlist.get(i).index = i;
-				System.out.println (i);
 		}
 	}
 

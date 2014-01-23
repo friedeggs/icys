@@ -1,39 +1,42 @@
 package icys.java;
 
+//Imports
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-
 import javax.imageio.ImageIO;
 import static icys.java.Utilities.*;
 
 public class Penguin extends LifeForm {
 	
+	//initialization
 	int sinceEaten;
 	int fishesEaten; 
 	
+	//Constructor
 	public Penguin (int index) {
 		super (index);
 	}
 	
+	//Sur-normal constructor
 	public Penguin (int index, int x, int y) 
 	{
 		super (index);
-		this.x = x;
-		this.y = y;
-		blocks [x][y].set(this);
+		this.x = x; //position X
+		this.y = y; //position Y
+		blocks [x][y].set(this); //Block on life form = this
 		fishesEaten = 0;
 		sinceEaten = 0;
 		chooseTarget ();
 		try {
-			image = ImageIO.read(new File ("penguino.png"));
+			image = ImageIO.read(new File ("penguino.png")); //img
 		} catch (IOException e) {
 			e.printStackTrace();
 		}	
 	}
 
+	//removes the target fish that was eaten
 	public void eatFish ()
 	{
 		if (x == target.x && y == target.y)
@@ -42,7 +45,6 @@ public class Penguin extends LifeForm {
 				((Fish) target).remove();
 				fishesEaten ++;
 				sinceEaten = 0;
-				System.out.println("omNOMNOM");
 			}
 			target = null;
 		}
@@ -50,14 +52,14 @@ public class Penguin extends LifeForm {
 			sinceEaten ++ ;
 	}
 	
+	// is this still alive?
 	public void checkAlive() 
 	{
-		if (sinceEaten > 20) {
-			System.out.println ("Penguin: *dies of hunger*");
+		if (sinceEaten > 20) 
 			remove();
-		}
 	}
 	
+	//=.= asexual reproduction. Just pretend that it ate too much and pooped out an egg.
 	public void reproduces()
 	{
 		if (fishesEaten == 5)
@@ -68,22 +70,22 @@ public class Penguin extends LifeForm {
 			blocks [x][y].set(this);
 			eggs.add(baby);
 			direction [1][1] = -1;
-			//System.out.println("EEEEEEGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
 		}	
 	}
 	
-	public void updateTarget() //updateTarget: This method checks if target is alive, and calls method to choose new target if current target is dead
+	 //checks if target is alive, and calls method to choose new target if current target is dead
+	public void updateTarget()
 	{
 		if (target == null || (fish.size() > 0 && target instanceof Block))
 			chooseTarget();
 	}
 	
-	public void chooseTarget() //Chooses closest fish for new target
+	//Chooses closest fish for new target
+	public void chooseTarget() 
 	{
 		if (fish.size() == 0) {
 			// choose a random block of land
 			target = randomBlock ();
-			//System.out.println("random target");
 			return;
 		}
 		// else: 
@@ -126,10 +128,12 @@ public class Penguin extends LifeForm {
 	 * @return
 	 */
 	
+	//this...= that?
 	public boolean equals (Penguin p) {
 		return (p.x == x && p.y == y);
 	}
 	
+	//more remove method that kills the entity
 	@Override
 	public void remove() {
 		blocks [x][y].set(null);
@@ -145,6 +149,7 @@ public class Penguin extends LifeForm {
 		}
 	}
 
+	//... and even more updates
 	public void update(Graphics g) {
 		// TODO Auto-generated method stub
 		if (blocks [x][y].value == LAND) {

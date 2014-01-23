@@ -1,5 +1,6 @@
 package icys.java;
 
+//import
 import java.awt.Graphics;
 import java.io.File;
 import java.io.IOException;
@@ -9,6 +10,7 @@ import static icys.java.Utilities.*;
 
 public class Player extends Penguin {
 
+	//constructor
 	public Player() {
 		super(0);
 		try {
@@ -19,6 +21,7 @@ public class Player extends Penguin {
 		// TODO Auto-generated constructor stub
 	}	
 	
+	//constructor with X and Y values as coordinates
 	public Player(int x, int y) {
 		super(0, x, y);
 		try {
@@ -29,6 +32,7 @@ public class Player extends Penguin {
 		// TODO Auto-generated constructor stub
 	}
 	
+	// update
 	public void update (Graphics g) {
 		if (target == null)
 			return;
@@ -36,6 +40,7 @@ public class Player extends Penguin {
 		blocks [x][y].lifeform = this;
 	}
 	
+	//moves player around and around and around
 	protected void move () {
 		if (target == null)
 			return;

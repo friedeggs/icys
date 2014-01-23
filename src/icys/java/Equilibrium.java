@@ -22,7 +22,6 @@ public class Equilibrium extends Mode {
 			if (home != null) {
 			babyPen = new Egg (eggs.size(), home.x, home.y);
 			eggs.add(babyPen);
-			System.out.println("An egg was spontaneously generated!");
 			}
 		}
 		
@@ -33,7 +32,6 @@ public class Equilibrium extends Mode {
 			if (place != null) {
 			newPen = new Penguin (penguins.size(), place.x, place.y);
 		    penguins.add(newPen);
-		    System.out.println("A penguin was spontaneously generated!");
 			}
 		}
 		
@@ -44,7 +42,6 @@ public class Equilibrium extends Mode {
 			if (territory != null) {
 			bwear = new PolarBear (bears.size(), territory.x, territory.y);
 			bears.add(bwear);
-			System.out.println("A bear was spontaneously generated!");
 			}
 		}
 		
