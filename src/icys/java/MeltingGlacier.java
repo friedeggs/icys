@@ -93,7 +93,6 @@ public class MeltingGlacier extends NaturalDisaster {
 				values[j][i] = splited[indexS].charAt(0);
 				indexS++;
 			}
-
 	} // End of read method
 
 } // End of Class
