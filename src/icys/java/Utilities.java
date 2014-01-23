@@ -35,7 +35,7 @@ public class Utilities {
 	
 	public static int block_width, block_height;
 	
-	public static int interval = 10, timeInterval = 25, sleep = 250, TIMER = 0;
+	public static int interval = 10, timeInterval = 25, sleep = 3000, TIMER = 0;
 	
 	public static Color lightblue = new Color (175, 217, 255),
 			blue = new Color (124, 175, 222),
