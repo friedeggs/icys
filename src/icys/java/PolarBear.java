@@ -62,9 +62,12 @@ public class PolarBear extends LifeForm {
 				System.out.println("Penguin: *eaten by Polar Bear*");
 			}
 			target = null;
+			blocks [x][y].set(this);
 		}
-		else
+		else {
 			sinceEaten ++ ;
+			System.out.println("SINNNCCEEEE EEAAAAAAAAAAAATTTTTTTENNNN");
+		}
 	}
 	
 	private void checkAlive() 
@@ -198,12 +201,11 @@ public class PolarBear extends LifeForm {
 							chosenDir [1] = j; 
 							x += i;
 							y += j;
-							if (x == target.x && y == target.y
-									&& target instanceof Penguin) {
+							//if (x == target.x && y == target.y
+							//		/*&& target instanceof Penguin*/) {
 							eatPenguin ();
 							//if (i+j != 0)
-							blocks [x][y].set(this);
-							}
+							//}
 							blocks [x][y].setTargeter(this);
 							x -= i;
 							y -= j;

@@ -52,9 +52,9 @@ public class Extinction extends Mode{
 
 		super.draw(g);
 		
-		for (int i = 0 ; i < penguins.size () ; i++) {
-			penguins.get(i).update (g);
-		}
+//		for (int i = 0 ; i < penguins.size () ; i++) {
+//			penguins.get(i).update (g);
+//		}
 		//System.out.println("==========");
 	}
 	
