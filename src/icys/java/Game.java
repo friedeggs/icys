@@ -54,6 +54,7 @@ public class Game extends Mode {
 	
 	public void endGame () {
 		alive = false;
+		player = null;
 	}
 	
 	public Penguin getPlayer () {
