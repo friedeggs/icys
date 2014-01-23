@@ -8,7 +8,7 @@ import static icys.java.Utilities.*;
 
 public class MeltingGlacier extends NaturalDisaster {
 	
-	char [][] myCrap = new char [21][15];
+	char [][] values = new char [21][15];
 	int time = 0;
 	
 	public MeltingGlacier() {
@@ -53,9 +53,9 @@ public class MeltingGlacier extends NaturalDisaster {
 			read ("blackWaterAndMelt");
 		else
 			read("melt");
-		for (int i = 0; i < myCrap.length; i ++)
-			for (int j = 0; j <myCrap[i].length; j++)
-				Utilities.blocks[i][j].changeValue (myCrap[i][j]);
+		for (int i = 0; i < values.length; i ++)
+			for (int j = 0; j <values[i].length; j++)
+				Utilities.blocks[i][j].changeValue (values[i][j]);
 
 	}
 	
@@ -70,9 +70,9 @@ public class MeltingGlacier extends NaturalDisaster {
 //					System.out.println(blocks [i][j].lifeform);
 //				}
 		read("start");
-		for (int i = 0; i < myCrap.length; i ++)
-			for (int j = 0; j <myCrap[i].length; j++)
-				Utilities.blocks[i][j].changeValue (myCrap[i][j]);
+		for (int i = 0; i < values.length; i ++)
+			for (int j = 0; j <values[i].length; j++)
+				Utilities.blocks[i][j].changeValue (values[i][j]);
 	}
 
 	public void read(String name) {
@@ -100,9 +100,9 @@ public class MeltingGlacier extends NaturalDisaster {
 		}
 		splited = result.split("	");
 		int indexS = 0;
-		for (int i = 0; i < myCrap[0].length; i++)
-			for (int j = 0; j < myCrap.length; j++) {
-				myCrap[j][i] = splited[indexS].charAt(0);
+		for (int i = 0; i < values[0].length; i++)
+			for (int j = 0; j < values.length; j++) {
+				values[j][i] = splited[indexS].charAt(0);
 				indexS++;
 			}
 

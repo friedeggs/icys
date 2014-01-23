@@ -1,9 +1,8 @@
 package icys.java;
 
-import static icys.java.Utilities.bears;
-import static icys.java.Utilities.eggs;
-import static icys.java.Utilities.fish;
-import static icys.java.Utilities.penguins;
+import static icys.java.Utilities.*;
+
+
 
 import java.awt.Graphics;
 
@@ -11,7 +10,20 @@ public class Extinction extends Mode{
 
 	public Extinction()
 	{
-		super();
+		super();		
+		/*
+		earthquake.setEnabled(false);
+		pollution.setEnabled(false);
+		melt.setEnabled(false);
+		addEgg.setEnabled(false);
+		addPenguin.setEnabled(false);
+		addBear.setEnabled(false); */
+		main.remove (earthquake);
+		main.remove (pollution);
+		main.remove (melt);
+		main.remove (addEgg);
+		main.remove (addPenguin);
+		main.remove (addBear);
 		
 		for (int i = 0 ; i < 1 ; i++) {
 			fish.add(new Fish (i));
