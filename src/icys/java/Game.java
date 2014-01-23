@@ -78,6 +78,7 @@ public class Game extends Mode {
 	@Override
 	public void mouseReleased (MouseEvent e) {
 		super.mouseReleased (e);
+		if (alive) {
 		int x = e.getX(), y = e.getY();
 		for (int i = 0 ; i < tile.length ; i++) {
 			for (int j = 0 ; j < tile[0].length ; j++) {
@@ -89,12 +90,14 @@ public class Game extends Mode {
 					tile [i][j].setState (0);
 			}
 		}
+		}
 	}
 	
 	@Override
 	public void mouseMoved (MouseEvent e) {
 		super.mouseMoved(e);
 		System.out.println ("mouse moved");
+		if (alive) {
 		int x = e.getX(), y = e.getY();
 		for (int i = 0 ; i < tile.length ; i++) {
 			for (int j = 0 ; j < tile[0].length ; j++) {
@@ -103,6 +106,7 @@ public class Game extends Mode {
 				else if (tile [i][j].getState() != 2)
 					tile [i][j].setState (0);
 			}
+		}
 		}
 	}
 	
