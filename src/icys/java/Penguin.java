@@ -40,6 +40,10 @@ public class Penguin extends LifeForm {
 		{
 			if (target instanceof Fish) {
 				((Fish) target).remove();
+				if (currentScreen == mode && player != null && equals (player)) {
+					System.out.println ("PENGUIN OVER HERE");
+					score++;
+				}
 				fishesEaten ++;
 				sinceEaten = 0;
 				System.out.println("omNOMNOM");

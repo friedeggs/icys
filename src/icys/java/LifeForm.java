@@ -119,6 +119,19 @@ public abstract class LifeForm extends Entity {
 	// CAN'T SWITCH POSITIONS
 	protected void move ()
 	{
+		if (this instanceof Player) {
+			if (target == null) {
+				if (blocks [x][y].targeter != null) {
+					blocks [x][y].targeter.crossOff (x - blocks [x][y].targeter.x,
+							y - blocks [x][y].targeter.y);
+					if (blocks [x][y].targeter != null)
+						blocks [x][y].targeter.move();
+				}
+				blocks [x][y].targeter = this;
+				return;
+			}
+		}
+		
 		crossOffLifeForms ();
 		
 		// Don't allow lifeforms to switch positions

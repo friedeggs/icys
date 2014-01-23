@@ -2,19 +2,26 @@ package icys.java;
 
 import static icys.java.Utilities.*;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 
 public class Game extends Mode {
 	
-	int score = 0;
+	//int score = 0;
 	boolean alive = true;
-	Penguin player;
+	//Player player;
 	Tile hovered, targeted;
+	LabelButton scoreLabel;
 	
 	public Game () {
 		super();
 
+		score = 0;
+		scoreLabel = new LabelButton ("Fish eaten: " + score,
+				font, Color.WHITE, blue);
+		main.add(scoreLabel);
+		main.add(main.background);
 		
 		for (int i = 0 ; i < tile.length ; i++) {
 			for (int j = 0 ; j < tile [0].length ; j++) {
@@ -49,6 +56,16 @@ public class Game extends Mode {
 		//but we still need crosses.. what.
 	}
 	
+	public void hide () {
+		super.hide ();
+		scoreLabel.setVisible(false);
+	}
+	
+	public void show () {
+		super.show ();
+		scoreLabel.setVisible(true);
+	}
+	
 	public boolean ongoing () {
 		return alive;
 	}
@@ -74,11 +91,19 @@ public class Game extends Mode {
 //		if (TIMER % sleep == 0 && alive) 
 //			player.update(g);
 		
-		for (int i = 0 ; i < blocks.length ; i++) 
-			for (int j = 0 ; j < blocks[0].length ; j++)
-				blocks[i][j].show(g);
+//		for (int i = 0 ; i < blocks.length ; i++) 
+//			for (int j = 0 ; j < blocks[0].length ; j++)
+//				blocks[i][j].show(g);
+		
+		if (player != null && ((Player)player).ateFish())
+			score++;
+		
+		scoreLabel.setText("Fish eaten: " + score);
+		scoreLabel.applyGraphics (g);
+		scoreLabel.setLocation (block_width + scoreLabel.getWidth() / 2, 
+				block_height * 7);
 
-		//System.out.println("==========");
+		System.out.println("==========" + score);
 	}
 	
 	@Override

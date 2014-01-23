@@ -113,7 +113,8 @@ public class Block extends Entity {
 		if (lifeform != null) {
 			System.out.println(x+" "+y+" "+lifeform);
 			lifeform.sink(); // does nothing if glacier is not melting
-			lifeform.show(g);
+			if (!(lifeform instanceof Player && !((Game)mode).ongoing()))
+					lifeform.show(g);
 		}
 	}
 }

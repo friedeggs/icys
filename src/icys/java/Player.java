@@ -8,6 +8,8 @@ import javax.imageio.ImageIO;
 import static icys.java.Utilities.*;
 
 public class Player extends Penguin {
+	
+	boolean ate;
 
 	public Player() {
 		super(0);
@@ -37,9 +39,28 @@ public class Player extends Penguin {
 	}
 	
 	protected void move () {
-		if (target == null)
+		System.out.println ("used------------------------");
+		if (target == null) {
+			if (blocks [x][y].targeter != null) {
+				blocks [x][y].targeter.crossOff (x - blocks [x][y].targeter.x,
+						y - blocks [x][y].targeter.y);
+				if (blocks [x][y].targeter != null)
+					blocks [x][y].targeter.move();
+			}
+			blocks [x][y].targeter = this;
 			return;
+		}
 		super.move();
+	}
+	
+	public boolean ateFish () {
+		return ate;
+	}
+	
+	public void remove () {
+		if (equals (blocks [x][y].targeter))
+				blocks [x][y].targeter = null;
+		super.remove ();
 	}
 	
 }
