@@ -99,11 +99,13 @@ public class PolarBear extends LifeForm {
 	
 	private void chooseTarget() //Chooses closest fish for new target
 	{		
-		if (penguins.size() == 0) {
+		if (penguins.size() == 0 && !(currentScreen instanceof Game 
+				&& ((Game)currentScreen).ongoing())) {
 			target = randomBlock ();
 			return;
 		}
-		if ((currentScreen instanceof Game) && ((Game)currentScreen).ongoing())
+		if (penguins.size() == 0 && (currentScreen instanceof Game) 
+				&& ((Game)currentScreen).ongoing())
 		{
 			target = ((Game)currentScreen).getPlayer();
 			return;
