@@ -52,6 +52,8 @@ public class PolarBear extends LifeForm {
 		if (x == target.x && y == target.y)
 		{
 			if (target instanceof Penguin) {
+				if (target instanceof Player)
+					((Game)currentScreen).endGame ();
 				((Penguin) target).remove();
 				penguinsEaten ++;
 				sinceEaten = 0;
