@@ -18,7 +18,7 @@ public class WaterPollution extends NaturalDisaster {
 
 	public void stopFish () {
 		Utilities.fish.clear (); //Deletes all fish
-		stopFish = 10;
+		stopFish = 30;
 	}
 
 	public void blackenWater() {

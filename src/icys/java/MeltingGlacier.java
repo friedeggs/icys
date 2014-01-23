@@ -34,19 +34,7 @@ public class MeltingGlacier extends NaturalDisaster {
 					blocks [i][j].lifeform.meltY += 2 * block_height / interval;
 	}
 	
-	public void lostBear() {
-		// 50%
-		// grid [row] [col] = Math.random () < density; <Boolean?
-		boolean dead = false;
-		for (int i = 0; i < Utilities.bears.size(); i++) {
-			dead = Math.random() < 0.5;
-			if (dead) {
-				Utilities.bears.remove(i);
-				i--;
-			}
-		}
-	} // End of remove polar bear list
-
+	
 	public void meltArea() {
 		// 175, 217, 255
 		if (polluted)
