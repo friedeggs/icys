@@ -1,5 +1,6 @@
 package icys.java;
-import java.awt.Color;
+
+//Import
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
@@ -9,7 +10,6 @@ import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -17,7 +17,8 @@ import static icys.java.Utilities.*;
 
 @SuppressWarnings("serial")
 public class Main extends JFrame implements MouseListener, MouseMotionListener {
-	//Mode selection;
+
+	//Initialization
 	BufferedImage fish;
 	Font font = new Font ("Calibri", Font.BOLD, 32);
 	FontMetrics metrics;
@@ -25,6 +26,7 @@ public class Main extends JFrame implements MouseListener, MouseMotionListener {
 	boolean running = false;
 	int i = 0;
 	
+	//Constructor
 	public Main () {
 		super ("ICY-S"); 
 	}
@@ -77,47 +79,51 @@ public class Main extends JFrame implements MouseListener, MouseMotionListener {
 		}
 		
 		public void paintComponent (Graphics g) {
-//			int density = 180, j;
-//			for (int i = 5 ; i < width ; i += density) {
-//				if (i / density % 2 == 0)
-//					j = 0;
-//				else
-//					j = density / 2;
-//				for ( ; j < height ; j += density) {
-//					g.drawImage(fish, i, j, null);
-//				}
-//			}
+/*			int density = 180, j;
+			for (int i = 5 ; i < width ; i += density) {
+				if (i / density % 2 == 0)
+					j = 0;
+				else
+					j = density / 2;
+				for ( ; j < height ; j += density) {
+					g.drawImage(fish, i, j, null);
+				}
+			}
+			*/
 			g.setColor (lightblue);
 			g.fillRect(0, 0, width, height);
 			currentScreen.draw (g);
 			
-//				g.drawLine(0, border+offset, getWidth(), border+offset);
-//				g.drawLine (0, getHeight() - border, getWidth(), getHeight() - border);
-//				g.drawLine(border, 0, border, getHeight());
-//				g.drawLine(getWidth() - border, 0, getWidth () - border, getHeight());
-//				
-//				g.drawLine(0, (getHeight()-offset+border)/4+offset, 
-//						getWidth(), (getHeight()-offset+border)/4+offset);
-//				g.drawLine(0, (3*getHeight()-3*offset-border)/4+offset, 
-//						getWidth(), (3*getHeight()-3*offset-border)/4+offset);
-//				g.drawLine((getWidth()+border)/4, 0, (getWidth()+border)/4, getHeight());
-//				g.drawLine((3*getWidth()-border)/4, 0, 
-//						(3*getWidth()-border)/4, getHeight());
+/*				g.drawLine(0, border+offset, getWidth(), border+offset);
+				g.drawLine (0, getHeight() - border, getWidth(), getHeight() - border);
+    			g.drawLine(border, 0, border, getHeight());
+				g.drawLine(getWidth() - border, 0, getWidth () - border, getHeight());
+				
+				g.drawLine(0, (getHeight()-offset+border)/4+offset, 
+						getWidth(), (getHeight()-offset+border)/4+offset);
+			g.drawLine(0, (3*getHeight()-3*offset-border)/4+offset, 
+						getWidth(), (3*getHeight()-3*offset-border)/4+offset);
+				g.drawLine((getWidth()+border)/4, 0, (getWidth()+border)/4, getHeight());
+				g.drawLine((3*getWidth()-border)/4, 0, 
+						(3*getWidth()-border)/4, getHeight());
 				
 			
 			
-//				g.setColor (aqua);
-//				g.fillRect (border, border+offset, // (A-3B)/2
-//				(getWidth()-3*border)/2, (getHeight()-offset-3*border)/2);
-//				g.fillRect ((getWidth()+border)/2, border+offset,
-//						(getWidth()-3*border)/2, (getHeight()-offset-3*border)/2);
-//				g.fillRect (border, (getHeight()+offset+border)/2,
-//						(getWidth()-3*border)/2, (getHeight()-offset-3*border)/2);
-//				g.fillRect ((getWidth()+border)/2, (getHeight()+offset+border)/2,
-//						(getWidth()-3*border)/2, (getHeight()-offset-3*border)/2);
+				g.setColor (aqua);
+				g.fillRect (border, border+offset, // (A-3B)/2
+				(getWidth()-3*border)/2, (getHeight()-offset-3*border)/2);
+				g.fillRect ((getWidth()+border)/2, border+offset,
+						(getWidth()-3*border)/2, (getHeight()-offset-3*border)/2);
+				g.fillRect (border, (getHeight()+offset+border)/2,
+						(getWidth()-3*border)/2, (getHeight()-offset-3*border)/2);
+				g.fillRect ((getWidth()+border)/2, (getHeight()+offset+border)/2,
+						(getWidth()-3*border)/2, (getHeight()-offset-3*border)/2);
+  
+ */
 		}
 	}
 	
+	//animate, move things around but with time interval
 	public void animate () {
 		while (true) {
 			if (running) {
@@ -135,11 +141,13 @@ public class Main extends JFrame implements MouseListener, MouseMotionListener {
 		}
 	}
 	
+	// THE THING THAT STARTS THE PROGRAM!!!
 	public static void main (String args []) {
 		main = new Main ();
 		main.create ();
 	}
 	
+	//What screen should appear?
 	public void setScreen (Screen screen) {
 		currentScreen.hide ();
 		currentScreen = screen;
@@ -155,6 +163,8 @@ public class Main extends JFrame implements MouseListener, MouseMotionListener {
 		}
 	}
 	
+	
+	/*--------ALL THE MOUSE MOVEMENTS------------*/
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		// TODO Auto-generated method stub

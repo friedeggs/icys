@@ -1,14 +1,14 @@
 package icys.java;
 
+//Import
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-
 import static icys.java.Utilities.*;
 
 public abstract class LifeForm extends Entity {
-	// Many things are really only applicable to penguin and polarbear
+	// Many things are really only applicable to penguin and polar bear
 	
+	//Initialization
 	Entity target; // Block or fish
 	int index, meltY = 0, chosenDir [] = new int [2];
 	BufferedImage image;
@@ -23,23 +23,28 @@ public abstract class LifeForm extends Entity {
 	 */
 	int direction [][] = new int [3][3]; // CHANGE IN X AND Y
 	
+	//Constructor
 	public LifeForm (int index) {
 		this.index = index;
 	}	
 	
+	//Mutated constructor
 	public LifeForm (int index, int x, int y) {
 		this.index = index;
 		this.x = x;
 		this.y = y;
 	}
 	
+	//update
 	public abstract void update (Graphics g);
 
+	//nope, not here anymore
 	protected void crossOff (int i, int j) {
 		blocks [x][y].targeter = null;
 		direction [i+1][j+1] = -1;
 	}
 
+	//Nope. Nothing here
 	protected void crossOffLifeForms () {
 		for (int i = -1 ; i <= 1 ; i++)
 			for (int j = -1 ; j <= 1 ; j++)
@@ -47,6 +52,7 @@ public abstract class LifeForm extends Entity {
 						direction [i+1][j+1] = -1;
 	}
 
+	//When moving, the life form cannot move diagonally
 	protected void clearCrosses () {
 		for (int i = -1 ; i <= 1 ; i++)
 			for (int j = -1 ; j <= 1 ; j++)
@@ -54,18 +60,22 @@ public abstract class LifeForm extends Entity {
 					direction [i+1][j+1] = 0;
 	}
 	
+	//GUI
 	public void show(Graphics g)
 	{ // DRAW IN MIDDLE OF BLOCK
 		g.drawImage (image, coordX(x), coordY(y) - block_height / 2 + meltY, null);
 		clearCrosses();
 	}
 	
+	//make a random block as target
 	public Block randomBlock () {
 		int counter = 0;
 		for (int i = 0 ; i < blocks.length ; i++)
 			for (int j = 0 ; j < blocks[0].length ; j++)
 				if (blocks[i][j].lifeform == null && blocks[i][j].value== LAND)
 					counter++;
+		
+		//Choose a block, any block
 		int x = (int)(Math.random () * counter);
 		for (int i = 0 ; i < blocks.length ; i++)
 			for (int j = 0 ; j < blocks[0].length ; j++)
@@ -75,14 +85,15 @@ public abstract class LifeForm extends Entity {
 					if (x == counter)
 						return blocks [i][j];
 				}
-		// WHAT IF COUNTER = 0
+
 		return null;
 	}
 	
+	//remove
 	public abstract void remove ();
 	
 	/**
-	 * Returns whether this position is a valid location for a lifeform
+	 * Returns whether this position is a valid location for a life form
 	 * to move to
 	 * @param i
 	 * @param j
@@ -109,6 +120,7 @@ public abstract class LifeForm extends Entity {
 		return 1;
 	}
 	
+	//If this = that
 	protected boolean equals (LifeForm l) {
 		return l == null || (l.x == x && l.y == y);
 	}
@@ -116,18 +128,16 @@ public abstract class LifeForm extends Entity {
 	/**
 	 * Choose a location to target but don't actually change the location
 	 */
-	// CAN'T SWITCH POSITIONS
 	protected void move ()
 	{
 		crossOffLifeForms ();
 		
-		// Don't allow lifeforms to switch positions
+		// Don't allow life forms to switch positions
 		if (blocks[x][y].targeter != null && !equals(blocks [x][y].targeter))
 			direction [blocks[x][y].targeter.x - x +1]
 					[blocks[x][y].targeter.y - y +1] = -1;
 		if (equals (blocks [x][y].lifeform))
 			blocks [x][y].lifeform = null;
-			//blocks[x][y].set(null);
 		
 		int counter [] = new int [3];
 		for (int i = -1 ; i <= 1 ; i++)
@@ -142,13 +152,6 @@ public abstract class LifeForm extends Entity {
 						direction [i+1][j+1] = 0;
 				}
 
-//		for (int i = -1 ; i <= 1 ; i++) {
-//			for (int j = -1 ; j <= 1 ; j++) {
-//				System.out.print(direction [i+1][j+1]+" ");
-//			}
-//			System.out.println();
-//		}
-		//blocks [x][y].setTargeter(this);
 		for (int k = 2 ; k >= 0 ; k--) {
 			int random = (int)(Math.random() * counter [k]);
 			for (int i = -1 ; i <= 1 ; i++)
@@ -164,7 +167,6 @@ public abstract class LifeForm extends Entity {
 					}
 		}
 		
-		System.out.println ("SORROW MISERY DEATH FEAR SORROW MISUNDERSTANDING");
 		chosenDir [0] = 0; // MARK AS CHOSEN
 		chosenDir [1] = 0; 
 		
@@ -179,10 +181,7 @@ public abstract class LifeForm extends Entity {
 	
 	public void sink () {
 		if (TIMER % sleep == 0 && meltY > 0) {
-			System.out.println("HELP I 'M SINKINGGGGGGGG");
 			meltY += 2 * block_height / interval;
-//			if (meltY >= 2 * block_height)
-//				remove ();
 		}
 	}
 	

@@ -1,5 +1,6 @@
 package icys.java;
 
+//import
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -8,9 +9,11 @@ import static icys.java.Utilities.*;
 
 public class MeltingGlacier extends NaturalDisaster {
 	
+	//initialization
 	char [][] values = new char [21][15];
 	int time = 0;
 	
+	//constructor
 	public MeltingGlacier() {
 		melted = true;
 		//lostBear();
@@ -18,8 +21,9 @@ public class MeltingGlacier extends NaturalDisaster {
 		sinkLifeForms ();
 	}	
 	
+	//update everything
 	public void update () {
-		System.out.println("GLACIER UPDATEEEEEEEE");
+		//time increase
 		time++;
 		if (time == interval) {
 			revert ();
@@ -27,6 +31,7 @@ public class MeltingGlacier extends NaturalDisaster {
 		}
 	}
 	
+	//make life forms drop into the water
 	public void sinkLifeForms () {
 		for (int i = 0 ; i < blocks.length ; i++)
 			for (int j = 0 ; j < blocks[0].length ; j++)
@@ -34,7 +39,7 @@ public class MeltingGlacier extends NaturalDisaster {
 					blocks [i][j].lifeform.meltY += 2 * block_height / interval;
 	}
 	
-	
+	//melt required area
 	public void meltArea() {
 		// 175, 217, 255
 		if (polluted)
@@ -44,25 +49,18 @@ public class MeltingGlacier extends NaturalDisaster {
 		for (int i = 0; i < values.length; i ++)
 			for (int j = 0; j <values[i].length; j++)
 				Utilities.blocks[i][j].changeValue (values[i][j]);
-
 	}
 	
+	//make glaciers back to normal
 	public void revert ()
 	{
-//		for (int i = 0 ; i < blocks.length ; i++)
-//			for (int j = 0 ; j < blocks[0].length ; j++)
-//				if (blocks [i][j].lifeform != null && 
-//				blocks [i][j].value != LAND) {
-//					System.out.println("sunk");
-//					blocks [i][j].lifeform.remove();
-//					System.out.println(blocks [i][j].lifeform);
-//				}
 		read("start");
 		for (int i = 0; i < values.length; i ++)
 			for (int j = 0; j <values[i].length; j++)
 				Utilities.blocks[i][j].changeValue (values[i][j]);
 	}
 
+	//read stored text file
 	public void read(String name) {
 
 		String[] splited = new String [315];

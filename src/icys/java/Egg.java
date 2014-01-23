@@ -76,7 +76,6 @@ public class Egg extends LifeForm{
 		for (int i = 0 ; i < eggs.size () - 1 ; i++) {
 				newlist.add(eggs.get(i));
 				newlist.get(i).index = i;
-				System.out.println (i);
 		}
 	}
 	

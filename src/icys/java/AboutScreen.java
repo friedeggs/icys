@@ -30,7 +30,7 @@ public class AboutScreen implements Screen {
 				"life forms or triggering disasters. \nno keyboard input. " +
 				"\ngame mode also available.");
 		
-		//set fond and desired effect
+		//set font and desired effect
 		area.setFont(font);
 		area.setEditable(false);
 		area.setOpaque(true);
@@ -64,7 +64,7 @@ public class AboutScreen implements Screen {
 		title.setVisible (true);
 	}
 
-	//hide when unecessary
+	//hide when unnecessary
 	@Override
 	public void hide() {
 		back.setVisible (false);

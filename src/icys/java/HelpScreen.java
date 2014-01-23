@@ -1,5 +1,6 @@
 package icys.java;
 
+//Import
 import static icys.java.Utilities.*;
 
 import java.awt.Color;
@@ -13,39 +14,50 @@ import javax.swing.border.EmptyBorder;
 
 public class HelpScreen implements Screen {
 	
+	//Initialization
 	LabelButton back, title;
 	JTextArea area;
 	
+	//Constructor
 	public HelpScreen () {
 		
+		//set title and back
 		title = new LabelButton ("Help", new Font ("Calibri Light", Font.PLAIN, 48), 
 				Color.WHITE, lightblue);
 		back = new LabelButton ("back", font, Color.WHITE, lightblue, blue, aqua);
+		
+		//Write in the text area the text we need
 		area = new JTextArea ("GAME: simulation based game" +
 				"\nSIMULATION: primary feature with interaction" +
 				"\nEXTINCTION: interactive simulation in which the life forms " +
 				"will eventually die out. " +
 				"fish will continue to appear on the sides" +
 				"\nEQUILIBRIUM: a simulation system that repeats itself");
+		
+		//set font and desired effect
 		area.setFont(font);
 		area.setEditable(false);
 		area.setOpaque(true);
 		area.setBackground(lightblue);
 		area.setForeground(Color.WHITE);
 		
+		//add everything to display
 		main.add(title);
 		main.add(area);
 		main.add (back);
 		
+		//hide when not needed
 		hide ();
 	}
 
+	//Draws GUI
 	@Override
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	//displays the class
 	@Override
 	public void show() {
 		back.setVisible (true);
@@ -53,6 +65,7 @@ public class HelpScreen implements Screen {
 		title.setVisible (true);
 	}
 
+	//hide when unnecessary
 	@Override
 	public void hide() {
 		back.setVisible (false);
@@ -60,6 +73,7 @@ public class HelpScreen implements Screen {
 		title.setVisible (false);
 	}
 
+	//apply border and etc
 	@Override
 	public void applyGraphics(Graphics g) {
 		back.applyGraphics(g);
@@ -79,6 +93,7 @@ public class HelpScreen implements Screen {
 		title.setLocation (width / 2, height / 2 - h / 2 - title.getHeight () / 2);
 	}
 
+	/*--------ALL THE MOUSE MOVEMENTS------------*/
 	@Override
 	public void mouseClicked(MouseEvent e) {
 	}

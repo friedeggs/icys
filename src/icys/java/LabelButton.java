@@ -1,21 +1,23 @@
 package icys.java;
-import static icys.java.Utilities.font;
 
+//Import
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
-
 import javax.swing.JLabel;
 import javax.swing.border.EmptyBorder;
 
 
 public class LabelButton extends JLabel implements Button {
+	
+	//Initialization
 	Color fore[], back[];
 	int state; // 0 or 1
 	boolean clicked = false;
 	Font font;
 	
+	//Constructor
 	public LabelButton (String text, Font font, Color fore1, Color back1) {
 		this (text, font, fore1, back1, null, null);
 	}

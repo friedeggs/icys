@@ -26,7 +26,7 @@ public class Block extends Entity {
 		lifeform = l;
 	}	
 	
-	//Sets the target of the lifeform on it
+	//Sets the target of the life form on it
 	public void setTargeter(LifeForm l) {
 		targeter = l;
 	}

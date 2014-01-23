@@ -1,21 +1,17 @@
 package icys.java;
 
+//Imports
 import static icys.java.Utilities.*;
-
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 
 public class Extinction extends Mode{
 
+	//Initialization
 	public Extinction()
 	{
-		super();		
-		/*earthquake.setEnabled(false);
-		pollution.setEnabled(false);
-		melt.setEnabled(false);
-		addEgg.setEnabled(false);
-		addPenguin.setEnabled(false);
-		addBear.setEnabled(false); */
+		super();
+		//Remove buttons that should be disabled
 		main.remove (earthquake);
 		main.remove (pollution);
 		main.remove (melt);
@@ -23,16 +19,19 @@ public class Extinction extends Mode{
 		main.remove (addPenguin);
 		main.remove (addBear);
 		
+		//Add fish
 		for (int i = 0 ; i < 1 ; i++) {
 			fish.add(new Fish (i));
 		}
 		
+		//Add Eggs
 		for (int i = 0 ; i < 1 ; i++) {
 			eggs.add(new Egg (i, 8, 12));
 			eggs.add(new Egg (i, 14, 10));
 			eggs.add(new Egg (i, 9, 5));
 		}
 		
+		//Add penguins
 		for (int i = 0 ; i < 1 ; i++) {
 			penguins.add(new Penguin (i, 10, 10));
 			penguins.add(new Penguin (i, 13, 7));
@@ -41,6 +40,7 @@ public class Extinction extends Mode{
 			penguins.add(new Penguin (i, 10, 7));
 		}
 		
+		//Add bears
 		for (int i = 0 ; i < 1 ; i++) {
 			bears.add(new PolarBear (i, 5, 12));
 			bears.add(new PolarBear (i, 10, 11));
@@ -48,35 +48,15 @@ public class Extinction extends Mode{
 		
 	}
 	
+	//Update everything
 	public void draw(Graphics g) {
-
 		super.draw(g);
-		
 //		for (int i = 0 ; i < penguins.size () ; i++) {
 //			penguins.get(i).update (g);
 //		}
-		//System.out.println("==========");
 	}
 	
-	
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	/*--------ALL THE MOUSE MOVEMENTS------------*/
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -93,7 +73,6 @@ public class Extinction extends Mode{
 				
 	}
 
-
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -105,12 +84,6 @@ public class Extinction extends Mode{
 			help.setState(0);
 			main.setScreen(HelpScreen);
 		}
-		
-	}
-
-	@Override
-	public void mouseDragged(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
