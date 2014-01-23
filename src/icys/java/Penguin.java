@@ -13,6 +13,7 @@ public class Penguin extends LifeForm {
 	//initialization
 	int sinceEaten;
 	int fishesEaten; 
+	int timer, timeout = 15;
 	
 	//Constructor
 	public Penguin (int index) {
@@ -39,7 +40,7 @@ public class Penguin extends LifeForm {
 	//removes the target fish that was eaten
 	public void eatFish ()
 	{
-		if (x == target.x && y == target.y)
+		if (target != null && x == target.x && y == target.y)
 		{
 			if (target instanceof Fish) {
 				((Fish) target).remove();
@@ -55,7 +56,7 @@ public class Penguin extends LifeForm {
 	// is this still alive?
 	public void checkAlive() 
 	{
-		if (mode != currentScreen && sinceEaten > 20) 
+		if (!(currentScreen instanceof Game) && sinceEaten > 20) 
 			remove();
 	}
 	
@@ -76,13 +77,16 @@ public class Penguin extends LifeForm {
 	 //checks if target is alive, and calls method to choose new target if current target is dead
 	public void updateTarget()
 	{
-		if (target == null || (fish.size() > 0 && target instanceof Block))
+		timer++;
+		if (timer == timeout || 
+				target == null || (fish.size() > 0 && target instanceof Block))
 			chooseTarget();
 	}
 	
 	//Chooses closest fish for new target
 	public void chooseTarget() 
 	{
+		timer = 0;
 		if (fish.size() == 0) {
 			// choose a random block of land
 			target = randomBlock ();

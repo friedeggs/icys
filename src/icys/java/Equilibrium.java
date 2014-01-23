@@ -45,7 +45,7 @@ public class Equilibrium extends Mode {
 		}
 		
 		//Add polar bears
-		for (int i = 0 ; i < 4 ; i++) {
+		for (int i = 0 ; i < 1 ; i++) {
 			PolarBear bwear = new PolarBear (bears.size());
 			Block territory = bwear.randomBlock();
 			if (territory != null) {

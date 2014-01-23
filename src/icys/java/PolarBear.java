@@ -2,6 +2,7 @@ package icys.java;
 
 //Imports
 import static icys.java.Utilities.*;
+
 import java.awt.Graphics;
 import java.io.File;
 import java.io.IOException;
@@ -14,6 +15,7 @@ public class PolarBear extends LifeForm {
 	//Initialization
 	int sinceEaten = 0;
 	int penguinsEaten = 0; 
+	int timeout = 15, timer = 0;
 
 	//Constructor
 	public PolarBear(int index)
@@ -50,9 +52,10 @@ public class PolarBear extends LifeForm {
 	}
 	
 	//removes the target penguin that was eaten
-	private void eatPenguin ()
+	public void eatPenguin ()
 	{
-		if (x == target.x && y == target.y)
+		System.out.println(this + " " + penguinsEaten);
+		if (target != null && x == target.x && y == target.y)
 		{
 			if (target instanceof Penguin) {
 				if (target instanceof Player)
@@ -73,22 +76,21 @@ public class PolarBear extends LifeForm {
 	// is this still alive?
 	private void checkAlive() 
 	{
-		if (mode != currentScreen && sinceEaten > 60) {
+		if (!(currentScreen instanceof Game) && sinceEaten > 60) {
 			remove();
 		}
 	}
 	
 	//HOW DOES IT EVEN--
-	private ArrayList<PolarBear> reproduces()
+	private void reproduces()
 	{
-		
 		if (penguinsEaten == 5)
 		{
+			System.out.println ("new polar bear");
 			PolarBear baby = new PolarBear(bears.size(), x, y);
 			penguinsEaten = 0;
 			bears.add(baby);
 		}
-		return bears; 	
 	}
 	
 	/**
@@ -97,12 +99,15 @@ public class PolarBear extends LifeForm {
 	 */
 	private void updateTarget() 
 	{
-		if (target == null || (penguins.size() > 0 && target instanceof Block))
+		timer++;
+		if (timer == timeout ||
+				target == null || (penguins.size() > 0 && target instanceof Block))
 			chooseTarget();
 	}
 	
 	private void chooseTarget() //Chooses closest fish for new target
 	{		
+		timer = 0;
 		if (penguins.size() == 0 && !(currentScreen instanceof Game 
 				&& ((Game)currentScreen).ongoing())) {
 			target = randomBlock ();
@@ -188,7 +193,8 @@ public class PolarBear extends LifeForm {
 					direction [i+1][j+1] = 0;
 				}
 
-		//blocks [x][y].setTargeter(this);
+		if (blocks [x][y].targeter == this)
+			blocks [x][y].setTargeter(null);
 		for (int k = 2 ; k >= 0 ; k--) {
 			int random = (int)(Math.random() * counter [k]);
 			for (int i = -1 ; i <= 1 ; i++)

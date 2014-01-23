@@ -113,6 +113,8 @@ public abstract class LifeForm extends Entity {
 	 * @return
 	 */
 	protected int closer (int i, int j) {
+		if (target == null)
+			return 1;
 		if (blocks [x+i][y+j].distanceTo(target) < distanceTo (target))
 			return 3;
 		if (blocks [x+i][y+j].distanceTo(target) == distanceTo (target))
@@ -152,6 +154,8 @@ public abstract class LifeForm extends Entity {
 						direction [i+1][j+1] = 0;
 				}
 
+		if (blocks [x][y].targeter == this)
+			blocks [x][y].setTargeter(null);
 		for (int k = 2 ; k >= 0 ; k--) {
 			int random = (int)(Math.random() * counter [k]);
 			for (int i = -1 ; i <= 1 ; i++)
