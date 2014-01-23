@@ -52,6 +52,10 @@ public class Game extends Mode {
 		return alive;
 	}
 	
+	public void endGame () {
+		alive = false;
+	}
+	
 	public Penguin getPlayer () {
 		return player;
 	}
@@ -60,7 +64,7 @@ public class Game extends Mode {
 
 		super.draw(g);
 
-		if (TIMER % sleep == 0) 
+		if (TIMER % sleep == 0 && alive) 
 			player.update(g);
 		
 		for (int i = 0 ; i < blocks.length ; i++) 
