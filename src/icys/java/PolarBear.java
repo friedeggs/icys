@@ -13,8 +13,8 @@ import javax.imageio.ImageIO;
 
 public class PolarBear extends LifeForm {
 
-	int sinceEaten;
-	int penguinsEaten; 
+	int sinceEaten = 0;
+	int penguinsEaten = 0; 
 
 	public PolarBear(int index)
 	{
@@ -101,6 +101,11 @@ public class PolarBear extends LifeForm {
 			target = randomBlock ();
 			return;
 		}
+		if ((currentScreen instanceof Game) && ((Game)currentScreen).ongoing())
+		{
+			target = ((Game)currentScreen).getPlayer();
+			return;
+		}
 		
 		int[] distances = new int [penguins.size()]; 
 		int min; 
@@ -119,6 +124,10 @@ public class PolarBear extends LifeForm {
 				min = distances[j];	//...set as minimum.
 				this.target = penguins.get(j); //And set the respective fish as new target
 			}
+		}
+		if (currentScreen instanceof Game && ((Game)currentScreen).ongoing()) {
+			if (distanceTo (((Game)currentScreen).getPlayer()) < min)
+				target = ((Game)currentScreen).getPlayer();
 		}
 	}
 	
@@ -194,6 +203,7 @@ public class PolarBear extends LifeForm {
 		if (blocks [x][y].targeter != null) {
 			blocks [x][y].targeter.crossOff (x - blocks [x][y].targeter.x,
 					y - blocks [x][y].targeter.y);
+			if (blocks [x][y].targeter != null)
 			blocks [x][y].targeter.move();
 		}
 	}

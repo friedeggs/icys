@@ -40,6 +40,7 @@ public class Utilities {
 	public static Color lightblue = new Color (175, 217, 255),
 			blue = new Color (124, 175, 222),
 			aqua = new Color (221, 240, 255),
+			dark = new Color(11, 23, 59),
 			water = aqua;//new Color (103, 213, 235);
 	
 	public static Font font = new Font ("Calibri", Font.BOLD, 32),
@@ -51,7 +52,7 @@ public class Utilities {
 	
 	public static char [][] value = new char [blocks.length][blocks [0].length];
 	
-	public static final int WATER = 0, LAND = 1, UNUSED = 2;
+	public static final int WATER = 0, LAND = 1, UNUSED = 2, POLLUTED = 3;
 	
 	public static ArrayList <Fish> fish;
 	

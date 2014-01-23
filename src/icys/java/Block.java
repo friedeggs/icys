@@ -53,19 +53,21 @@ public class Block extends Entity {
 			value = Utilities.WATER;
 		else if (x =='1')
 			value = Utilities.LAND;
-		else //if (x =='2')
+		else if (x =='2')
 			value = Utilities.UNUSED;
+		else if (x =='3')
+			value = Utilities.POLLUTED;
 	}
 
 	public void show(Graphics g) // and char a??
 	{
 		Color //aqua, //new Color(175, 217, 255), 
-				land = new Color(255, 255, 255),
-				dark = new Color(11, 23, 59), use;
+				land = new Color(255, 255, 255), use;
 
 		if (value != 1) {
-			if (value == 3)
+			if (value == 3) {
 				use = dark; // water pollution
+			}
 			else
 				use = water;
 		} else
@@ -81,7 +83,7 @@ public class Block extends Entity {
 		g.setColor(use);
 		poly = new Polygon (xPoint, yPoint, xPoint.length);
 		g.fillPolygon (poly);
-		if (value == 1) {
+		if (value == LAND) {
 			g.setColor (blue);
 			g.drawPolygon (poly);
 		}

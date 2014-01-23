@@ -1,6 +1,5 @@
 package icys.java;
 
-import java.util.ArrayList;
 import static icys.java.Utilities.*;
 
 public class Earthquake extends NaturalDisaster {
