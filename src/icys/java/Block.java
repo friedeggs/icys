@@ -37,7 +37,7 @@ public class Block extends Entity {
 	}
 	
 	public void update (Graphics g) {
-		if (TIMER % sleep == 0 && 
+		if (TIMER % sleep == 0 && value == LAND &&
 				!(targeter == null && (lifeform instanceof Egg 
 				|| lifeform instanceof Fish || lifeform instanceof Player))) {
 		//if (targeter != null) {

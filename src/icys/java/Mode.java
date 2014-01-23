@@ -19,6 +19,8 @@ public class Mode implements Screen {
 	LabelButton back, help, earthquake, melt, pollution; 
 	LabelButton addEgg, addPenguin, addBear;
 	MeltingGlacier glacier;
+	WaterPollution pollutedWater;
+	Earthquake quake;
 	
 	public Mode () {
 		
@@ -122,17 +124,27 @@ public class Mode implements Screen {
 		g.setColor(water);
 		g.fillRect(0, offset+2*border, width, height-offset-2*border);
 		
+		
+		if (TIMER % (sleep / 2) == 0 && isQuake != 0)
+			quake.update ();
+		
 		if (TIMER % sleep == 0) {
 		// DON'T ADD MORE FISH THAN CAN BE ADDED
+			
 		if (melted) {
 			glacier.update();
 		}
 		
-		if (!stopFish) {
+		if (stopFish == 0) {
 			int rand = (int)(Math.abs(random.nextGaussian()*2/3));
 			for (int i = 0 ; i < rand ; i++) {
 				fish.add(new Fish (fish.size()));
 			}		
+		}
+		else {
+			stopFish--;
+			if (stopFish == 0)
+				pollutedWater.revert ();
 		}
 //		rand = (int)(Math.abs(random.nextGaussian()/2));
 //		for (int i = 0 ; i < rand ; i++) {
@@ -257,7 +269,7 @@ public class Mode implements Screen {
 		}
 		else if (earthquake.contains(x,y)) {
 			earthquake.setState(1);
-			//Earthquake quake = new Earthquake();
+			quake = new Earthquake();
 			System.out.println("Oh no! An earthquake!");
 		}
 		else if (melt.contains(x, y)) {
@@ -267,7 +279,7 @@ public class Mode implements Screen {
 		}
 		else if (pollution.contains(x, y)) {
 			pollution.setState(1);
-			WaterPollution pollutedWater = new WaterPollution();
+			pollutedWater = new WaterPollution();
 			System.out.println("Ah! The water was polluted!");
 		}
 		else if (addEgg.contains(x, y)){

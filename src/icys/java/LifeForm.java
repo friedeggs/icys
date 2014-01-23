@@ -32,6 +32,8 @@ public abstract class LifeForm extends Entity {
 		this.x = x;
 		this.y = y;
 	}
+	
+	public abstract void update (Graphics g);
 
 	protected void crossOff (int i, int j) {
 		blocks [x][y].targeter = null;
@@ -166,6 +168,7 @@ public abstract class LifeForm extends Entity {
 	
 	public void sink () {
 		if (meltY > 0) {
+			System.out.println("HELP I 'M SINKINGGGGGGGG");
 			meltY += 2 * block_height / interval;
 //			if (meltY >= 2 * block_height)
 //				remove ();

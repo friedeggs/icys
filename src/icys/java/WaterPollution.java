@@ -4,22 +4,28 @@ package icys.java;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import static icys.java.Utilities.*;
 
 public class WaterPollution extends NaturalDisaster {
 
 	char [][] myCrap = new char [21][15];
 	
 	public WaterPollution() {
+		polluted = true;
 		stopFish();
 		blackenWater();
 	}
 
 	public void stopFish () {
 		Utilities.fish.clear (); //Deletes all fish
+		stopFish = 10;
 	}
 
 	public void blackenWater() {
-		read("blackWater");
+		if (melted)
+			read ("blackWaterAndMelt");
+		else
+			read("blackWater");
 		for (int i = 0; i < myCrap.length; i ++)
 			for (int j = 0; j <myCrap[i].length; j++)
 				Utilities.blocks[i][j].changeValue (myCrap[i][j]);
@@ -28,6 +34,7 @@ public class WaterPollution extends NaturalDisaster {
 	
 	public void revert ()
 	{
+		polluted = false;
 		read("start");
 		for (int i = 0; i < myCrap.length; i ++)
 			for (int j = 0; j <myCrap[i].length; j++)

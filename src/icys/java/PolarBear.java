@@ -39,11 +39,12 @@ public class PolarBear extends LifeForm {
 	
 	public void update(Graphics g)
 	{
-		//eatPenguin();
-		checkAlive();
-		reproduces ();
-		updateTarget();
-		move();
+		if (blocks [x][y].value == LAND) {
+			checkAlive();
+			reproduces ();
+			updateTarget();
+			move();
+		}
 	}
 	
 	private void eatPenguin ()

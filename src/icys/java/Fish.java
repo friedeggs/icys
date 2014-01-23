@@ -1,5 +1,6 @@
 package icys.java;
 
+import java.awt.Graphics;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -55,6 +56,12 @@ public class Fish extends LifeForm {
 				newlist.get(i).index = i;
 				System.out.println (i);
 		}
+	}
+
+	@Override
+	public void update(Graphics g) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

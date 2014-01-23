@@ -9,11 +9,12 @@ public class Game extends Mode {
 	
 	int score = 0;
 	boolean alive = true;
-	Player player;
+	Penguin player;
 	Tile hovered;
 	
 	public Game () {
 		super();
+
 		
 		for (int i = 0 ; i < tile.length ; i++) {
 			for (int j = 0 ; j < tile [0].length ; j++) {
@@ -58,7 +59,7 @@ public class Game extends Mode {
 			for (int j = 0 ; j < blocks[0].length ; j++)
 				blocks[i][j].show(g);
 
-		System.out.println("==========");
+		//System.out.println("==========");
 	}
 	
 	@Override
@@ -79,6 +80,7 @@ public class Game extends Mode {
 	
 	@Override
 	public void mouseMoved (MouseEvent e) {
+		super.mouseMoved(e);
 		System.out.println ("mouse moved");
 		int x = e.getX(), y = e.getY();
 		for (int i = 0 ; i < tile.length ; i++) {
