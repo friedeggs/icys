@@ -57,6 +57,7 @@ public class Game extends Mode {
 		if (targeted != null)
 			targeted.setState(0);
 		alive = false;
+		player.remove();
 		player = null;
 		if (hovered != null)
 			hovered.setState(0);
